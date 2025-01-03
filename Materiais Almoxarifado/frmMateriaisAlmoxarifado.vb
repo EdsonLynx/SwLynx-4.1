@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports System.Drawing
 Imports System.IO
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class frmMateriaisAlmoxarifado
 
@@ -10,7 +11,7 @@ Public Class frmMateriaisAlmoxarifado
     Dim Peso As Double = 0
     Dim TotalValor As Double = 0
     Dim IdMaterial As Integer = 0
-
+    Dim Valor As Double = 0
 
     Private Sub TimerDgvMaterial_Tick(sender As Object, e As EventArgs) Handles TimerDgvMaterial.Tick
 
@@ -21,13 +22,13 @@ CodigoJuridicoMat,
 PercIPI, vIPI, 
 PercICMS, vICMS, 
 TotalValor
-    FROM material
+    FROM  " & ComplementoTipoBanco & "material
     WHERE DescDetal LIKE '%" & TxtPesqDesc1.Text & "%'
   AND DescDetal LIKE '%" & TxtPesqDesc2.Text & "%'
   AND DescDetal LIKE '%" & TxtPesqDesc3.Text & "%'
   AND CodigoJuridicoMat LIKE '%" & TxtPesqJuridico.Text & "%'
   AND CodMatFabricante LIKE '%" & TxtPesqCod.Text & "%'
-  AND pecamanufat IS NULL
+  AND PecaManuFat IS NULL
 ORDER BY DescDetal limit 500;"
 
         dgvMaterial.DataSource = cl_BancoDados.CarregarDados(query)
@@ -40,46 +41,52 @@ ORDER BY DescDetal limit 500;"
 
     Private Sub frmMateriaisAlmoxarifado_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
         TimerDgvMaterial.Enabled = True
 
         If dgvMaterial.Rows.Count < 0 Then
 
             MsgBox("Não há materiais na lista de material para ser selecionado", vbInformation, "Atenção")
-
-            btnAssociarMaterialM2.Enabled = False
-            btnAssociarMaterialML.Enabled = False
-            btnRelacao1para1.Enabled = False
-
         Else
-
-            btnAssociarMaterialM2.Enabled = True
-            btnAssociarMaterialML.Enabled = True
-            btnRelacao1para1.Enabled = True
-
             ' Verifica se LarguraBlank e ComprimentoBlank são nulos antes de usá-los
             Dim larguraBlank As Double = Replace(DadosArquivoCorrente.LarguraBlank, ".", ",")
             Dim comprimentoBlank As Double = Replace(DadosArquivoCorrente.ComprimentoBlank, ".", ",")
+            Dim Peso As Double = Replace(DadosArquivoCorrente.Massa, ".", ",")
+
+            Dim TaxaUtilizacao As Double = 0
+            Dim AreaCalculadaBlank As Double = 0
+
+            Dim AreaChapaM As Double = 1.2 * 3 * 0.95
 
             ' Preenchendo as dimensões da largura e comprimento em metros quadrados
             Me.txtLarguram2.Text = DadosArquivoCorrente.LarguraBlank
             Me.txtComprimentom2.Text = DadosArquivoCorrente.ComprimentoBlank
+            Me.txtPesoMaterial.Text = DadosArquivoCorrente.Massa
+
 
             ' Calculando o valor total de m² e verificando se os valores são válidos
+            ' Calculando o valor total de m² e verificando se os valores são válidos
             If larguraBlank > 0 And comprimentoBlank > 0 Then
-                Me.txtm2Total.Text = (((larguraBlank / 1000) * (comprimentoBlank / 1000)) / 3.6).ToString("F2")
+                AreaCalculadaBlank = (larguraBlank / 1000) * (comprimentoBlank / 1000)
+
+                TaxaUtilizacao = AreaCalculadaBlank / AreaChapaM
+
+                txtm2Total.Text = TaxaUtilizacao.ToString("F2")
+
             Else
-                Me.txtm2Total.Text = "0.00"
+
+                ' Calculando o comprimento em metros lineares e verificando se o comprimento é válido
+                If comprimentoBlank > 0 Then
+                    Me.txtComprimentom2.Text = (comprimentoBlank / 1000).ToString("F2")
+                    txtm2Total.Text = (comprimentoBlank / 1000).ToString("F2")
+                Else
+                    Me.txtComprimentom2.Text = "0.00"
+
+                End If
+
             End If
 
-            ' Calculando o comprimento em metros lineares e verificando se o comprimento é válido
-            If comprimentoBlank > 0 Then
-                Me.txtComprimentoML.Text = (comprimentoBlank / 1000).ToString("F2")
-            Else
-                Me.txtComprimentoML.Text = "0.00"
-            End If
         End If
+
     End Sub
 
     Private Sub TxtPesqCod_TextChanged(sender As Object, e As EventArgs) Handles TxtPesqCod.TextChanged
@@ -105,14 +112,6 @@ ORDER BY DescDetal limit 500;"
     Private Sub btnAssociarMaterialM2_Click(sender As Object, e As EventArgs) Handles btnAssociarMaterialM2.Click
 
         If Double.TryParse(txtm2Total.Text, QtdeEntrada) Then
-            ' QtdeEntrada agora contém o valor convertido com sucesso
-
-            'Calculo de Area de chapa
-            ' Me.txtValorMaterialCalculado.Text = TotalValor * QtdeEntrada
-            ' Me.txtPesoMaterialCalculado.Text = Peso * QtdeEntrada
-
-            ' TotalValor = TotalValor * QtdeEntrada
-            ' Peso = Peso * QtdeEntrada
 
 
             SalvarMaterial()
@@ -122,7 +121,6 @@ ORDER BY DescDetal limit 500;"
 
 
     End Sub
-
 
     Private Function SalvarMaterial()
 
@@ -137,14 +135,14 @@ ORDER BY DescDetal limit 500;"
 IdMaterial, DescDetal,
 DescFamilia, CodMatFabricante, CodigoJuridicoMat,
 d_e_l_e_t_e, Valor, pecaqtde, Peso
-From viewmontapeca1
+From  " & ComplementoTipoBanco & "viewmontapeca1
 Where CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao.Trim & "'
 And (d_e_l_e_t_e IS NOT NULL or d_e_l_e_t_e is null)
 order by descdetal")
 
                 For i As Integer = 0 To dt.Rows.Count - 1
 
-                    If dt.Rows(i)("idmaterial") = IdMaterial Then
+                    If dt.Rows(i)("IdMaterial") = IdMaterial Then
 
                         MsgBox("Este material já esta lançado para este desenho, você podera excluir a lançar a nova quantidade!", vbInformation, "Atenção")
 
@@ -159,7 +157,7 @@ order by descdetal")
                                                                          values ('" & DadosArquivoCorrente.NomeArquivoSemExtensao.Trim & "','0','" & IdMaterial & "','" _
                                                                                      & Replace(QtdeEntrada, ",", ".") & "','" _
                                                                                      & DadosArquivoCorrente.IdMaterial & "','" & Replace(Peso, ",", ".") & "','" & Replace(TotalValor, ",", ".") & "')")
-                MsgBox("Material Inserido com Sucesso!", vbInformation, "Salvamento com Sucesso!")
+                MsgBox("material Inserido com Sucesso!", vbInformation, "Salvamento com Sucesso!")
 
                 MyTaskPanelHost.TimerMontaPeca.Enabled = True
 
@@ -182,74 +180,25 @@ order by descdetal")
 
             IdMaterial = dgvMaterial.CurrentRow.Cells("IdMaterial").Value
 
-            If Double.TryParse(txtm2Total.Text, QtdeEntrada) Then
-                ' QtdeEntrada agora contém o valor convertido com sucesso
-
-                Try
-                    IdMaterial = If(IsDBNull(dgvMaterial.CurrentRow.Cells("IdMaterial").Value), 0, Convert.ToInt32(dgvMaterial.CurrentRow.Cells("IdMaterial").Value))
-                    TotalValor = If(IsDBNull(dgvMaterial.CurrentRow.Cells("TotalValor").Value), 0, Convert.ToDouble(dgvMaterial.CurrentRow.Cells("TotalValor").Value))
-                    Peso = If(IsDBNull(dgvMaterial.CurrentRow.Cells("Peso").Value), 0, Convert.ToDouble(dgvMaterial.CurrentRow.Cells("Peso").Value))
-                Catch ex As Exception
-                    ' Em caso de erro, as variáveis já estão com os valores padrão
-                End Try
+            IdMaterial = If(IsDBNull(dgvMaterial.CurrentRow.Cells("IdMaterial").Value), 0, Convert.ToInt32(dgvMaterial.CurrentRow.Cells("IdMaterial").Value))
+            TotalValor = If(IsDBNull(dgvMaterial.CurrentRow.Cells("TotalValor").Value), 0, Convert.ToDouble(dgvMaterial.CurrentRow.Cells("TotalValor").Value))
+            Peso = If(IsDBNull(dgvMaterial.CurrentRow.Cells("Peso").Value), 0, Convert.ToDouble(dgvMaterial.CurrentRow.Cells("Peso").Value))
+            ' Valor = If(IsDBNull(dgvMaterial.CurrentRow.Cells("Valor").Value), 0, Convert.ToDouble(dgvMaterial.CurrentRow.Cells("Valor").Value))
 
 
-                'Calculo de Area de chapa
-                Me.txtValorMaterialCalculado.Text = TotalValor * QtdeEntrada
-                Me.txtPesoMaterialCalculado.Text = Peso * QtdeEntrada
-
-                TotalValor = TotalValor * QtdeEntrada
-                Peso = Peso * QtdeEntrada
-
-                txtPesoMaterialCalculado.Text = Peso
-                txtValorMaterialCalculado.Text = TotalValor
-            Else
-
-                ' Caso o valor não seja um número válido, QtdeEntrada permanece 0
-                MsgBox("Valor inválido. Por favor, insira um número válido.", vbExclamation, "Atenção")
-
-            End If
-
-        End If
-
-    End Sub
-
-    Private Sub btnAssociarMaterialML_Click(sender As Object, e As EventArgs) Handles btnAssociarMaterialML.Click
-
-        If Double.TryParse(txtMetroLinearotal.Text, QtdeEntrada) Then
-            ' QtdeEntrada agora contém o valor convertido com sucesso
-
-            'Calculo de Area de chapa
-            QtdeEntrada = Me.txtMetroLinearotal.Text
-            'Me.txtPesoMaterialCalculado.Text = Peso * QtdeEntrada
+            Me.txtPesoMaterial.Text = Peso
+            Me.txtValorMaterial.Text = TotalValor
 
 
-            TotalValor = TotalValor * QtdeEntrada
-            Peso = Peso * QtdeEntrada
 
+        Else
 
-            SalvarMaterial()
+            ' Caso o valor não seja um número válido, QtdeEntrada permanece 0
+            MsgBox("Valor inválido. Por favor, insira um número válido.", vbExclamation, "Atenção")
 
         End If
 
 
-    End Sub
-
-    Private Sub btnRelacao1para1_Click(sender As Object, e As EventArgs) Handles btnRelacao1para1.Click
-
-        If Double.TryParse(txtQtde1para1.Text, QtdeEntrada) Then
-            ' QtdeEntrada agora contém o valor convertido com sucesso
-
-            'Calculo de Area de chapa
-            ' Me.txtMetroLinearotal.Text = TotalValor * QtdeEntrada
-            'Me.txtPesoMaterialCalculado.Text = Peso * QtdeEntrada
-
-            TotalValor = TotalValor * QtdeEntrada
-            Peso = Peso * QtdeEntrada
-
-            SalvarMaterial()
-
-        End If
 
     End Sub
 
@@ -267,7 +216,5 @@ order by descdetal")
 
     End Sub
 
-    Private Sub dgvMaterial_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs) Handles dgvMaterial.CellContentClick
 
-    End Sub
 End Class

@@ -226,6 +226,9 @@
   <data name="ler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="excluir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\excluir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="montagem" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
@@ -625,6 +628,9 @@
         2b3GOTtD/uorZHt+lI3MOpgJ+r3jD0HPNoD/AbXW0XQW0oOrAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="EYE SNOW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EYE SNOW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="de-solda" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
@@ -1014,8 +1020,8 @@
         AOQVN/1+XH/o00UV8L0fqjqOZ8Sf8h67/wCuhooor9Fw/wDCj6L8jgluf//Z
 </value>
   </data>
-  <data name="excluir" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\excluir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="produtos 32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\produtos 32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lista" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1084,7 +1090,7 @@
         RK5CYII=
 </value>
   </data>
-  <data name="produtos 32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\produtos 32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="inspecao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspecao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

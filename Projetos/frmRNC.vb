@@ -13,20 +13,20 @@ Public Class frmRNC
 
         If chkConcluidas.Checked = False Then
 
-            sql = " (estatus <> 'FINALIZADA' OR  estatus =  '' OR  estatus  IS NULL ) AND "
+            sql = " (Estatus <> 'FINALIZADA' OR  Estatus =  '' OR  Estatus  IS NULL ) AND "
 
         ElseIf chkConcluidas.Checked = True Then
 
 
-            sql = "" '" (estatus = 'FINALIZADA' OR  estatus =  '' OR  estatus  IS NULL ) AND "
+            sql = "" '" (Estatus = 'FINALIZADA' OR  Estatus =  '' OR  Estatus  IS NULL ) AND "
 
 
         End If
 
-        dgvDados.DataSource = cl_BancoDados.CarregarDados("SELECT idordemservicoitempendencia, IDOrdemServicoITEM, 
-IDOrdemServico, CodMatFabricante, DescricaoPendencia,
-estatus, UltimaPendencia FROM ordemservicoitempendencia
-where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "'")
+        dgvDados.DataSource = cl_BancoDados.CarregarDados("SELECT idordemservicoitempendencia, IDOrdemServicoItem, 
+IdOrdemServico, CodMatFabricante, DescricaoPendencia,
+Estatus, UltimaPendencia FROM  " & ComplementoTipoBanco & "ordemservicoitempendencia
+where " & sql & "CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "'")
 
         TimerdgvDados.Enabled = False
 
@@ -64,9 +64,9 @@ where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExte
 
                 For I As Integer = 0 To dgvDados.Rows.Count - 1
 
-                    If dgvDados.Rows(I).Cells("dgvSelecao").Value = True And dgvDados.Rows(I).Cells("ESTATUS").Value.ToString <> "FINALIZADA" Then
+                    If dgvDados.Rows(I).Cells("dgvSelecao").Value = True And dgvDados.Rows(I).Cells("Estatus").Value.ToString <> "FINALIZADA" Then
 
-                        If DadosArquivoCorrente.NomeArquivoSemExtensao = dgvDados.Rows(I).Cells("codmatfabricante").Value.ToString Then
+                        If DadosArquivoCorrente.NomeArquivoSemExtensao = dgvDados.Rows(I).Cells("CodMatFabricante").Value.ToString Then
 
                             ' dgvDados.Rows(I).Cells("DescricaoFinalizacao").Value = OrdemServicoItemPendencia.DescricaoFinalizacao
                             OrdemServicoItemPendencia.idordemservicoitempendencia = dgvDados.Rows(I).Cells("idordemservicoitempendencia").Value
@@ -75,7 +75,7 @@ where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExte
 
                             dgvDados.Rows(I).Cells("dgvSelecao").Value = False
                             dgvDados.Rows(I).Cells("dgvIconeestatus").Value = My.Resources.verificado
-                            'dgvDados.Rows(I).Cells("ESTATUS").Value = "FINALIZADA"
+                            'dgvDados.Rows(I).Cells("Estatus").Value = "FINALIZADA"
 
                         End If
 
@@ -85,17 +85,32 @@ where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExte
 
             End If
 
+
+
+
+
             DadosArquivoCorrente.rnc = cl_BancoDados.RetornaCampoDaPesquisa("SELECT count(idordemservicoitempendencia) as qtdernc 
-                    FROM ordemservicoitempendencia where
-                              (estatus <> 'FINALIZADA' OR  estatus =  '' OR  estatus  IS NULL) 
-                    and codmatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "';", "qtdernc")
+                    FROM  " & ComplementoTipoBanco & "ordemservicoitempendencia where
+                              (Estatus <> 'FINALIZADA' OR  Estatus =  '' OR  Estatus  IS NULL) 
+                    and CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "';", "qtdernc")
 
             If DadosArquivoCorrente.rnc.ToString = "0" Or DadosArquivoCorrente.rnc.ToString = "" Or DadosArquivoCorrente.rnc = Nothing Then
 
                 MyTaskPanelHost.btnPendencias.Image = My.Resources.verificado1
-                cl_BancoDados.AlteracaoEspecifica("material", "RNC", "", "codmatfabricante", DadosArquivoCorrente.NomeArquivoSemExtensao)
+                cl_BancoDados.AlteracaoEspecifica("material", "RNC", "", "CodMatFabricante", DadosArquivoCorrente.NomeArquivoSemExtensao)
                 DadosArquivoCorrente.rnc = ""
                 MyTaskPanelHost.btnPendencias.Enabled = False
+
+                MyTaskPanelHost.TimerdgvDesenhos.Enabled = True
+
+                For I As Integer = 0 To MyTaskPanelHost.dgvDataGridBOM.Rows.Count - 1
+
+                    If MyTaskPanelHost.dgvDataGridBOM.Rows(I).Cells("CodMatFabricante").Value.ToString = DadosArquivoCorrente.NomeArquivoSemExtensao Then
+                        MyTaskPanelHost.dgvDataGridBOM.Rows(I).Cells("dgvIconeRNC").Value = My.Resources.verificado1
+                    End If
+                Next
+
+
 
             Else
 
@@ -123,7 +138,7 @@ where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExte
                               UsuarioProjeto = @UsuarioProjeto,
                               DataAcertoProjeto = @DataAcertoProjeto,
                               DescricaoFinalizacao = @DescricaoFinalizacao,
-                              estatus = @estatus
+                              Estatus = @Estatus
                               WHERE idordemservicoitempendencia = @idordemservicoitempendencia"
 
             If myconect.State = myconect.State.Closed Then
@@ -134,7 +149,7 @@ where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExte
                 ' Defina os valores para os parâmetros
                 cmd.Parameters.AddWithValue("@UsuarioProjeto", Usuario.NomeCompleto)
                 cmd.Parameters.AddWithValue("@DataAcertoProjeto", Date.Now.Date)
-                cmd.Parameters.AddWithValue("@estatus", "FINALIZADA")
+                cmd.Parameters.AddWithValue("@Estatus", "FINALIZADA")
                 cmd.Parameters.AddWithValue("@DescricaoFinalizacao", OrdemServicoItemPendencia.DescricaoFinalizacao)
                 cmd.Parameters.AddWithValue("@idordemservicoitempendencia", OrdemServicoItemPendencia.idordemservicoitempendencia)
 
@@ -151,7 +166,7 @@ where " & sql & "codmatfabricante = '" & DadosArquivoCorrente.NomeArquivoSemExte
 
             For I As Integer = 0 To dgvDados.Rows.Count - 1
 
-                If dgvDados.Rows(I).Cells("estatus").Value.ToString = "FINALIZADA" Then
+                If dgvDados.Rows(I).Cells("Estatus").Value.ToString = "FINALIZADA" Then
 
                     dgvDados.Rows(I).Cells("dgvIconeestatus").Value = My.Resources.verificado
 

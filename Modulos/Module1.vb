@@ -2,6 +2,8 @@
 Imports SolidWorks.Interop.sldworks
 Imports System.Data.OleDb
 
+Imports System.Data.SqlClient
+
 
 Public Module Module1
 
@@ -20,6 +22,18 @@ Public Module Module1
     Public myconectAccess As New OleDbConnection
     Public mycomandAccess As New OleDbCommand
 
+    Public myconectSQL As New SqlConnection
+    Public mycomandSQL As New SqlCommand
+
+    Public TipoBanco As String 'SQL - MYSQL - ACCESS
+
+
+    Public BancoCliente As String
+
+    Public ComplementoTipoBanco As String
+
+
+
     Public conexao As String
 
     Public sModelName As String
@@ -31,7 +45,7 @@ Public Module Module1
 
     Public instance As ISldWorks
     Public swModel As ModelDoc2 'usado no arquivo corrente
-    Public swModelComp As ModelDoc2 'usado na estrutura de arvore do projeto
+    Public swModelComp As ModelDoc2 'usado na estrutura de arvore do Projeto
 
     Public swPart As PartDoc
     Public swDocEvent As DocumentEventHandler
@@ -76,6 +90,8 @@ Public Module Module1
 
     Public OrdemServicoItemPendencia As New CLOrdemServicoItemPendencia
 
+    Public QualidadeSGQ As New ClQualidadeSGQ
+
     Public colunas() As String
 
     Public qtdePecaLm As Double
@@ -102,6 +118,8 @@ Public Module Module1
     Public Arquivos As New FrmBuscarProgramas
     ' Public Projeto As New frmProjetos
     Public PendenciasRNC As New frmRNC
+    Public CriaProdutos As New frmCriaProdutos
+    Public InspecaoQualidade As New frmInspecaoQualidade
 
     Public ClSwAddin As New SwAddin
 
@@ -117,7 +135,7 @@ Public Module Module1
     Public HoraServidor As String
 
 
-    Public Email As New clEmail
+    Public ClasseEmail As New clEmail
 
     '*****************************************************
     'CLASSES ESPECIFICAS DE CLIENTES
@@ -131,5 +149,6 @@ Public Module Module1
 
     Public ExtensaoArquivoCorrente As String
 
+    Public EnviarEmailLiberacaoOS As String
 
 End Module

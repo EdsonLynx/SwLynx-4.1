@@ -3,9 +3,6 @@
 Public Class frmExportarParaOS
     Private Sub frmExportarParaOS_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
-
         If My.Settings.ParametroExportarDXF = "1" Then
 
             optParametroExportarDXF1.Checked = True
@@ -44,6 +41,7 @@ Public Class frmExportarParaOS
 
         End If
 
+        Me.txtEmailPCP.Text = Usuario.EnviarEmailLiberacaoOS.ToString
 
 
     End Sub
@@ -80,23 +78,27 @@ Public Class frmExportarParaOS
 
         End If
 
-
-
         If chkCaixaDelimitadora.Checked = True Then
-
             My.Settings.CaixaDelimitadora = "SIM"
             ' Salva as configurações
             My.Settings.Save()
-
         ElseIf chkCaixaDelimitadora.Checked = False Then
-
             My.Settings.CaixaDelimitadora = "NÃO"
             ' Salva as configurações
             My.Settings.Save()
-
-
         End If
 
+        If txtTempoRespostaServidor.Text = "" Or txtTempoRespostaServidor.Text = "0" Then
+            My.Settings.TempoRespostaServidor = "0"
+            My.Settings.Save()
+        Else
+            My.Settings.TempoRespostaServidor = txtTempoRespostaServidor.Text
+            My.Settings.Save()
+        End If
+
+        txtEmailPCP.Text = Usuario.EnviarEmailLiberacaoOS
+
+        cl_BancoDados.AlteracaoEspecifica("configucacaosistema", "EnviarEmailLiberacaoOS", txtEmailPCP.Text, "idConfigucacaoSistema", 1)
 
         Me.Close()
 
@@ -192,4 +194,15 @@ Public Class frmExportarParaOS
 
     End Sub
 
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+
+    End Sub
+
+    Private Sub txtEmailPCP_TextChanged(sender As Object, e As EventArgs) Handles txtEmailPCP.TextChanged
+
+    End Sub
+
+    Private Sub txtEmailPCP_LocationChanged(sender As Object, e As EventArgs) Handles txtEmailPCP.LocationChanged
+
+    End Sub
 End Class

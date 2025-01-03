@@ -1,22 +1,14 @@
 ﻿Public Class frmLogin
     Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
-        '  If banco.AbrirBanco() Then
-        'Dim conexao = banco.ObterConexao()
-        ' Use a conexão conforme necessário
-        ' End If
-
-
         Me.Text = "Sistema SINCO - Lynx - Cliente: " & My.Settings.BancoDadosAtivo
-
 
         If My.Settings.UsuarioLogado <> "" Then
 
             Me.txtLogin.Text = My.Settings.UsuarioLogado
             Me.mskSenha.Text = My.Settings.SenhaUsuarioLogado
             Me.chkSalvarDadosEntrada.Checked = True
+
         Else
 
             Me.txtLogin.Text = Nothing
@@ -32,7 +24,7 @@
     Senha,
     Sigla 
 FROM
-    usuario
+     " & ComplementoTipoBanco & " usuario
 WHERE
     (D_E_L_E_T_E <> '*' OR D_E_L_E_T_E IS NULL)
     AND Login = Senha order by idUsuario")
@@ -45,7 +37,8 @@ WHERE
 
         Dim TotalUsuario As Integer
         'Verificar a quantide de usuarios cadastrado no sistema
-        TotalUsuario = cl_BancoDados.RetornaCampoDaPesquisa("SELECT count(idUsuario) as Qtde FROM usuario", "Qtde")
+        TotalUsuario = cl_BancoDados.RetornaCampoDaPesquisa("SELECT count(idUsuario) as qtde FROM  " & ComplementoTipoBanco & "usuario", "qtde")
+        Usuario.RetornaDadosConfiguracao()
 
         Dim entrar As Boolean
 

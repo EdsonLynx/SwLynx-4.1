@@ -153,11 +153,27 @@ Public Class SwAddin
         iSwApp = ThisSW
         addinID = Cookie
 
+        TipoBanco = "MYSQL"
+        'TipoBanco = "SQL"
 
-        If cl_BancoDados.AbrirBanco() = True Then
 
+        If TipoBanco = "MYSQL" Then
+
+            ComplementoTipoBanco = ""
+
+        ElseIf TipoBanco = "SQL" Then
+
+            ComplementoTipoBanco = "[BDENG].[dbo]."
+
+        End If
+
+
+
+
+            If cl_BancoDados.AbrirBanco() = True Then
 
             AddTaskPane()
+
             ShowTaskPane()
 
             MyTaskPanelHost.Show()
@@ -179,14 +195,11 @@ Public Class SwAddin
             SwApp.LoadAddIn("SwLynx_4._1")
             ConnectToSW = True
 
-
-
         Else
 
             SwApp.UnloadAddIn("SwLynx_4._1")
 
             ConnectToSW = False
-            '  Lynx_SW_1._0
 
         End If
 
@@ -217,34 +230,36 @@ Public Class SwAddin
     ' Evento disparado quando o documento ativo muda
     Function OnActiveModelDocChange() As Integer
         ' Atualizar o modelo ativo
-        swModel = SwApp.ActiveDoc
+        ' swModel = SwApp.ActiveDoc
 
-        If swModel Is Nothing Then
-            'Console.WriteLine("Nenhum documento ativo no SolidWorks.")
-        Else
-            ' Pegar o Selection Manager para capturar a seleção
-            selectionMgr = swModel.SelectionManager
+        'edson 20-01-2025
+        'para verificar a necessidade processamento na abertura de cada arquivo
+        ''''''''If swModel Is Nothing Then
+        ''''''''    'Console.WriteLine("Nenhum documento ativo no SolidWorks.")
+        ''''''''Else
+        ''''''''    ' Pegar o Selection Manager para capturar a seleção
+        ''''''''    selectionMgr = swModel.SelectionManager
 
-            ' Verificar a seleção atual
-            If selectionMgr.GetSelectedObjectCount2(-1) > 0 Then
-                Dim selectedObj As Object = selectionMgr.GetSelectedObject6(1, -1)
-                Dim objType As Integer = selectionMgr.GetSelectedObjectType3(1, -1)
+        ''''''''    ' Verificar a seleção atual
+        ''''''''    If selectionMgr.GetSelectedObjectCount2(-1) > 0 Then
+        ''''''''        Dim selectedObj As Object = selectionMgr.GetSelectedObject6(1, -1)
+        ''''''''        Dim objType As Integer = selectionMgr.GetSelectedObjectType3(1, -1)
 
-                ' Verificar se o objeto selecionado é um componente
-                If objType = swSelectType_e.swSelCOMPONENTS Then
-                    Dim component As Component2 = TryCast(selectedObj, Component2)
-                    If component IsNot Nothing Then
-                        ' Exibir o nome e o caminho do arquivo
-                        Dim fileName As String = component.GetPathName()
-                        ' MsgBox("Arquivo selecionado: " & fileName)
-                    End If
-                    'Else
-                    '    MsgBox("Outro tipo de objeto selecionado.")
-                End If
-            End If
-        End If
+        ''''''''        ' Verificar se o objeto selecionado é um componente
+        ''''''''        If objType = swSelectType_e.swSelCOMPONENTS Then
+        ''''''''            Dim component As Component2 = TryCast(selectedObj, Component2)
+        ''''''''            If component IsNot Nothing Then
+        ''''''''                ' Exibir o nome e o caminho do arquivo
+        ''''''''                Dim fileName As String = component.GetPathName()
+        ''''''''                ' MsgBox("Arquivo selecionado: " & fileName)
+        ''''''''            End If
+        ''''''''            'Else
+        ''''''''            '    MsgBox("Outro tipo de objeto selecionado.")
+        ''''''''        End If
+        ''''''''    End If
+        ''''''''End If
 
-        Return 0
+        ''''''''Return 0
     End Function
 
     ' Manipulador de eventos para o fechamento de documentos
@@ -512,11 +527,14 @@ Public Class SwAddin
 
     Sub AttachSWEvents()
         Try
+
+
             AddHandler iSwApp.ActiveDocChangeNotify, AddressOf Me.SldWorks_ActiveDocChangeNotify
-            AddHandler iSwApp.DocumentLoadNotify2, AddressOf Me.SldWorks_DocumentLoadNotify2
-            AddHandler iSwApp.FileNewNotify2, AddressOf Me.SldWorks_FileNewNotify2
-            AddHandler iSwApp.ActiveModelDocChangeNotify, AddressOf Me.SldWorks_ActiveModelDocChangeNotify
-            AddHandler iSwApp.FileOpenPostNotify, AddressOf Me.SldWorks_FileOpenPostNotify
+            'edson 20-01-2025
+            ' AddHandler iSwApp.DocumentLoadNotify2, AddressOf Me.SldWorks_DocumentLoadNotify2
+            ' AddHandler iSwApp.FileNewNotify2, AddressOf Me.SldWorks_FileNewNotify2
+            'AddHandler iSwApp.ActiveModelDocChangeNotify, AddressOf Me.SldWorks_ActiveModelDocChangeNotify
+            'AddHandler iSwApp.FileOpenPostNotify, AddressOf Me.SldWorks_FileOpenPostNotify
             AddHandler iSwApp.FileCloseNotify, AddressOf Me.FileCloseNotify
             ' Acompanhar eventos de seleção globais
             AddHandler iSwApp.ActiveModelDocChangeNotify, AddressOf OnActiveModelDocChange
@@ -547,10 +565,11 @@ Public Class SwAddin
     Sub DetachSWEvents()
         Try
             RemoveHandler iSwApp.ActiveDocChangeNotify, AddressOf Me.SldWorks_ActiveDocChangeNotify
-            RemoveHandler iSwApp.DocumentLoadNotify2, AddressOf Me.SldWorks_DocumentLoadNotify2
-            RemoveHandler iSwApp.FileNewNotify2, AddressOf Me.SldWorks_FileNewNotify2
-            RemoveHandler iSwApp.ActiveModelDocChangeNotify, AddressOf Me.SldWorks_ActiveModelDocChangeNotify
-            RemoveHandler iSwApp.FileOpenPostNotify, AddressOf Me.SldWorks_FileOpenPostNotify
+            'edson 20-01-2025
+            'RemoveHandler iSwApp.DocumentLoadNotify2, AddressOf Me.SldWorks_DocumentLoadNotify2
+            'RemoveHandler iSwApp.FileNewNotify2, AddressOf Me.SldWorks_FileNewNotify2
+            'RemoveHandler iSwApp.ActiveModelDocChangeNotify, AddressOf Me.SldWorks_ActiveModelDocChangeNotify
+            'RemoveHandler iSwApp.FileOpenPostNotify, AddressOf Me.SldWorks_FileOpenPostNotify
             RemoveHandler iSwApp.FileCloseNotify, AddressOf Me.FileCloseNotify
 
             ' MsgBox(swModel.GetPathName)
@@ -643,12 +662,14 @@ Public Class SwAddin
                 MyTaskPanelHost.AtualizaTela(swModel)
 
                 'Carrega a lista de materia para a peça ativa
-                MyTaskPanelHost.TimerMontaPeca.Enabled = True
+                ' MyTaskPanelHost.TimerMontaPeca.Enabled = True
 
                 'Carrega lista de ordem de serico que mostra quais Ordem de Servico contem esta peça
-                MyTaskPanelHost.TimerFiltroPecaAtivaOS.Enabled = True
+                '  MyTaskPanelHost.TimerFiltroPecaAtivaOS.Enabled = True
 
-                ' DadosArquivoCorrente.AtualizaDesenho(swModel)
+                ' DadosArquivoCorrente.AtualizaDesenho(swModel) 'teste salvamento 20-01-2025
+
+
             Catch ex As Exception
 
                 ' MsgBox("Erro geral: " & ex.Message)
@@ -762,6 +783,7 @@ Public Class SwAddin
 
     ' Função recursiva para percorrer os componentes da montagem
     Private Sub LerDadosComponentes(ByVal comp As Component2, ByVal nivel As Integer, ByVal swModel As ModelDoc2)
+
         Try
             If comp Is Nothing Then Return
 
@@ -846,42 +868,45 @@ Public Class SwAddin
         'TODO: Add your implementation here
     End Function
 
-    Function SldWorks_DocumentLoadNotify2(ByVal docTitle As String, ByVal docPath As String) As Integer
 
-    End Function
+    'edson 20-01-2025
+    ''''Function SldWorks_DocumentLoadNotify2(ByVal docTitle As String, ByVal docPath As String) As Integer
 
-    Function SldWorks_FileNewNotify2(ByVal newDoc As Object, ByVal doctype As Integer, ByVal templateName As String) As Integer
-        '''''''''''''''''''''''''''''''''''''''  AttachEventsToAllDocuments()
 
-    End Function
+    ''''End Function
 
-    Function SldWorks_ActiveModelDocChangeNotify() As Integer
+    ''''Function SldWorks_FileNewNotify2(ByVal newDoc As Object, ByVal doctype As Integer, ByVal templateName As String) As Integer
+    ''''    '''''''''''''''''''''''''''''''''''''''  AttachEventsToAllDocuments()
 
-        'TODO: Add your implementation here
-        'MsgBox("Arquivo Selecionado Alterado")
+    ''''End Function
 
-        'IntanciaSolidWorks.ConectarSolidWorks()
-        'DadosArquivoCorrente.LendoDadosComunsPartAssembly()
-        ''Lista de corte
+    'Function SldWorks_ActiveModelDocChangeNotify() As Integer
 
-        'If swModel.GetType() = swDocumentTypes_e.swDocPART Then
-        '    DadosArquivoCorrente.PercorrerPropriedadesDaListaDeCorte()
-        'End If
+    '    'TODO: Add your implementation here
+    '    'MsgBox("Arquivo Selecionado Alterado")
 
-        ''dados da caixa delimitadora
-        'DadosArquivoCorrente.LerDadosCaixaDelimitadora()
+    '    'IntanciaSolidWorks.ConectarSolidWorks()
+    '    'DadosArquivoCorrente.LendoDadosComunsPartAssembly()
+    '    ''Lista de corte
 
-        '' DadosArquivoCorrente.VerificarProcessodaPecaCorrente()
+    '    'If swModel.GetType() = swDocumentTypes_e.swDocPART Then
+    '    '    DadosArquivoCorrente.PercorrerPropriedadesDaListaDeCorte()
+    '    'End If
 
-        ''Função para Salvar no Banco de dados
-        'DadosArquivoCorrente.AtualizaDesenho()
+    '    ''dados da caixa delimitadora
+    '    'DadosArquivoCorrente.LerDadosCaixaDelimitadora()
 
-    End Function
+    '    '' DadosArquivoCorrente.VerificarProcessodaPecaCorrente()
 
-    Function SldWorks_FileOpenPostNotify(ByVal FileName As String) As Integer
-        '''' AttachEventsToAllDocuments()
-        ' MsgBox("Arquivo Selecionado Alterado")
-    End Function
+    '    ''Função para Salvar no Banco de dados
+    '    'DadosArquivoCorrente.AtualizaDesenho()
+
+    'End Function
+
+    'Function SldWorks_FileOpenPostNotify(ByVal FileName As String) As Integer
+    '    '''' AttachEventsToAllDocuments()
+    '    ' MsgBox("Arquivo Selecionado Alterado")
+    'End Function
 
 #End Region
 

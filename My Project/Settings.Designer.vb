@@ -257,6 +257,30 @@ Namespace My
                 Me("CaixaDelimitadora") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property TempoRespostaServidor() As Integer
+            Get
+                Return CType(Me("TempoRespostaServidor"),Integer)
+            End Get
+            Set
+                Me("TempoRespostaServidor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property EnviarEmailLiberacaoOS() As String
+            Get
+                Return CType(Me("EnviarEmailLiberacaoOS"),String)
+            End Get
+            Set
+                Me("EnviarEmailLiberacaoOS") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

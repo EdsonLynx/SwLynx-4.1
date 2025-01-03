@@ -50,7 +50,7 @@ Public Class ClExcel
         planilha = pasta1.ActiveSheet
 
                 Try
-            Dim NovoIdOrdemServicoDB As Integer = Convert.ToInt32(dgvprincipal.CurrentRow.Cells("IDOrdemServico").Value.ToString)
+            Dim NovoIdOrdemServicoDB As Integer = Convert.ToInt32(dgvprincipal.CurrentRow.Cells("IdOrdemServico").Value.ToString)
 
             NovoIdOrdemServico = cl_BancoDados.FormatarPara5Caracteres(NovoIdOrdemServicoDB.ToString())
                 Catch ex As Exception
@@ -64,9 +64,9 @@ Public Class ClExcel
 
                 'cabeçalho
                 planilha.Range("W2").Value = NovoIdOrdemServico.ToString
-                planilha.Range("D8").Value = dgvprincipal.CurrentRow.Cells("PROJETO").Value.ToString & " - " & dgvprincipal.CurrentRow.Cells("DESCEMPRESA").Value.ToString
-        planilha.Range("D9").Value = dgvprincipal.CurrentRow.Cells("TAG").Value.ToString.Trim.ToUpper
-        planilha.Range("N8").Value = dgvprincipal.CurrentRow.Cells("DESCRICAO").Value.ToString.Trim.ToUpper
+                planilha.Range("D8").Value = dgvprincipal.CurrentRow.Cells("Projeto").Value.ToString & " - " & dgvprincipal.CurrentRow.Cells("DescEmpresa").Value.ToString
+        planilha.Range("D9").Value = dgvprincipal.CurrentRow.Cells("Tag").Value.ToString.Trim.ToUpper
+        planilha.Range("N8").Value = dgvprincipal.CurrentRow.Cells("Descricao").Value.ToString.Trim.ToUpper
         planilha.Range("D10").Value = dgvprincipal.CurrentRow.Cells("ENDERECO").Value.ToString.Trim.ToUpper
 
         ''cabeçalho
@@ -81,10 +81,10 @@ Public Class ClExcel
             Try
 
                 planilha.Range("A18:W18").Copy(planilha.Range("A" & 19 + I & ":W" & 19 + I))
-                planilha.Range("A" & I + 19).Value = dgvGrid.Rows(I).Cells("IDOrdemServicoITEM").Value.ToString.Trim.ToUpper
+                planilha.Range("A" & I + 19).Value = dgvGrid.Rows(I).Cells("IDOrdemServicoItem").Value.ToString.Trim.ToUpper
                 planilha.Range("B" & I + 19).Value = dgvGrid.Rows(I).Cells("CodMatFabricante").Value.ToString.Trim.ToUpper
                 planilha.Range("I" & I + 19).Value = dgvGrid.Rows(I).Cells("QtdeTotal").Value.ToString.Trim.ToUpper
-                planilha.Range("J" & I + 19).Value = dgvGrid.Rows(I).Cells("Materialsw").Value.ToString.Trim.ToUpper
+                planilha.Range("J" & I + 19).Value = dgvGrid.Rows(I).Cells("MaterialSW").Value.ToString.Trim.ToUpper
                 planilha.Range("K" & I + 19).Value = dgvGrid.Rows(I).Cells("Unidade").Value.ToString.Trim.ToUpper
                 planilha.Range("L" & I + 19).Value = dgvGrid.Rows(I).Cells("Espessura").Value.ToString.Trim.ToUpper
                 planilha.Range("M" & I + 19).Value = dgvGrid.Rows(I).Cells("Altura").Value.ToString.Trim.ToUpper
@@ -92,7 +92,7 @@ Public Class ClExcel
                 planilha.Range("O" & I + 19).Value = dgvGrid.Rows(I).Cells("txtItemEstoque").Value.ToString.Trim.ToUpper
                 planilha.Range("P" & I + 19).Value = dgvGrid.Rows(I).Cells("DescResumo").Value.ToString.Trim.ToUpper
                 planilha.Range("S" & I + 19).Value = dgvGrid.Rows(I).Cells("DescDetal").Value.ToString.Trim.ToUpper
-                planilha.Range("V" & I + 19).Value = dgvGrid.Rows(I).Cells("ACABAMENTO").Value.ToString.Trim.ToUpper
+                planilha.Range("V" & I + 19).Value = dgvGrid.Rows(I).Cells("Acabamento").Value.ToString.Trim.ToUpper
                 planilha.Range("W" & I + 19).Value = dgvGrid.Rows(I).Cells("txtTipoDesenho").Value.ToString.Trim.ToUpper
 
                 BarraProgresso.Value = I
@@ -117,7 +117,7 @@ Public Class ClExcel
 
                     planilha.Range("A18:W18").Copy(planilha.Range("A" & 19 + InicioMaterial + m & ":W" & 19 + InicioMaterial + m))
 
-                    'planilha.Range("A" & InicioMaterial + m + 19).Value = dgvMaterial.Rows(m).Cells("IDOrdemServicoITEM").Value
+                    'planilha.Range("A" & InicioMaterial + m + 19).Value = dgvMaterial.Rows(m).Cells("IDOrdemServicoItem").Value
                     planilha.Range("B" & InicioMaterial + m + 19).Value = dgvMaterial.Rows(m).Cells("CodMatFabricante").Value.ToString.Trim.ToUpper
 
                     planilha.Range("I" & InicioMaterial + m + 19).Value = dgvMaterial.Rows(m).Cells("QtdeTotal").Value.ToString.Trim.ToUpper
@@ -125,7 +125,7 @@ Public Class ClExcel
                     planilha.Range("S" & InicioMaterial + m + 19).Value = dgvMaterial.Rows(m).Cells("DescDetal").Value.ToString.Trim.ToUpper
 
 
-                    planilha.Range("W" & InicioMaterial + m + 19).Value = "MATERIAL"
+                    planilha.Range("W" & InicioMaterial + m + 19).Value = "material"
                     planilha.Range("K" & InicioMaterial + m + 19).Value = dgvMaterial.Rows(m).Cells("Unidade").Value.ToString.Trim.ToUpper
 
 
@@ -202,7 +202,7 @@ Public Class ClExcel
 
     '            ' Preencher materiais adicionais
     '            Dim inicioMaterial As Integer = dgvGrid.Rows.Count + 19
-    '            PreencherGridExcel(planilha, dgvMaterial, inicioMaterial, BarraProgresso, "MATERIAL")
+    '            PreencherGridExcel(planilha, dgvMaterial, inicioMaterial, BarraProgresso, "material")
 
     '            ' Remover linha modelo
     '            planilha.Range("A18:W18").Delete()
@@ -242,7 +242,7 @@ Public Class ClExcel
     '    ' Método para obter o ID da Ordem de Serviço
     '    Private Function ObterIdOrdemServico(dgvGrid As DataGridView) As String
     '        Try
-    '            Dim id As Integer = Convert.ToInt32(dgvGrid.CurrentRow.Cells("IDOrdemServico").Value)
+    '            Dim id As Integer = Convert.ToInt32(dgvGrid.CurrentRow.Cells("IdOrdemServico").Value)
     '            Return cl_BancoDados.FormatarPara5Caracteres(id.ToString())
     '        Catch
     '            Return cl_BancoDados.FormatarPara5Caracteres("1")
@@ -252,10 +252,10 @@ Public Class ClExcel
     '    ' Método para preencher o cabeçalho da planilha
     '    Private Sub PreencherCabecalho(planilha As Microsoft.Office.Interop.Excel.Worksheet, dgvprincipal As DataGridView, ordemServico As String)
     '        planilha.Range("W2").Value = ordemServico
-    '        planilha.Range("D8").Value = dgvprincipal.CurrentRow.Cells("PROJETO").Value.ToString() & " - " &
-    '                                   dgvprincipal.CurrentRow.Cells("DESCEMPRESA").Value.ToString()
-    '        planilha.Range("D9").Value = dgvprincipal.CurrentRow.Cells("TAG").Value.ToString()
-    '        planilha.Range("N8").Value = dgvprincipal.CurrentRow.Cells("DESCRICAO").Value.ToString()
+    '        planilha.Range("D8").Value = dgvprincipal.CurrentRow.Cells("Projeto").Value.ToString() & " - " &
+    '                                   dgvprincipal.CurrentRow.Cells("DescEmpresa").Value.ToString()
+    '        planilha.Range("D9").Value = dgvprincipal.CurrentRow.Cells("Tag").Value.ToString()
+    '        planilha.Range("N8").Value = dgvprincipal.CurrentRow.Cells("Descricao").Value.ToString()
     '        planilha.Range("D10").Value = dgvprincipal.CurrentRow.Cells("ENDERECO").Value.ToString()
     '        planilha.Range("D13").Value = dgvprincipal.CurrentRow.Cells("USUARIO").Value.ToString()
     '        planilha.Range("D14").Value = dgvprincipal.CurrentRow.Cells("DATA").Value.ToString()
@@ -275,7 +275,7 @@ Public Class ClExcel
     '                planilha.Range("A18:W18").Copy(planilha.Range("A" & linhaAtual & ":W" & linhaAtual))
 
     '                Dim row = dgv.Rows(i)
-    '                planilha.Range("A" & linhaAtual).Value = row.Cells("IDOrdemServicoITEM").Value
+    '                planilha.Range("A" & linhaAtual).Value = row.Cells("IDOrdemServicoItem").Value
     '                planilha.Range("B" & linhaAtual).Value = row.Cells("CodMatFabricante").Value
     '                planilha.Range("I" & linhaAtual).Value = row.Cells("QtdeTotal").Value
     '                planilha.Range("P" & linhaAtual).Value = row.Cells("DescResumo").Value
@@ -324,7 +324,7 @@ Public Class ClExcel
     '''''        planilha = pasta1.ActiveSheet
 
     '''''        Try
-    '''''            Dim NovoIdOrdemServicoDB As Integer = Convert.ToInt32(dgvGrid.CurrentRow.Cells("IDOrdemServico").Value.ToString)
+    '''''            Dim NovoIdOrdemServicoDB As Integer = Convert.ToInt32(dgvGrid.CurrentRow.Cells("IdOrdemServico").Value.ToString)
 
     '''''            NovoIdOrdemServico = cl_BancoDados.FormatarPara5Caracteres(NovoIdOrdemServicoDB.ToString())
     '''''        Catch ex As Exception
@@ -336,9 +336,9 @@ Public Class ClExcel
 
     '''''        'cabeçalho
     '''''        planilha.Range("R2").Value = NovoIdOrdemServico.ToString
-    '''''        planilha.Range("D10").Value = dgvPrincipal.CurrentRow.Cells("PROJETO").Value.ToString & " - " & dgvPrincipal.CurrentRow.Cells("DESCEMPRESA").Value.ToString
-    '''''        planilha.Range("D11").Value = dgvPrincipal.CurrentRow.Cells("TAG").Value.ToString
-    '''''        planilha.Range("N10").Value = dgvPrincipal.CurrentRow.Cells("DESCRICAO").Value.ToString
+    '''''        planilha.Range("D10").Value = dgvPrincipal.CurrentRow.Cells("Projeto").Value.ToString & " - " & dgvPrincipal.CurrentRow.Cells("DescEmpresa").Value.ToString
+    '''''        planilha.Range("D11").Value = dgvPrincipal.CurrentRow.Cells("Tag").Value.ToString
+    '''''        planilha.Range("N10").Value = dgvPrincipal.CurrentRow.Cells("Descricao").Value.ToString
     '''''        planilha.Range("D12").Value = dgvPrincipal.CurrentRow.Cells("ENDERECO").Value.ToString
 
     '''''        planilha.Range("D16").Value = dgvPrincipal.CurrentRow.Cells("USUARIO").Value.ToString
@@ -346,7 +346,7 @@ Public Class ClExcel
 
     '''''        If TipoExcel = True Then
 
-    '''''            planilha.Range("N16").Value = dgvPrincipal.CurrentRow.Cells("DATA_LIBERACAO_ENGENHARIA").Value.ToString
+    '''''            planilha.Range("N16").Value = dgvPrincipal.CurrentRow.Cells("Data_Liberacao_Engenharia").Value.ToString
 
     '''''        End If
 
@@ -360,13 +360,13 @@ Public Class ClExcel
 
     '''''                planilha.Range("A22:U22").Copy(planilha.Range("A" & 23 + I & ":U" & 23 + I))
 
-    '''''                planilha.Range("A" & I + 23).Value = dgvGrid.Rows(I).Cells("IDOrdemServicoITEM").Value
+    '''''                planilha.Range("A" & I + 23).Value = dgvGrid.Rows(I).Cells("IDOrdemServicoItem").Value
     '''''                planilha.Range("B" & I + 23).Value = dgvGrid.Rows(I).Cells("DescResumo").Value
     '''''                planilha.Range("I" & I + 23).Value = dgvGrid.Rows(I).Cells("DescDetal").Value
     '''''                planilha.Range("L" & I + 23).Value = dgvGrid.Rows(I).Cells("CodMatFabricante").Value
     '''''                planilha.Range("N" & I + 23).Value = dgvGrid.Rows(I).Cells("QtdeTotal").Value
     '''''                planilha.Range("O" & I + 23).Value = dgvGrid.Rows(I).Cells("MaterialSW").Value
-    '''''                planilha.Range("P" & I + 23).Value = dgvGrid.Rows(I).Cells("ACABAMENTO").Value
+    '''''                planilha.Range("P" & I + 23).Value = dgvGrid.Rows(I).Cells("Acabamento").Value
     '''''                planilha.Range("Q" & I + 23).Value = dgvGrid.Rows(I).Cells("TipoDesenho").Value
     '''''                planilha.Range("R" & I + 23).Value = dgvGrid.Rows(I).Cells("Espessura").Value
     '''''                planilha.Range("S" & I + 23).Value = dgvGrid.Rows(I).Cells("Altura").Value
@@ -390,14 +390,14 @@ Public Class ClExcel
 
     '''''                planilha.Range("A22:u22").Copy(planilha.Range("A" & 23 + InicioMaterial + m & ":U" & 23 + InicioMaterial + m))
 
-    '''''                'planilha.Range("A" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("IDOrdemServicoITEM").Value
+    '''''                'planilha.Range("A" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("IDOrdemServicoItem").Value
     '''''                planilha.Range("B" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("DescResumo").Value
     '''''                planilha.Range("I" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("DescDetal").Value
     '''''                planilha.Range("L" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("CodMatFabricante").Value
     '''''                planilha.Range("N" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("QtdeTotal").Value
     '''''                'planilha.Range("O" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("MaterialSW").Value
     '''''                planilha.Range("P" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Unidade").Value
-    '''''                planilha.Range("Q" & InicioMaterial + m + 23).Value = "MATERIAL" 'dgvMaterial.Rows(m).Cells("TipoDesenho").Value
+    '''''                planilha.Range("Q" & InicioMaterial + m + 23).Value = "material" 'dgvMaterial.Rows(m).Cells("TipoDesenho").Value
     '''''                'planilha.Range("R" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Espessura").Value
     '''''                'planilha.Range("S" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Altura").Value
     '''''                'planilha.Range("T" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Largura").Value
@@ -476,13 +476,13 @@ Public Class ClExcel
                     planilha.Range("A13:N13").Copy(planilha.Range("A" & 14 + I & ":N" & 14 + I))
 
                     planilha.Range("A" & I + 14).Value = dgvGrid.Rows(I).Cells("OS").Value
-                    planilha.Range("B" & I + 19).Value = dgvGrid.Rows(I).Cells("PROJETO").Value
-                    planilha.Range("C" & I + 19).Value = dgvGrid.Rows(I).Cells("TAG").Value
+                    planilha.Range("B" & I + 19).Value = dgvGrid.Rows(I).Cells("Projeto").Value
+                    planilha.Range("C" & I + 19).Value = dgvGrid.Rows(I).Cells("Tag").Value
                     planilha.Range("D" & I + 19).Value = dgvGrid.Rows(I).Cells("DescDetal").Value
                     planilha.Range("K" & I + 19).Value = dgvGrid.Rows(I).Cells("DescResumo").Value
                     planilha.Range("L" & I + 19).Value = dgvGrid.Rows(I).Cells("Codigo").Value
                     planilha.Range("M" & I + 19).Value = dgvGrid.Rows(I).Cells("Unidade").Value
-                    planilha.Range("N" & I + 19).Value = dgvGrid.Rows(I).Cells("Qtde").Value
+                    planilha.Range("N" & I + 19).Value = dgvGrid.Rows(I).Cells("qtde").Value
 
                     BarraProgresso.Value = I
                 Catch ex As Exception
@@ -548,7 +548,7 @@ Public Class clPadraoMetta
             planilha = pasta1.ActiveSheet
 
             Try
-                Dim NovoIdOrdemServicoDB As Integer = Convert.ToInt32(dgvPrincipal.CurrentRow.Cells("IDOrdemServico").Value.ToString)
+                Dim NovoIdOrdemServicoDB As Integer = Convert.ToInt32(dgvPrincipal.CurrentRow.Cells("IdOrdemServico").Value.ToString)
 
                 NovoIdOrdemServico = cl_BancoDados.FormatarPara5Caracteres(NovoIdOrdemServicoDB.ToString())
             Catch ex As Exception
@@ -560,9 +560,9 @@ Public Class clPadraoMetta
 
             'cabeçalho
             planilha.Range("R2").Value = NovoIdOrdemServico.ToString
-            planilha.Range("D10").Value = dgvPrincipal.CurrentRow.Cells("PROJETO").Value.ToString & " - " & dgvPrincipal.CurrentRow.Cells("DESCEMPRESA").Value.ToString
-            planilha.Range("D11").Value = dgvPrincipal.CurrentRow.Cells("TAG").Value.ToString
-            planilha.Range("N10").Value = dgvPrincipal.CurrentRow.Cells("DESCRICAO").Value.ToString
+            planilha.Range("D10").Value = dgvPrincipal.CurrentRow.Cells("Projeto").Value.ToString & " - " & dgvPrincipal.CurrentRow.Cells("DescEmpresa").Value.ToString
+            planilha.Range("D11").Value = dgvPrincipal.CurrentRow.Cells("Tag").Value.ToString
+            planilha.Range("N10").Value = dgvPrincipal.CurrentRow.Cells("Descricao").Value.ToString
             planilha.Range("D12").Value = dgvPrincipal.CurrentRow.Cells("ENDERECO").Value.ToString
 
             planilha.Range("D16").Value = dgvPrincipal.CurrentRow.Cells("USUARIO").Value.ToString
@@ -570,7 +570,7 @@ Public Class clPadraoMetta
 
             If TipoExcel = True Then
 
-                planilha.Range("N16").Value = dgvPrincipal.CurrentRow.Cells("DATA_LIBERACAO_ENGENHARIA").Value.ToString
+                planilha.Range("N16").Value = dgvPrincipal.CurrentRow.Cells("Data_Liberacao_Engenharia").Value.ToString
 
             End If
 
@@ -584,13 +584,13 @@ Public Class clPadraoMetta
 
                     planilha.Range("A22:U22").Copy(planilha.Range("A" & 23 + I & ":U" & 23 + I))
 
-                    planilha.Range("A" & I + 23).Value = dgvGrid.Rows(I).Cells("IDOrdemServicoITEM").Value
+                    planilha.Range("A" & I + 23).Value = dgvGrid.Rows(I).Cells("IDOrdemServicoItem").Value
                     planilha.Range("B" & I + 23).Value = dgvGrid.Rows(I).Cells("DescResumo").Value
                     planilha.Range("I" & I + 23).Value = dgvGrid.Rows(I).Cells("DescDetal").Value
                     planilha.Range("L" & I + 23).Value = dgvGrid.Rows(I).Cells("CodMatFabricante").Value
                     planilha.Range("N" & I + 23).Value = dgvGrid.Rows(I).Cells("QtdeTotal").Value
                     planilha.Range("O" & I + 23).Value = dgvGrid.Rows(I).Cells("MaterialSW").Value
-                    planilha.Range("P" & I + 23).Value = dgvGrid.Rows(I).Cells("ACABAMENTO").Value
+                    planilha.Range("P" & I + 23).Value = dgvGrid.Rows(I).Cells("Acabamento").Value
                     planilha.Range("Q" & I + 23).Value = dgvGrid.Rows(I).Cells("txtTipoDesenho").Value
                     planilha.Range("R" & I + 23).Value = dgvGrid.Rows(I).Cells("Espessura").Value
                     planilha.Range("S" & I + 23).Value = dgvGrid.Rows(I).Cells("Altura").Value
@@ -614,14 +614,14 @@ Public Class clPadraoMetta
 
                     planilha.Range("A22:u22").Copy(planilha.Range("A" & 23 + InicioMaterial + m & ":U" & 23 + InicioMaterial + m))
 
-                    'planilha.Range("A" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("IDOrdemServicoITEM").Value
+                    'planilha.Range("A" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("IDOrdemServicoItem").Value
                     planilha.Range("B" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("DescResumo").Value
                     planilha.Range("I" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("DescDetal").Value
                     planilha.Range("L" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("CodMatFabricante").Value
                     planilha.Range("N" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("QtdeTotal").Value
                     'planilha.Range("O" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("MaterialSW").Value
                     planilha.Range("P" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Unidade").Value
-                    planilha.Range("Q" & InicioMaterial + m + 23).Value = "MATERIAL" 'dgvMaterial.Rows(m).Cells("TipoDesenho").Value
+                    planilha.Range("Q" & InicioMaterial + m + 23).Value = "material" 'dgvMaterial.Rows(m).Cells("TipoDesenho").Value
                     'planilha.Range("R" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Espessura").Value
                     'planilha.Range("S" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Altura").Value
                     'planilha.Range("T" & InicioMaterial + m + 23).Value = dgvMaterial.Rows(m).Cells("Largura").Value
@@ -697,9 +697,9 @@ Public Class clPadraoMetta
             ' Preencher dados do Grid
             PreencherGrid(planilha, dgvGrid, 23, BarraProgresso)
 
-            ' Preencher dados de Material
+            ' Preencher dados de material
             Dim linhaInicialMaterial = dgvGrid.Rows.Count + 23
-            PreencherGrid(planilha, dgvMaterial, linhaInicialMaterial, BarraProgresso, "MATERIAL")
+            PreencherGrid(planilha, dgvMaterial, linhaInicialMaterial, BarraProgresso, "material")
 
             ' Remover linha modelo
             planilha.Range("A22:U22").Delete()
@@ -759,7 +759,7 @@ Public Class clPadraoMetta
     ' Método para obter o ID da Ordem de Serviço
     Private Function ObterIdOrdemServico(dgvGrid As DataGridView) As String
         Try
-            Dim id As Integer = Convert.ToInt32(dgvGrid.CurrentRow.Cells("IDOrdemServico").Value)
+            Dim id As Integer = Convert.ToInt32(dgvGrid.CurrentRow.Cells("IdOrdemServico").Value)
             Return cl_BancoDados.FormatarPara5Caracteres(id.ToString())
         Catch
             Return cl_BancoDados.FormatarPara5Caracteres("1")
@@ -774,14 +774,14 @@ Public Class clPadraoMetta
     TipoExcel As Boolean
 )
         planilha.Range("R2").Value = ordemServico
-        planilha.Range("D10").Value = $"{dgvPrincipal.CurrentRow.Cells("PROJETO").Value} - {dgvPrincipal.CurrentRow.Cells("DESCEMPRESA").Value}"
-        planilha.Range("D11").Value = dgvPrincipal.CurrentRow.Cells("TAG").Value
-        planilha.Range("N10").Value = dgvPrincipal.CurrentRow.Cells("DESCRICAO").Value
+        planilha.Range("D10").Value = $"{dgvPrincipal.CurrentRow.Cells("Projeto").Value} - {dgvPrincipal.CurrentRow.Cells("DescEmpresa").Value}"
+        planilha.Range("D11").Value = dgvPrincipal.CurrentRow.Cells("Tag").Value
+        planilha.Range("N10").Value = dgvPrincipal.CurrentRow.Cells("Descricao").Value
         planilha.Range("D12").Value = dgvPrincipal.CurrentRow.Cells("ENDERECO").Value
         planilha.Range("D16").Value = dgvPrincipal.CurrentRow.Cells("USUARIO").Value
         planilha.Range("D17").Value = dgvPrincipal.CurrentRow.Cells("Data").Value
         If TipoExcel Then
-            planilha.Range("N16").Value = dgvPrincipal.CurrentRow.Cells("DATA_LIBERACAO_ENGENHARIA").Value
+            planilha.Range("N16").Value = dgvPrincipal.CurrentRow.Cells("Data_Liberacao_Engenharia").Value
         End If
         planilha.Range("Q16").Value = My.Computer.Name.ToUpper()
         planilha.Range("Q17").Value = Date.Now.ToShortDateString
@@ -801,7 +801,7 @@ Public Class clPadraoMetta
                 planilha.Range("A22:U22").Copy(planilha.Range("A" & linhaAtual & ":U" & linhaAtual))
 
                 Dim row = dgv.Rows(i)
-                planilha.Range("A" & linhaAtual).Value = row.Cells("IDOrdemServicoITEM").Value
+                planilha.Range("A" & linhaAtual).Value = row.Cells("IDOrdemServicoItem").Value
                 planilha.Range("B" & linhaAtual).Value = row.Cells("DescResumo").Value
                 planilha.Range("I" & linhaAtual).Value = row.Cells("DescDetal").Value
                 planilha.Range("L" & linhaAtual).Value = row.Cells("CodMatFabricante").Value

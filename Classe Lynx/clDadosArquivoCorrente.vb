@@ -26,6 +26,8 @@ Imports iText.Kernel.Pdf.Canvas
 Imports iText.Kernel.Font
 Imports iText.IO.Font.Constants
 Imports SolidWorks.Interop.dsgnchk
+Imports System.Data.SqlClient
+Imports ZstdSharp.Unsafe
 
 
 Public Class ClDadosArquivoCorrente
@@ -52,7 +54,7 @@ Public Class ClDadosArquivoCorrente
     'Processo
     Public soldagem As String
 
-    Public acabamento As String
+    Public Acabamento As String
     Public TipoDesenho As String
     Public Corte As String
     Public Dobra As String
@@ -62,7 +64,7 @@ Public Class ClDadosArquivoCorrente
     Public ItemEstoque As String
     Public rnc As String
     'Public Sobra_Fabrica As String
-    Public Qtde As String
+    Public qtde As String
 
     Public ArquivoPdf As String
     Public ArquivoDxf As String
@@ -84,7 +86,7 @@ Public Class ClDadosArquivoCorrente
     Public PerimetroCorteInterno As String
     Public NumeroDobras As String
     Public Massa As String
-    Public Material As String
+    Public material As String
     Public AreaPintura As String
 
     Public propertyName As String
@@ -97,10 +99,15 @@ Public Class ClDadosArquivoCorrente
     Public DescricaoPendencia As String
     Public Sobra_Fabrica As String
 
+    Public EnderecoFichaTecnica As String
+    Public EnderecoIsometrico As String
+
+
+
     Public Function ArquivoCorrente(ByVal swModel As ModelDoc2) As Boolean
 
 
-        MyTaskPanelHost.LimparTelaVAriaveis()
+        MyTaskPanelHost.LimparTelaVariaveis()
 
         IntanciaSolidWorks.ConectarSolidWorks()
         ' swApparq = CreateObject("SldWorks.Application")
@@ -198,25 +205,33 @@ Public Class ClDadosArquivoCorrente
                 ' Cálculo da área de pintura
                 AreaPintura = If(MyMassProp IsNot Nothing, MyMassProp.SurfaceArea.ToString("F2", Globalization.CultureInfo.InvariantCulture), "0.00")
 
+                EnderecoFichaTecnica = cl_BancoDados.RetornaCampoDaPesquisa("Select EnderecoFichaTecnica from  " & ComplementoTipoBanco & "material where CodMatFabricante = '" & NomeArquivoSemExtensao & "'", "EnderecoFichaTecnica")
+                EnderecoIsometrico = cl_BancoDados.RetornaCampoDaPesquisa("Select EnderecoIsometrico from  " & ComplementoTipoBanco & "material where CodMatFabricante = '" & NomeArquivoSemExtensao & "'", "EnderecoIsometrico")
+
+
                 ' Obtendo propriedades personalizadas
                 If swModel IsNot Nothing Then
                     swCustProp = swModelDocExt.CustomPropertyManager("")
                     ' Try
 
                     soldagem = GetCustomProperty(swCustProp, "txtsoldagem")
-                        acabamento = GetCustomProperty(swCustProp, "txtacabamento")
-                        TipoDesenho = GetCustomProperty(swCustProp, "txtTipoDesenho")
-                        Corte = GetCustomProperty(swCustProp, "txtcorte")
-                        Dobra = GetCustomProperty(swCustProp, "txtdobra")
-                        Solda = GetCustomProperty(swCustProp, "txtsolda")
-                        Pintura = GetCustomProperty(swCustProp, "txtpintura")
-                        Montagem = GetCustomProperty(swCustProp, "txtmontagem")
-                        ItemEstoque = GetCustomProperty(swCustProp, "txtitemestoque")
+                    Acabamento = GetCustomProperty(swCustProp, "txtacabamento")
+                    TipoDesenho = GetCustomProperty(swCustProp, "txtTipoDesenho")
+                    Corte = GetCustomProperty(swCustProp, "txtcorte")
+                    Dobra = GetCustomProperty(swCustProp, "txtdobra")
+                    Solda = GetCustomProperty(swCustProp, "txtsolda")
+                    Pintura = GetCustomProperty(swCustProp, "txtpintura")
+                    Montagem = GetCustomProperty(swCustProp, "txtmontagem")
+                    ItemEstoque = GetCustomProperty(swCustProp, "txtitemestoque")
 
                     ' Catch ex As Exception
                     ' Registrar a exceção, se necessário
                     'End Try'
                     'R'eturn True
+
+
+
+
                 End If
             End If
 
@@ -245,7 +260,7 @@ Public Class ClDadosArquivoCorrente
         PerimetroCorteInterno = ""
         NumeroDobras = ""
         Massa = ""
-        Material = ""
+        material = ""
     End Sub
 
     Public Function PercorrerPropriedadesDaListaDeCorte(ByVal swModel As ModelDoc2) As Boolean
@@ -270,7 +285,7 @@ Public Class ClDadosArquivoCorrente
                 LimparPropriedadesListaDeCorte()
 
                 Massa = GetCustomProperty(swCustProp, "Peso")
-                ' Material = GetCustomProperty(swCustProp, "Material")
+                ' material = GetCustomProperty(swCustProp, "material")
 
 
                 Try
@@ -297,19 +312,19 @@ Public Class ClDadosArquivoCorrente
                 Try
 
 
-                    Material = GetCustomProperty(swCustProp, "Material")
+                    material = GetCustomProperty(swCustProp, "material")
 
 
                     ' O nome do material é o primeiro valor no array de propriedades
-                    ' Material = materialProperties(0) ' O nome do material é armazenado no índice 0
+                    ' material = materialProperties(0) ' O nome do material é armazenado no índice 0
 
                 Catch ex As Exception
 
-                    Material = ""
+                    material = ""
 
                 End Try
 
-                ' MsgBox(Material)
+                ' MsgBox(material)
 
 
 
@@ -500,14 +515,14 @@ Public Class ClDadosArquivoCorrente
                                         Massa = "0.00"
                                     End Try
 
-                                ElseIf String.Equals(NomePropriedadeListCut.ToString(), "Material", StringComparison.OrdinalIgnoreCase) Then
+                                ElseIf String.Equals(NomePropriedadeListCut.ToString(), "material", StringComparison.OrdinalIgnoreCase) Then
 
                                     ' Garante que o valor inicial seja tratado como String e evita nulos.
-                                    Material = If(propertyTypes(i)?.ToString(), String.Empty)
+                                    material = If(propertyTypes(i)?.ToString(), String.Empty)
 
                                     ' Se o valor for "True", redefine como uma string vazia.
-                                    If String.Equals(Material, "True", StringComparison.OrdinalIgnoreCase) Then
-                                        Material = String.Empty
+                                    If String.Equals(material, "True", StringComparison.OrdinalIgnoreCase) Then
+                                        material = String.Empty
                                     End If
 
                                 End If
@@ -536,7 +551,7 @@ Public Class ClDadosArquivoCorrente
                         PerimetroCorteInterno = ""
                         NumeroDobras = ""
                         Massa = ""
-                        Material = ""
+                        material = ""
 
                     End If
 
@@ -549,7 +564,7 @@ Public Class ClDadosArquivoCorrente
                     PerimetroCorteInterno = ""
                     NumeroDobras = ""
                     Massa = ""
-                    Material = ""
+                    material = ""
 
                 Finally
                 End Try
@@ -784,49 +799,157 @@ Public Class ClDadosArquivoCorrente
 
     End Sub
 
-    Public Function VerificarProcessodaPecaCorrente(ByVal swModel As ModelDoc2) As Boolean
+    Public Function VerificarProcessodaPecaCorrente(ByVal swModel As ModelDoc2, ByVal msg As Boolean) As Boolean
+
+        VerificarProcessodaPecaCorrente = True
+
         Try
 
-            ' Verifica se todos os valores são nulos, vazios ou "0"
-            If (String.IsNullOrEmpty(DadosArquivoCorrente.Corte.ToString().Trim()) OrElse DadosArquivoCorrente.Corte.ToString().Trim() = "0") AndAlso
-       (String.IsNullOrEmpty(DadosArquivoCorrente.Dobra.ToString().Trim()) OrElse DadosArquivoCorrente.Dobra.ToString().Trim() = "0") AndAlso
-       (String.IsNullOrEmpty(DadosArquivoCorrente.Solda.ToString().Trim()) OrElse DadosArquivoCorrente.Solda.ToString().Trim() = "0") AndAlso
-       (String.IsNullOrEmpty(DadosArquivoCorrente.Pintura.ToString().Trim()) OrElse DadosArquivoCorrente.Pintura.ToString().Trim() = "0") Then
-
-                ' Código a ser executado quando todos os valores são "0" ou vazios
-                MyTaskPanelHost.chkMontagem.Checked = True
-
-                Dim valorMontagem As String = "1"
-
-                DadosArquivoCorrente.Montagem = valorMontagem
-                DadosArquivoCorrente.GarantirOuCriarPropriedade(swModel, "txtmontagem", valorMontagem, DadosArquivoCorrente.Montagem)
 
 
+            Dim MensagemErros As String = "Lista de Ações Pendentes no Arquivo: " & DadosArquivoCorrente.NomeArquivoSemExtensao & vbCrLf & vbCrLf & vbCrLf
+
+            'Usa Select Case para diferenciar o tipo do documento
+            If swModel.GetType() = swDocumentTypes_e.swDocPART Then
+
+                If DadosArquivoCorrente.NumeroDobras <> "" And DadosArquivoCorrente.TipoDesenho <> "CHAPARIA" Then
+
+                    MensagemErros = MensagemErros & "Erro 01 - Peças com Dobras são consideraras chapa, favor verificar os dados do cadastro da peça, o tipo de desenho deve ser 'CHAPARIA'" & vbCrLf
 
 
-                Return True
+                    VerificarProcessodaPecaCorrente = False
+
+
+                End If
+
+                If DadosArquivoCorrente.TipoDesenho = "" Then
+
+                    MensagemErros = MensagemErros & "Erro 02 - O tipo de desenho não foi informado, favor informar!" & vbCrLf
+
+
+
+                    VerificarProcessodaPecaCorrente = False
+
+
+                End If
+
+                If DadosArquivoCorrente.TipoDesenho = "CHAPARIA" Then
+
+                    If (DadosArquivoCorrente.Espessura = "" Or DadosArquivoCorrente.Espessura = "0.00") And DadosArquivoCorrente.Corte <> "1" Then
+
+                        MensagemErros = MensagemErros & "Erro 03 - Como o tipo de desenho esta marcado como 'Chaparia' e obriogatorio a criação da Lista de corte" & vbCrLf
+
+                        VerificarProcessodaPecaCorrente = False
+
+
+                    End If
+
+                    If DadosArquivoCorrente.Corte <> "1" Then
+
+                        MensagemErros = MensagemErros & "Erro 04 - O Setor de corte deve estar marcado" & vbCrLf
+
+                        VerificarProcessodaPecaCorrente = False
+
+
+                    End If
+
+
+                    If DadosArquivoCorrente.Espessura.ToString = "" Then
+
+
+                        MensagemErros = MensagemErros & "Erro 05 - Com o tipo de desenho como 'CHAPARIA' a espessura deve ser infomada, crie a lista de corte!" & vbCrLf
+
+                        VerificarProcessodaPecaCorrente = False
+
+
+                    End If
+
+
+                End If
+
+                If DadosArquivoCorrente.TipoDesenho <> "CHAPARIA" Then
+
+                    If DadosArquivoCorrente.Corte = "" And
+                            DadosArquivoCorrente.Solda = Dobra = "" And
+                            DadosArquivoCorrente.Pintura = "" And
+                            DadosArquivoCorrente.Montagem = "" Then
+
+                        MsgBox("E necessario a indição de pelo menos (1)um processo!")
+
+                    Else
+
+                        VerificarProcessodaPecaCorrente = False
+
+                    End If
+
+                End If
+
+            ElseIf swModel.GetType() = swDocumentTypes_e.swDocASSEMBLY Then
+
+                If DadosArquivoCorrente.TipoDesenho = "CHAPARIA" Then
+
+                    MensagemErros = MensagemErros & "Erro 08 - Os arquivos com extensão 'SLDASM' conjuntos do SolidWorks, não podem ser do tipo 'CHAPARIA'" & vbCrLf
+
+                    VerificarProcessodaPecaCorrente = False
+
+
+                End If
+
+                If DadosArquivoCorrente.TipoDesenho = "" Then
+
+                    MensagemErros = MensagemErros & "Erro 09 - O tipo de desenho e de preenchimento Obrigatorio" & vbCrLf
+
+                    VerificarProcessodaPecaCorrente = False
+
+
+                End If
+
+                If DadosArquivoCorrente.Corte = "" And
+                      DadosArquivoCorrente.Dobra = "" And
+                      DadosArquivoCorrente.Solda = "" And
+                      DadosArquivoCorrente.Pintura = "" And
+                      DadosArquivoCorrente.Montagem = "" Then
+
+                    MensagemErros = MensagemErros & "Erro 10 - Os arquivos com extensão 'SLDASM' deve conter pelomenos algum processo!" & vbCrLf
+
+                    VerificarProcessodaPecaCorrente = False
+
+
+
+                End If
+
             End If
 
-            ' Retornar falso se a condição não for atendida
-            Return False
+            Dim qtdernc As Integer = Convert.ToInt16(cl_BancoDados.RetornaCampoDaPesquisa("SELECT count(idordemservicoitempendencia) as qtdernc 
+                    FROM  " & ComplementoTipoBanco & "ordemservicoitempendencia where
+                              (Estatus <> 'FINALIZADA' OR  Estatus =  '' OR  Estatus  IS NULL) 
+                    and CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "';", "qtdernc"))
+
+            If qtdernc > 0 Then
+
+                MensagemErros = MensagemErros & "Erro 11 - Existem RNC's em aberto no arquivo corrente!" & vbCrLf
+
+                VerificarProcessodaPecaCorrente = False
+
+            End If
+
+            If msg = True Then
+
+                If VerificarProcessodaPecaCorrente = False Then
+
+                    MessageBox.Show(MensagemErros, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                End If
+
+            End If
+
         Catch ex As Exception
-            '   MsgBox(ex.Message)
+
+            '  VerificarProcessodaPecaCorrente = False
+
         Finally
+
         End Try
-
-        If UCase(DadosArquivoCorrente.Espessura).ToString > 0 Then
-            DadosArquivoCorrente.Corte = 1
-            DadosArquivoCorrente.GarantirOuCriarPropriedade(swModel, "txtcorte", DadosArquivoCorrente.Corte, DadosArquivoCorrente.Corte)
-        Else
-            DadosArquivoCorrente.Corte = 0
-        End If
-
-        If UCase(DadosArquivoCorrente.NumeroDobras).ToString > 0 Then
-            DadosArquivoCorrente.Dobra = 1
-            DadosArquivoCorrente.GarantirOuCriarPropriedade(swModel, "txtdobra", DadosArquivoCorrente.Dobra, DadosArquivoCorrente.Dobra)
-        Else
-            DadosArquivoCorrente.Dobra = 0
-        End If
 
 
 
@@ -834,31 +957,33 @@ Public Class ClDadosArquivoCorrente
 
     Public Sub AtualizaDesenho(ByVal swModel As ModelDoc2)
 
-        Try
+        If TipoBanco = "MYSQL" Then
+
+            Try
 
 
-            Dim dt As System.Data.DataTable
-            Dim query As String
-            Dim isUpdate As Boolean = False
+                Dim dt As System.Data.DataTable
+                Dim query As String
+                Dim isUpdate As Boolean = False
 
-            dt = cl_BancoDados.CarregarDados("Select CodMatFabricante FROM material WHERE PecaManuFat = 'S' and CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "'")
+                dt = cl_BancoDados.CarregarDados("Select CodMatFabricante FROM  " & ComplementoTipoBanco & "material WHERE PecaManuFat = 'S' and CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "'")
 
-            ' Verifica se o DataTable tem pelo menos uma linha
-            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                ' Verifica se o valor da coluna "CodMatFabricante" não é DBNull
-                If dt.Rows(0)("CodMatFabricante") IsNot DBNull.Value Then
-                    isUpdate = True
+                ' Verifica se o DataTable tem pelo menos uma linha
+                If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                    ' Verifica se o valor da coluna "CodMatFabricante" não é DBNull
+                    If dt.Rows(0)("CodMatFabricante") IsNot DBNull.Value Then
+                        isUpdate = True
+                    Else
+                        isUpdate = False
+                    End If
                 Else
                     isUpdate = False
                 End If
-            Else
-                isUpdate = False
-            End If
 
 
-            ' Definir a consulta SQL com base na existência do item
-            If isUpdate Then
-                query = "UPDATE material SET DescResumo = @DescResumo, DescDetal = @DescDetal, PecaManufat = @PecaManufat, " &
+                ' Definir a consulta SQL com base na existência do item
+                If isUpdate Then
+                    query = "UPDATE material SET DescResumo = @DescResumo, DescDetal = @DescDetal, PecaManuFat = @PecaManuFat, " &
             "Autor = @Autor, Palavrachave = @Palavrachave, Notas = @Notas, Espessura = @Espessura, AreaPintura = @AreaPintura, " &
             "NumeroDobras = @NumeroDobras, Peso = @Peso, Unidade = @Unidade, Altura = @Altura, Largura = @Largura, " &
             "Profundidade = @Profundidade, UsuarioAlteracao = @UsuarioAlteracao, DtAlteracao = @DtCad, CodigoJuridicoMat = @CodigoJuridicoMat, " &
@@ -867,98 +992,249 @@ Public Class ClDadosArquivoCorrente
             "txtSolda = @txtSolda, txtPintura = @txtPintura, txtMontagem = @txtMontagem, Comprimentocaixadelimitadora = @Compcx, " &
             "Larguracaixadelimitadora = @Largcx, Espessuracaixadelimitadora = @Espcx, txtItemEstoque = @txtItemEstoque " &
             "WHERE CodMatFabricante = @CodMatFabricante"
-            Else
-                query = "INSERT INTO material (DescResumo, DescDetal, PecaManufat, Autor, Palavrachave, Notas, Espessura, AreaPintura, NumeroDobras, Peso, " &
+                Else
+                    query = "INSERT INTO material (DescResumo, DescDetal, PecaManuFat, Autor, Palavrachave, Notas, Espessura, AreaPintura, NumeroDobras, Peso, " &
             "Unidade, Altura, Largura, Profundidade, CodMatFabricante, DtCad, UsuarioCriacao, UsuarioAlteracao, DtAlteracao, CodigoJuridicoMat, " &
             "StatusMat, MaterialSW, EnderecoArquivo, Acabamento, txtSoldagem, txtTipoDesenho, txtCorte, txtDobra, txtSolda, txtPintura, " &
             "txtMontagem, Comprimentocaixadelimitadora, Larguracaixadelimitadora, Espessuracaixadelimitadora, txtItemEstoque) " &
-            "VALUES (@DescResumo, @DescDetal, @PecaManufat, @Autor, @Palavrachave, @Notas, @Espessura, @AreaPintura, @NumeroDobras, @Peso, @Unidade, " &
+            "VALUES (@DescResumo, @DescDetal, @PecaManuFat, @Autor, @Palavrachave, @Notas, @Espessura, @AreaPintura, @NumeroDobras, @Peso, @Unidade, " &
             "@Altura, @Largura, @Profundidade, @CodMatFabricante, @DtCad, @UsuarioCriacao, @UsuarioAlteracao, @DtAlteracao, @CodigoJuridicoMat, " &
             "@StatusMat, @MaterialSW, @EnderecoArquivo, @Acabamento, @txtSoldagem, @txtTipoDesenho, @txtCorte, @txtDobra, @txtSolda, @txtPintura, " &
             "@txtMontagem, @Compcx, @Largcx, @Espcx, @txtItemEstoque)"
-            End If
+                End If
 
-            Using cmd As New MySqlCommand(query, myconect)
-                Try
+                Using cmd As New MySqlCommand(query, myconect)
 
-
-                    VerificarProcessodaPecaCorrente(swModel)
+                    Try
 
 
-                    ' Adicione os parâmetros ao comando
-                    AddTextParameter(cmd, "@DescResumo", UCase(DadosArquivoCorrente.Titulo))
-                    AddTextParameter(cmd, "@DescDetal", UCase(DadosArquivoCorrente.AssuntoSubiTitulo))
-                    AddTextParameter(cmd, "@PecaManufat", "S")
-                    AddTextParameter(cmd, "@Autor", UCase(DadosArquivoCorrente.Author))
-                    AddTextParameter(cmd, "@Palavrachave", UCase(DadosArquivoCorrente.PalavraChave))
-                    AddTextParameter(cmd, "@Notas", UCase(DadosArquivoCorrente.Comentarios))
-                    AddTextParameter(cmd, "@Espessura", UCase(DadosArquivoCorrente.Espessura))
-                    AddTextParameter(cmd, "@AreaPintura", UCase(DadosArquivoCorrente.AreaPintura))
-                    AddTextParameter(cmd, "@NumeroDobras", UCase(DadosArquivoCorrente.NumeroDobras))
-                    AddTextParameter(cmd, "@Peso", UCase(DadosArquivoCorrente.Massa))
-                    AddTextParameter(cmd, "@Unidade", "PC")
-                    AddTextParameter(cmd, "@Altura", UCase(DadosArquivoCorrente.ComprimentoBlank))
-                    AddTextParameter(cmd, "@Largura", UCase(DadosArquivoCorrente.LarguraBlank))
-                    AddTextParameter(cmd, "@Profundidade", String.Empty)
-                    AddTextParameter(cmd, "@CodMatFabricante", UCase(DadosArquivoCorrente.NomeArquivoSemExtensao))
-                    AddTextParameter(cmd, "@DtCad", DateTime.Now.Date) ' Formato ISO
-                    AddTextParameter(cmd, "@UsuarioCriacao", Usuario.NomeCompleto.ToString.ToUpper)
-                    AddTextParameter(cmd, "@UsuarioAlteracao", UCase(DadosArquivoCorrente.SalvoUltimaVezPor))
-                    AddTextParameter(cmd, "@DtAlteracao", DadosArquivoCorrente.DataUltimoSalvamento.ToString) ' Formato ISO
-                    AddTextParameter(cmd, "@CodigoJuridicoMat", String.Empty)
-                    AddTextParameter(cmd, "@StatusMat", "A")
-                    AddTextParameter(cmd, "@MaterialSW", UCase(DadosArquivoCorrente.Material))
-                    AddTextParameter(cmd, "@EnderecoArquivo", UCase(DadosArquivoCorrente.EnderecoArquivo))
-                    AddTextParameter(cmd, "@Acabamento", UCase(DadosArquivoCorrente.acabamento))
-                    AddTextParameter(cmd, "@txtSoldagem", UCase(DadosArquivoCorrente.soldagem))
-                    AddTextParameter(cmd, "@txtTipoDesenho", UCase(DadosArquivoCorrente.TipoDesenho))
-                    AddTextParameter(cmd, "@txtCorte", UCase(DadosArquivoCorrente.Corte))
-                    AddTextParameter(cmd, "@txtDobra", UCase(DadosArquivoCorrente.Dobra))
-                    AddTextParameter(cmd, "@txtSolda", UCase(DadosArquivoCorrente.Solda))
-                    AddTextParameter(cmd, "@txtPintura", UCase(DadosArquivoCorrente.Pintura))
-                    AddTextParameter(cmd, "@txtMontagem", UCase(DadosArquivoCorrente.Montagem))
-                    AddTextParameter(cmd, "@Compcx", DadosArquivoCorrente.Alturacaixadelimitadora)
-                    AddTextParameter(cmd, "@Largcx", DadosArquivoCorrente.Larguracaixadelimitadora)
-                    AddTextParameter(cmd, "@Espcx", DadosArquivoCorrente.Profundidadeaixadelimitadora)
-                    AddTextParameter(cmd, "@txtItemEstoque", DadosArquivoCorrente.ItemEstoque)
+                        ' VerificarProcessodaPecaCorrente(swModel, False)
 
 
-                    'If cl_BancoDados.AbrirBanco = False Then
+                        ' Adicione os parâmetros ao comando
+                        AddTextParameterMysql(cmd, "@DescResumo", UCase(DadosArquivoCorrente.Titulo))
+                        AddTextParameterMysql(cmd, "@DescDetal", UCase(DadosArquivoCorrente.AssuntoSubiTitulo))
+                        AddTextParameterMysql(cmd, "@PecaManuFat", "S")
+                        AddTextParameterMysql(cmd, "@Autor", UCase(DadosArquivoCorrente.Author))
+                        AddTextParameterMysql(cmd, "@Palavrachave", UCase(DadosArquivoCorrente.PalavraChave))
+                        AddTextParameterMysql(cmd, "@Notas", UCase(DadosArquivoCorrente.Comentarios))
+                        AddTextParameterMysql(cmd, "@Espessura", UCase(DadosArquivoCorrente.Espessura))
+                        AddTextParameterMysql(cmd, "@AreaPintura", UCase(DadosArquivoCorrente.AreaPintura))
+                        AddTextParameterMysql(cmd, "@NumeroDobras", UCase(DadosArquivoCorrente.NumeroDobras))
+                        AddTextParameterMysql(cmd, "@Peso", UCase(DadosArquivoCorrente.Massa))
+                        AddTextParameterMysql(cmd, "@Unidade", "PC")
+                        AddTextParameterMysql(cmd, "@Altura", UCase(DadosArquivoCorrente.ComprimentoBlank))
+                        AddTextParameterMysql(cmd, "@Largura", UCase(DadosArquivoCorrente.LarguraBlank))
+                        AddTextParameterMysql(cmd, "@Profundidade", String.Empty)
+                        AddTextParameterMysql(cmd, "@CodMatFabricante", UCase(DadosArquivoCorrente.NomeArquivoSemExtensao))
+                        AddTextParameterMysql(cmd, "@DtCad", DateTime.Now.Date) ' Formato ISO
+                        AddTextParameterMysql(cmd, "@UsuarioCriacao", Usuario.NomeCompleto.ToString.ToUpper)
+                        AddTextParameterMysql(cmd, "@UsuarioAlteracao", UCase(DadosArquivoCorrente.SalvoUltimaVezPor))
+                        AddTextParameterMysql(cmd, "@DtAlteracao", DadosArquivoCorrente.DataUltimoSalvamento.ToString) ' Formato ISO
+                        AddTextParameterMysql(cmd, "@CodigoJuridicoMat", String.Empty)
+                        AddTextParameterMysql(cmd, "@StatusMat", "A")
+                        AddTextParameterMysql(cmd, "@MaterialSW", UCase(DadosArquivoCorrente.material))
+                        AddTextParameterMysql(cmd, "@EnderecoArquivo", UCase(DadosArquivoCorrente.EnderecoArquivo))
+                        AddTextParameterMysql(cmd, "@Acabamento", UCase(DadosArquivoCorrente.Acabamento))
+                        AddTextParameterMysql(cmd, "@txtSoldagem", UCase(DadosArquivoCorrente.soldagem))
+                        AddTextParameterMysql(cmd, "@txtTipoDesenho", UCase(DadosArquivoCorrente.TipoDesenho))
+                        AddTextParameterMysql(cmd, "@txtCorte", UCase(DadosArquivoCorrente.Corte))
+                        AddTextParameterMysql(cmd, "@txtDobra", UCase(DadosArquivoCorrente.Dobra))
+                        AddTextParameterMysql(cmd, "@txtSolda", UCase(DadosArquivoCorrente.Solda))
+                        AddTextParameterMysql(cmd, "@txtPintura", UCase(DadosArquivoCorrente.Pintura))
+                        AddTextParameterMysql(cmd, "@txtMontagem", UCase(DadosArquivoCorrente.Montagem))
+                        AddTextParameterMysql(cmd, "@Compcx", DadosArquivoCorrente.Alturacaixadelimitadora)
+                        AddTextParameterMysql(cmd, "@Largcx", DadosArquivoCorrente.Larguracaixadelimitadora)
+                        AddTextParameterMysql(cmd, "@Espcx", DadosArquivoCorrente.Profundidadeaixadelimitadora)
+                        AddTextParameterMysql(cmd, "@txtItemEstoque", DadosArquivoCorrente.ItemEstoque)
 
-                    '    cl_BancoDados.AbrirBanco()
 
-                    'End If
 
-                    cmd.ExecuteNonQuery()
+                        '    cmd.ExecuteNonQuery()
 
-                    swModel.SaveSilent()
+                        Dim maxTentativas As Integer = 3 ' Quantidade máxima de tentativas
+                        Dim tentativaAtual As Integer = 0
+                        Dim sucesso As Boolean = False
 
-                    ' Atualiza a exibição gráfica antes de salvar para garantir a miniatura
-                    ' swModel.GraphicsRedraw2()
+                        Do While Not sucesso And tentativaAtual < maxTentativas
+                            Try
+                                cmd.ExecuteNonQuery()
+                                sucesso = True ' Se chegou aqui, a execução foi bem-sucedida
+                                Threading.Thread.Sleep(CInt(My.Settings.TempoRespostaServidor))
+                            Catch ex As Exception
+                                tentativaAtual += 1
+                                If tentativaAtual < maxTentativas Then
+                                    '  MsgBox($"Erro na execução. Tentando novamente em 30 segundos... ({tentativaAtual}/{maxTentativas})")
+                                    Threading.Thread.Sleep(CInt(My.Settings.TempoRespostaServidor))
 
-                Catch ex As Exception
+                                    cl_BancoDados.AbrirBanco()
 
-                    ' Exibir mensagem de erro
-                    ' MessageBox.Show("Erro ao atualizar ou inserir dados no banco: " & ex.Message)
+                                Else
+                                    ' Lançar exceção após atingir o limite de tentativas
+                                    ' Throw New Exception($"Falha ao executar o comando após {maxTentativas} tentativas.", ex)
 
-                Finally
+                                    cl_BancoDados.AbrirBanco()
 
-                End Try
-            End Using
+                                End If
 
-        Catch ex As Exception
+                            End Try
 
-        Finally
+                        Loop
 
-        End Try
+                    Catch ex As Exception
+
+                        ' Exibir mensagem de erro
+                        MessageBox.Show("Erro ao atualizar ou inserir dados no banco: " & ex.Message)
+
+                        ClasseEmail.EmailTratamentoErro("Erro ao atualizar ou inserir dados no banco: " & ex.Message)
+
+                    Finally
+
+                    End Try
+                End Using
+
+            Catch ex As Exception
+
+            Finally
+
+            End Try
+
+        ElseIf TipoBanco = "SQL" Then
+
+            Try
+
+
+                Dim dt As System.Data.DataTable
+                Dim query As String
+                Dim isUpdate As Boolean = False
+
+                dt = cl_BancoDados.CarregarDados("Select CodMatFabricante FROM  " & ComplementoTipoBanco & "material WHERE PecaManuFat = 'S' and CodMatFabricante = '" & DadosArquivoCorrente.NomeArquivoSemExtensao & "'")
+
+                ' Verifica se o DataTable tem pelo menos uma linha
+                If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                    ' Verifica se o valor da coluna "CodMatFabricante" não é DBNull
+                    If dt.Rows(0)("CodMatFabricante") IsNot DBNull.Value Then
+                        isUpdate = True
+                    Else
+                        isUpdate = False
+                    End If
+                Else
+                    isUpdate = False
+                End If
+
+
+                ' Definir a consulta SQL com base na existência do item
+                If isUpdate Then
+                    query = "UPDATE " & ComplementoTipoBanco & " material SET DescResumo = @DescResumo, DescDetal = @DescDetal, PecaManuFat = @PecaManuFat, " &
+            "Autor = @Autor, Palavrachave = @Palavrachave, Notas = @Notas, Espessura = @Espessura, AreaPintura = @AreaPintura, " &
+            "NumeroDobras = @NumeroDobras, Peso = @Peso, Unidade = @Unidade, Altura = @Altura, Largura = @Largura, " &
+            "Profundidade = @Profundidade, UsuarioAlteracao = @UsuarioAlteracao, DtAlteracao = @DtCad, CodigoJuridicoMat = @CodigoJuridicoMat, " &
+            "StatusMat = @StatusMat, MaterialSW = @MaterialSW, EnderecoArquivo = @EnderecoArquivo, Acabamento = @Acabamento, " &
+            "txtSoldagem = @txtSoldagem, txtTipoDesenho = @txtTipoDesenho, txtCorte = @txtCorte, txtDobra = @txtDobra, " &
+            "txtSolda = @txtSolda, txtPintura = @txtPintura, txtMontagem = @txtMontagem, Comprimentocaixadelimitadora = @Compcx, " &
+            "Larguracaixadelimitadora = @Largcx, Espessuracaixadelimitadora = @Espcx, txtItemEstoque = @txtItemEstoque " &
+            "WHERE CodMatFabricante = @CodMatFabricante"
+                Else
+                    query = "INSERT INTO " & ComplementoTipoBanco & " material (DescResumo, DescDetal, PecaManuFat, Autor, Palavrachave, Notas, Espessura, AreaPintura, NumeroDobras, Peso, " &
+            "Unidade, Altura, Largura, Profundidade, CodMatFabricante, DtCad, UsuarioCriacao, UsuarioAlteracao, DtAlteracao, CodigoJuridicoMat, " &
+            "StatusMat, MaterialSW, EnderecoArquivo, Acabamento, txtSoldagem, txtTipoDesenho, txtCorte, txtDobra, txtSolda, txtPintura, " &
+            "txtMontagem, Comprimentocaixadelimitadora, Larguracaixadelimitadora, Espessuracaixadelimitadora, txtItemEstoque) " &
+            "VALUES (@DescResumo, @DescDetal, @PecaManuFat, @Autor, @Palavrachave, @Notas, @Espessura, @AreaPintura, @NumeroDobras, @Peso, @Unidade, " &
+            "@Altura, @Largura, @Profundidade, @CodMatFabricante, @DtCad, @UsuarioCriacao, @UsuarioAlteracao, @DtAlteracao, @CodigoJuridicoMat, " &
+            "@StatusMat, @MaterialSW, @EnderecoArquivo, @Acabamento, @txtSoldagem, @txtTipoDesenho, @txtCorte, @txtDobra, @txtSolda, @txtPintura, " &
+            "@txtMontagem, @Compcx, @Largcx, @Espcx, @txtItemEstoque)"
+                End If
+
+                Using cmd As New SqlCommand(query, myconectSQL)
+                    Try
+
+
+                        VerificarProcessodaPecaCorrente(swModel, True)
+
+
+                        ' Adicione os parâmetros ao comando
+                        AddTextParameterSql(cmd, "@DescResumo", UCase(DadosArquivoCorrente.Titulo))
+                        AddTextParameterSql(cmd, "@DescDetal", UCase(DadosArquivoCorrente.AssuntoSubiTitulo))
+                        AddTextParameterSql(cmd, "@PecaManuFat", "S")
+                        AddTextParameterSql(cmd, "@Autor", UCase(DadosArquivoCorrente.Author))
+                        AddTextParameterSql(cmd, "@Palavrachave", UCase(DadosArquivoCorrente.PalavraChave))
+                        AddTextParameterSql(cmd, "@Notas", UCase(DadosArquivoCorrente.Comentarios))
+                        AddTextParameterSql(cmd, "@Espessura", UCase(DadosArquivoCorrente.Espessura))
+                        AddTextParameterSql(cmd, "@AreaPintura", UCase(DadosArquivoCorrente.AreaPintura))
+                        AddTextParameterSql(cmd, "@NumeroDobras", UCase(DadosArquivoCorrente.NumeroDobras))
+                        AddTextParameterSql(cmd, "@Peso", UCase(DadosArquivoCorrente.Massa))
+                        AddTextParameterSql(cmd, "@Unidade", "PC")
+                        AddTextParameterSql(cmd, "@Altura", UCase(DadosArquivoCorrente.ComprimentoBlank))
+                        AddTextParameterSql(cmd, "@Largura", UCase(DadosArquivoCorrente.LarguraBlank))
+                        AddTextParameterSql(cmd, "@Profundidade", String.Empty)
+                        AddTextParameterSql(cmd, "@CodMatFabricante", UCase(DadosArquivoCorrente.NomeArquivoSemExtensao))
+                        AddTextParameterSql(cmd, "@DtCad", DateTime.Now.Date) ' Formato ISO
+                        AddTextParameterSql(cmd, "@UsuarioCriacao", Usuario.NomeCompleto.ToString.ToUpper)
+                        AddTextParameterSql(cmd, "@UsuarioAlteracao", UCase(DadosArquivoCorrente.SalvoUltimaVezPor))
+                        AddTextParameterSql(cmd, "@DtAlteracao", DadosArquivoCorrente.DataUltimoSalvamento.ToString) ' Formato ISO
+                        AddTextParameterSql(cmd, "@CodigoJuridicoMat", String.Empty)
+                        AddTextParameterSql(cmd, "@StatusMat", "A")
+                        AddTextParameterSql(cmd, "@MaterialSW", UCase(DadosArquivoCorrente.material))
+                        AddTextParameterSql(cmd, "@EnderecoArquivo", UCase(DadosArquivoCorrente.EnderecoArquivo))
+                        AddTextParameterSql(cmd, "@Acabamento", UCase(DadosArquivoCorrente.Acabamento))
+                        AddTextParameterSql(cmd, "@txtSoldagem", UCase(DadosArquivoCorrente.soldagem))
+                        AddTextParameterSql(cmd, "@txtTipoDesenho", UCase(DadosArquivoCorrente.TipoDesenho))
+                        AddTextParameterSql(cmd, "@txtCorte", UCase(DadosArquivoCorrente.Corte))
+                        AddTextParameterSql(cmd, "@txtDobra", UCase(DadosArquivoCorrente.Dobra))
+                        AddTextParameterSql(cmd, "@txtSolda", UCase(DadosArquivoCorrente.Solda))
+                        AddTextParameterSql(cmd, "@txtPintura", UCase(DadosArquivoCorrente.Pintura))
+                        AddTextParameterSql(cmd, "@txtMontagem", UCase(DadosArquivoCorrente.Montagem))
+                        AddTextParameterSql(cmd, "@Compcx", DadosArquivoCorrente.Alturacaixadelimitadora)
+                        AddTextParameterSql(cmd, "@Largcx", DadosArquivoCorrente.Larguracaixadelimitadora)
+                        AddTextParameterSql(cmd, "@Espcx", DadosArquivoCorrente.Profundidadeaixadelimitadora)
+                        AddTextParameterSql(cmd, "@txtItemEstoque", DadosArquivoCorrente.ItemEstoque)
+
+
+
+                        cmd.ExecuteNonQuery()
+
+                        swModel.SaveSilent()
+
+
+
+                    Catch ex As Exception
+
+                        ' Exibir mensagem de erro
+                        '  MessageBox.Show("Erro ao atualizar ou inserir dados no banco: " & ex.Message)
+
+                        ClasseEmail.EmailTratamentoErro("Erro ao atualizar ou inserir dados no banco: " & ex.Message)
+
+
+                    Finally
+
+                    End Try
+                End Using
+
+            Catch ex As Exception
+
+            Finally
+
+            End Try
+
+        End If
+
 
     End Sub
 
 
     ' Função para adicionar parâmetros como texto
-    Public Function AddTextParameter(ByRef cmd As MySqlCommand, ByVal paramName As String, ByVal value As Object)
+    Public Function AddTextParameterMysql(ByRef cmd As MySqlCommand, ByVal paramName As String, ByVal value As Object)
+
         cmd.Parameters.AddWithValue(paramName, If(value Is Nothing, String.Empty, value.ToString().Trim()))
+
     End Function
+
+    Public Function AddTextParameterSql(ByRef cmd As SqlCommand, ByVal paramName As String, ByVal value As Object)
+
+        cmd.Parameters.AddWithValue(paramName, If(value Is Nothing, String.Empty, value.ToString().Trim()))
+
+    End Function
+
 
     ' Função para gerar o SQL com parâmetros substituídos (para depuração)
     Function GenerateSqlWithParams(ByVal cmd As MySqlCommand) As String
@@ -977,173 +1253,180 @@ Public Class ClDadosArquivoCorrente
 
 
     Public Function ExportDXF(ByVal swModel As ModelDoc2, ByVal ManterAberto As Boolean, ByVal ExcluirLxds As Boolean) As Boolean
-        ExportDXF = False
-        ExcluirLxds = False
 
-        If Not swModel Is Nothing Then
-            ' Verifica se o modelo é uma peça (PART)
-            If swModel.GetType() = swDocumentTypes_e.swDocPART Then
-                Dim swPart As PartDoc
-                swPart = swModel
-                Dim sModelName As String
-                Dim sPathName As String
-                Dim varAlignment As Object
-                Dim dataAlignment(11) As Double
-                Dim varViews As Object
-                Dim dataViews(1) As String
-                Dim options As Integer
 
-                ' Verifica se a peça contém uma feature de chapa metálica
-                If IsSheetMetalPart(swModel) Then
-                    ' Acessa a feature de Flat-Pattern diretamente
-                    Dim swFlatPatternFeature As Feature
-                    swFlatPatternFeature = swPart.FeatureByName("Flat-Pattern")
+        Try
 
-                    ' Se a feature de Flat-Pattern não existir ou não estiver visível, forçar a planificação
-                    If swFlatPatternFeature Is Nothing OrElse swFlatPatternFeature.IsSuppressed() Then
-                        ' Forçar a planificação da peça de chapa metálica, caso a feature de Flat-Pattern não exista ou esteja suprimida
-                        Dim swSheetMetal As Feature
-                        swSheetMetal = swPart.FeatureByName("Sheet-Metal")
 
-                        If Not swSheetMetal Is Nothing Then
-                            ' Dessupressa todas as dobras que possam estar suprimidas
-                            Dim swFeature As Feature
-                            swFeature = swPart.GetFirstFeature()
-                            Do While Not swFeature Is Nothing
-                                If swFeature.GetTypeName2() = "SheetMetal" Then
-                                    ' Dessupressando as dobras
-                                    Dim swBend As Feature
-                                    swBend = swFeature.GetSubFeature("Bend")
-                                    If Not swBend Is Nothing Then
-                                        swBend.EditUnsuppress2()
+            ExportDXF = False
+            ExcluirLxds = False
+
+
+            If Not swModel Is Nothing Then
+                ' Verifica se o modelo é uma peça (PART)
+                If swModel.GetType() = swDocumentTypes_e.swDocPART Then
+                    Dim swPart As PartDoc
+                    swPart = swModel
+                    Dim sModelName As String
+                    Dim sPathName As String
+                    Dim varAlignment As Object
+                    Dim dataAlignment(11) As Double
+                    Dim varViews As Object
+                    Dim dataViews(1) As String
+                    Dim options As Integer
+
+                    ' Verifica se a peça contém uma feature de chapa metálica
+                    If IsSheetMetalPart(swModel) Then
+                        ' Acessa a feature de Flat-Pattern diretamente
+                        Dim swFlatPatternFeature As Feature
+                        swFlatPatternFeature = swPart.FeatureByName("Flat-Pattern")
+
+                        ' Se a feature de Flat-Pattern não existir ou não estiver visível, forçar a planificação
+                        If swFlatPatternFeature Is Nothing OrElse swFlatPatternFeature.IsSuppressed() Then
+                            ' Forçar a planificação da peça de chapa metálica, caso a feature de Flat-Pattern não exista ou esteja suprimida
+                            Dim swSheetMetal As Feature
+                            swSheetMetal = swPart.FeatureByName("Sheet-Metal")
+
+                            If Not swSheetMetal Is Nothing Then
+                                ' Dessupressa todas as dobras que possam estar suprimidas
+                                Dim swFeature As Feature
+                                swFeature = swPart.GetFirstFeature()
+                                Do While Not swFeature Is Nothing
+                                    If swFeature.GetTypeName2() = "SheetMetal" Then
+                                        ' Dessupressando as dobras
+                                        Dim swBend As Feature
+                                        swBend = swFeature.GetSubFeature("Bend")
+                                        If Not swBend Is Nothing Then
+                                            swBend.EditUnsuppress2()
+                                        End If
                                     End If
-                                End If
-                                swFeature = swFeature.GetNextFeature()
-                            Loop
+                                    swFeature = swFeature.GetNextFeature()
+                                Loop
 
-                            ' Dessupressa a feature Flat-Pattern, caso necessário
-                            swPart.EditUnsuppressFeature(swFlatPatternFeature)
+                                ' Dessupressa a feature Flat-Pattern, caso necessário
+                                swPart.EditUnsuppressFeature(swFlatPatternFeature)
+                            End If
+
+                        End If
+
+                        sModelName = swModel.GetPathName
+                        sPathName = Left(sModelName, Len(sModelName) - 6) & "dxf"
+
+
+                        If File.Exists(sPathName) Then
+
+                            File.Delete(sPathName)
+
+                        End If
+
+                        ' Cria uma anotação de texto na vista de anotação
+                        Dim swAnnotation As Annotation
+                        Dim swNote As Note
+                        Dim swText As String
+                        swText = swModel.GetTitle
+
+                        ' Obtém a caixa delimitadora (bounding box) do modelo
+                        Dim minPt(3) As Double
+                        Dim maxPt(3) As Double
+
+                        ' Obtém as coordenadas da caixa delimitadora
+                        swPart.GetPartBox(True)
+
+                        ' Calcula a posição dentro da geometria, por exemplo, na parte inferior direita
+                        Dim posX As Double
+                        Dim posY As Double
+
+                        ' Posiciona a anotação na parte inferior direita da geometria
+                        posX = maxPt(0) - 0.1 ' Ajuste conforme necessário para deixar um espaço de margem
+                        posY = minPt(1) + 0.1 ' Ajuste conforme necessário para deixar um espaço de margem
+
+                        ' Insere a nota no modelo
+                        swNote = swModel.InsertNote(swText)
+                        swAnnotation = swNote.GetAnnotation
+
+                        ' Define o estilo do texto
+                        swAnnotation.Width = 1 '0.04
+                        swAnnotation.SetPosition2(posX, posY, 0) ' Define a posição da anotação
+
+                        ' Define a cor do texto (branco, por exemplo)
+                        swAnnotation.Color = RGB(255, 255, 255) ' Define a cor do texto como branco
+
+                        ' Garantir que a anotação está configurada para ser exportada no DXF
+                        swAnnotation.Visible = True ' Garante que a anotação será visível na exportação
+
+                        ' Define os alinhamentos de geometria para exportação
+                        dataAlignment(0) = 0.0#
+                        dataAlignment(1) = 0.0#
+                        dataAlignment(2) = 0.0#
+                        dataAlignment(3) = 1.0#
+                        dataAlignment(4) = 0.0#
+                        dataAlignment(5) = 0.0#
+                        dataAlignment(6) = 0.0#
+                        dataAlignment(7) = 1.0#
+                        dataAlignment(8) = 0.0#
+                        dataAlignment(9) = 0.0#
+                        dataAlignment(10) = 0.0#
+                        dataAlignment(11) = 1.0#
+
+                        varAlignment = dataAlignment
+
+                        ' Define as vistas
+                        dataViews(0) = "*Current"
+                        dataViews(1) = "*Front"
+
+                        varViews = dataViews
+
+                        ' Configurações para exportação de chapas metálicas
+                        options = 1 ' Inclui a geometria do flat-pattern
+
+                        ' Exporta o arquivo para DXF
+                        swPart.ExportToDWG2(sPathName, sModelName, swExportToDWG_e.swExportToDWG_ExportSheetMetal, True, varAlignment, False, False, options, Nothing)
+
+                        ' Fecha o documento se necessário
+                        If ManterAberto = False Then
+                            swapp.CloseDoc(sModelName)
+                        End If
+
+                    Else
+                        ' Para peças que não são de chapa metálica, apenas exporte o DXF
+                        sModelName = swModel.GetPathName
+                        sPathName = Left(sModelName, Len(sModelName) - 6) & "dxf"
+
+                        ' Exporta o arquivo para DXF
+                        swPart.ExportToDWG2(sPathName, sModelName, swExportToDWG_e.swExportToDWG_ExportSheetMetal, True, varAlignment, False, False, options, Nothing)
+
+                        ' Fecha o documento se necessário
+                        If ManterAberto = False Then
+                            swapp.CloseDoc(swModel.GetPathName)
                         End If
                     End If
 
-                    sModelName = swModel.GetPathName
-                    sPathName = Left(sModelName, Len(sModelName) - 6) & "dxf"
+                    ExportDXF = True
 
+                    If ExcluirLxds = True Then
 
-                    If File.Exists(sPathName) Then
+                        sModelName = swModel.GetPathName
+                        sPathName = Left(sModelName, Len(sModelName) - 6) & "lxds"
 
-                        File.Delete(sPathName)
+                        If File.Exists(sPathName) Then
 
-                    End If
+                            File.Delete(sPathName)
 
-
-                    ' Cria uma anotação de texto na vista de anotação
-                    Dim swAnnotation As Annotation
-                    Dim swNote As Note
-                    Dim swText As String
-                    swText = swModel.GetTitle
-
-                    ' Obtém a caixa delimitadora (bounding box) do modelo
-                    Dim minPt(3) As Double
-                    Dim maxPt(3) As Double
-
-                    ' Obtém as coordenadas da caixa delimitadora
-                    swPart.GetPartBox(True)
-
-                    ' Calcula a posição dentro da geometria, por exemplo, na parte inferior direita
-                    Dim posX As Double
-                    Dim posY As Double
-
-                    ' Posiciona a anotação na parte inferior direita da geometria
-                    posX = maxPt(0) - 0.1 ' Ajuste conforme necessário para deixar um espaço de margem
-                    posY = minPt(1) + 0.1 ' Ajuste conforme necessário para deixar um espaço de margem
-
-                    ' Insere a nota no modelo
-                    swNote = swModel.InsertNote(swText)
-                    swAnnotation = swNote.GetAnnotation
-
-                    ' Define o estilo do texto
-                    swAnnotation.Width = 1 '0.04
-                    swAnnotation.SetPosition2(posX, posY, 0) ' Define a posição da anotação
-
-                    ' Define a cor do texto (branco, por exemplo)
-                    swAnnotation.Color = RGB(255, 255, 255) ' Define a cor do texto como branco
-
-                    ' Garantir que a anotação está configurada para ser exportada no DXF
-                    swAnnotation.Visible = True ' Garante que a anotação será visível na exportação
-
-                    ' Define os alinhamentos de geometria para exportação
-                    dataAlignment(0) = 0.0#
-                    dataAlignment(1) = 0.0#
-                    dataAlignment(2) = 0.0#
-                    dataAlignment(3) = 1.0#
-                    dataAlignment(4) = 0.0#
-                    dataAlignment(5) = 0.0#
-                    dataAlignment(6) = 0.0#
-                    dataAlignment(7) = 1.0#
-                    dataAlignment(8) = 0.0#
-                    dataAlignment(9) = 0.0#
-                    dataAlignment(10) = 0.0#
-                    dataAlignment(11) = 1.0#
-
-                    varAlignment = dataAlignment
-
-                    ' Define as vistas
-                    dataViews(0) = "*Current"
-                    dataViews(1) = "*Front"
-
-                    varViews = dataViews
-
-                    ' Configurações para exportação de chapas metálicas
-                    options = 1 ' Inclui a geometria do flat-pattern
-
-                    ' Exporta o arquivo para DXF
-                    swPart.ExportToDWG2(sPathName, sModelName, swExportToDWG_e.swExportToDWG_ExportSheetMetal, True, varAlignment, False, False, options, Nothing)
-
-                    ' Fecha o documento se necessário
-                    If ManterAberto = False Then
-                        swapp.CloseDoc(sModelName)
-                    End If
-
-                Else
-                    ' Para peças que não são de chapa metálica, apenas exporte o DXF
-                    sModelName = swModel.GetPathName
-                    sPathName = Left(sModelName, Len(sModelName) - 6) & "dxf"
-
-                    ' Exporta o arquivo para DXF
-                    swPart.ExportToDWG2(sPathName, sModelName, swExportToDWG_e.swExportToDWG_ExportSheetMetal, True, varAlignment, False, False, options, Nothing)
-
-                    ' Fecha o documento se necessário
-                    If ManterAberto = False Then
-                        swapp.CloseDoc(swModel.GetPathName)
-                    End If
-                End If
-
-                ExportDXF = True
-
-                If ExcluirLxds = True Then
-
-                    sModelName = swModel.GetPathName
-                    sPathName = Left(sModelName, Len(sModelName) - 6) & "lxds"
-
-
-                    If File.Exists(sPathName) Then
-
-                        File.Delete(sPathName)
+                        End If
 
                     End If
+
                 End If
 
             End If
+        Catch ex As Exception
 
-        End If
+            ClasseEmail.EmailTratamentoErro(ex.Message.ToString)
+        Finally
+
+        End Try
+
     End Function
-
-
-
-
-
-
 
     ''' <summary>
     ''' 
@@ -1200,6 +1483,7 @@ Public Class ClDadosArquivoCorrente
 
                 'pdfsinco.ExcreverPdf(pdfFilePath, pdfFilePath, "")
 
+                Threading.Thread.Sleep(CInt(My.Settings.TempoRespostaServidor))
 
                 '  swModel.SaveAs(pdfFilePath)
 

@@ -26,6 +26,12 @@ Partial Class Painel_Leitura_Dados
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Painel_Leitura_Dados))
         Me.tpgPrincipal = New System.Windows.Forms.TabControl()
         Me.tpgFolhaDados = New System.Windows.Forms.TabPage()
+        Me.btnIsometrico = New System.Windows.Forms.Button()
+        Me.btnFichaTecnica = New System.Windows.Forms.Button()
+        Me.txtIsometrico = New System.Windows.Forms.TextBox()
+        Me.txtFichaTecnica = New System.Windows.Forms.TextBox()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblProfundidadeTotalCaixaDelimitadora = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -54,6 +60,8 @@ Partial Class Painel_Leitura_Dados
         Me.tsbSalvar = New System.Windows.Forms.ToolStripButton()
         Me.tsbConverterDXF = New System.Windows.Forms.ToolStripButton()
         Me.TSBConverterPDF = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
         Me.TSBAssociarMaterial = New System.Windows.Forms.ToolStripButton()
         Me.tsbInserirNaOS = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
@@ -70,9 +78,13 @@ Partial Class Painel_Leitura_Dados
         Me.UsarFormatoA4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsarFornatoA4DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TsbInspecaoQualidade = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.lblQtdeEstoque = New System.Windows.Forms.ToolStripLabel()
         Me.tslVersaoSistema = New System.Windows.Forms.ToolStripLabel()
+        Me.txtNomeArquivo = New System.Windows.Forms.ToolStripTextBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.chkBoxAcabamento = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
@@ -148,11 +160,23 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TsbAtualizarBOM = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
         Me.ProgressBarListaSW = New System.Windows.Forms.ProgressBar()
         Me.lblOrdemServicoAtiva = New System.Windows.Forms.Label()
         Me.dgvDataGridBOM = New System.Windows.Forms.DataGridView()
+        Me.DGVIconeLXDS = New System.Windows.Forms.DataGridViewImageColumn()
         Me.DGVIconeDXF = New System.Windows.Forms.DataGridViewImageColumn()
         Me.dgvIconePDF = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.mnudgvDataGridBOM = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripSeparator34 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator33 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator35 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AbrirLXDSDaLinhaSelecionadaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator36 = New System.Windows.Forms.ToolStripSeparator()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnConverterListaDXFPDF = New System.Windows.Forms.Button()
         Me.btnListaMaterial = New System.Windows.Forms.Button()
@@ -228,8 +252,8 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.GerarArquivoEmPDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransformarEstaOrdemDeServiçoEmReferenciaDeProdutoPadrãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.txtDescricaoTag = New System.Windows.Forms.TextBox()
         Me.txtCliente = New System.Windows.Forms.TextBox()
@@ -247,7 +271,44 @@ Partial Class Painel_Leitura_Dados
         Me.dgvSelecaoAtualizacaoItemOs = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvTipoDesenhoAtualizacaoItemOs = New System.Windows.Forms.DataGridViewImageColumn()
         Me.tpgPCP = New System.Windows.Forms.TabPage()
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento = New System.Windows.Forms.DataGridView()
+        Me.txtClientepcp = New System.Windows.Forms.TextBox()
+        Me.cboProjetoPCP = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.dgvTimerpcpAgrupamentoProjeto = New System.Windows.Forms.DataGridView()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.dgvTimerProdutosItens = New System.Windows.Forms.DataGridView()
+        Me.dgvIconeItemOSProduto = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.mnudgvTimerProdutosItens = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripSeparator30 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.txtPesqCodOmie4 = New System.Windows.Forms.TextBox()
+        Me.txPesqCodDesenhoProduto4 = New System.Windows.Forms.TextBox()
+        Me.txtPesqCodOmie3 = New System.Windows.Forms.TextBox()
+        Me.txPesqCodDesenhoProduto3 = New System.Windows.Forms.TextBox()
+        Me.txtPesqCodOmie2 = New System.Windows.Forms.TextBox()
+        Me.txPesqCodDesenhoProduto2 = New System.Windows.Forms.TextBox()
+        Me.txtPesqDescricaoProduto4 = New System.Windows.Forms.TextBox()
+        Me.txtPesqDescricaoProduto3 = New System.Windows.Forms.TextBox()
+        Me.txtPesqDescricaoProduto2 = New System.Windows.Forms.TextBox()
+        Me.txtPesqDescricaoProduto1 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtPesqCodOmie1 = New System.Windows.Forms.TextBox()
+        Me.txPesqCodDesenhoProduto1 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.dgvTimerProdutos = New System.Windows.Forms.DataGridView()
+        Me.MNUdgvTimerProdutos = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AbrirPDFFichaTecnicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AbrirPDFIsometricoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator32 = New System.Windows.Forms.ToolStripSeparator()
+        Me.EditarProdutoExistenteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimerdgvDesenhos = New System.Windows.Forms.Timer(Me.components)
         Me.TimerMontaPeca = New System.Windows.Forms.Timer(Me.components)
         Me.Timerdgvos = New System.Windows.Forms.Timer(Me.components)
@@ -259,10 +320,8 @@ Partial Class Painel_Leitura_Dados
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.TimerpcpAgrupamentoProjeto = New System.Windows.Forms.Timer(Me.components)
-        Me.txtClientepcp = New System.Windows.Forms.TextBox()
-        Me.cboProjetoPCP = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento = New System.Windows.Forms.DataGridView()
+        Me.TimerProdutos = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerProdutoItens = New System.Windows.Forms.Timer(Me.components)
         Me.tpgPrincipal.SuspendLayout()
         Me.tpgFolhaDados.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -283,6 +342,7 @@ Partial Class Painel_Leitura_Dados
         CType(Me.BindingNavigator2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.BindingNavigator2.SuspendLayout()
         CType(Me.dgvDataGridBOM, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.mnudgvDataGridBOM.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.tpgOrdemServico.SuspendLayout()
         CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,8 +355,13 @@ Partial Class Painel_Leitura_Dados
         Me.tpgListaRNCPecaCorrente.SuspendLayout()
         CType(Me.DGVTimerFiltroPecaAtivaOS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tpgPCP.SuspendLayout()
-        CType(Me.dgvTimerpcpAgrupamentoProjeto, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvTimerpcpAgrupamentoProjetoDetalhamento, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvTimerpcpAgrupamentoProjeto, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.dgvTimerProdutosItens, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.mnudgvTimerProdutosItens.SuspendLayout()
+        CType(Me.dgvTimerProdutos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MNUdgvTimerProdutos.SuspendLayout()
         Me.SuspendLayout()
         '
         'tpgPrincipal
@@ -310,15 +375,22 @@ Partial Class Painel_Leitura_Dados
         Me.tpgPrincipal.Controls.Add(Me.tpgOrdemServico)
         Me.tpgPrincipal.Controls.Add(Me.tpgListaRNCPecaCorrente)
         Me.tpgPrincipal.Controls.Add(Me.tpgPCP)
+        Me.tpgPrincipal.Controls.Add(Me.TabPage1)
         Me.tpgPrincipal.Location = New System.Drawing.Point(4, 4)
         Me.tpgPrincipal.Margin = New System.Windows.Forms.Padding(4)
         Me.tpgPrincipal.Name = "tpgPrincipal"
         Me.tpgPrincipal.SelectedIndex = 0
-        Me.tpgPrincipal.Size = New System.Drawing.Size(812, 880)
+        Me.tpgPrincipal.Size = New System.Drawing.Size(908, 880)
         Me.tpgPrincipal.TabIndex = 0
         '
         'tpgFolhaDados
         '
+        Me.tpgFolhaDados.Controls.Add(Me.btnIsometrico)
+        Me.tpgFolhaDados.Controls.Add(Me.btnFichaTecnica)
+        Me.tpgFolhaDados.Controls.Add(Me.txtIsometrico)
+        Me.tpgFolhaDados.Controls.Add(Me.txtFichaTecnica)
+        Me.tpgFolhaDados.Controls.Add(Me.Label32)
+        Me.tpgFolhaDados.Controls.Add(Me.Label31)
         Me.tpgFolhaDados.Controls.Add(Me.GroupBox5)
         Me.tpgFolhaDados.Controls.Add(Me.GroupBox4)
         Me.tpgFolhaDados.Controls.Add(Me.BnPrincipal)
@@ -347,10 +419,72 @@ Partial Class Painel_Leitura_Dados
         Me.tpgFolhaDados.Margin = New System.Windows.Forms.Padding(4)
         Me.tpgFolhaDados.Name = "tpgFolhaDados"
         Me.tpgFolhaDados.Padding = New System.Windows.Forms.Padding(4)
-        Me.tpgFolhaDados.Size = New System.Drawing.Size(804, 851)
+        Me.tpgFolhaDados.Size = New System.Drawing.Size(900, 851)
         Me.tpgFolhaDados.TabIndex = 0
         Me.tpgFolhaDados.Text = "Dados Principais"
         Me.tpgFolhaDados.UseVisualStyleBackColor = True
+        '
+        'btnIsometrico
+        '
+        Me.btnIsometrico.Location = New System.Drawing.Point(775, 299)
+        Me.btnIsometrico.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnIsometrico.Name = "btnIsometrico"
+        Me.btnIsometrico.Size = New System.Drawing.Size(20, 23)
+        Me.btnIsometrico.TabIndex = 35
+        Me.btnIsometrico.Text = "..."
+        Me.btnIsometrico.UseVisualStyleBackColor = True
+        '
+        'btnFichaTecnica
+        '
+        Me.btnFichaTecnica.Location = New System.Drawing.Point(363, 300)
+        Me.btnFichaTecnica.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnFichaTecnica.Name = "btnFichaTecnica"
+        Me.btnFichaTecnica.Size = New System.Drawing.Size(20, 23)
+        Me.btnFichaTecnica.TabIndex = 34
+        Me.btnFichaTecnica.Text = "..."
+        Me.btnFichaTecnica.UseVisualStyleBackColor = True
+        '
+        'txtIsometrico
+        '
+        Me.txtIsometrico.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtIsometrico.Location = New System.Drawing.Point(396, 300)
+        Me.txtIsometrico.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtIsometrico.Name = "txtIsometrico"
+        Me.txtIsometrico.Size = New System.Drawing.Size(372, 22)
+        Me.txtIsometrico.TabIndex = 33
+        Me.ToolTipAjuda.SetToolTip(Me.txtIsometrico, "Dê um duplo clique para carregar a sigla do projetista atual. A sigla foi cadastr" &
+        "ada no " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sistema SINCO através do formulário de cadastro de usuário!")
+        '
+        'txtFichaTecnica
+        '
+        Me.txtFichaTecnica.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtFichaTecnica.Location = New System.Drawing.Point(11, 300)
+        Me.txtFichaTecnica.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFichaTecnica.Name = "txtFichaTecnica"
+        Me.txtFichaTecnica.Size = New System.Drawing.Size(345, 22)
+        Me.txtFichaTecnica.TabIndex = 32
+        Me.ToolTipAjuda.SetToolTip(Me.txtFichaTecnica, "Dê um duplo clique para carregar a sigla do projetista atual. A sigla foi cadastr" &
+        "ada no " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sistema SINCO através do formulário de cadastro de usuário!")
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(396, 281)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(130, 16)
+        Me.Label32.TabIndex = 31
+        Me.Label32.Text = "Desenho Isometrico:"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(12, 281)
+        Me.Label31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(95, 16)
+        Me.Label31.TabIndex = 30
+        Me.Label31.Text = "Ficha Tecnica:"
         '
         'GroupBox5
         '
@@ -374,8 +508,10 @@ Partial Class Painel_Leitura_Dados
         Me.GroupBox5.Controls.Add(Me.Label21)
         Me.GroupBox5.Controls.Add(Me.lblEspessura)
         Me.GroupBox5.Controls.Add(Me.Label17)
-        Me.GroupBox5.Location = New System.Drawing.Point(8, 415)
+        Me.GroupBox5.Location = New System.Drawing.Point(8, 471)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox5.Size = New System.Drawing.Size(215, 300)
         Me.GroupBox5.TabIndex = 29
         Me.GroupBox5.TabStop = False
@@ -385,7 +521,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblProfundidadeTotalCaixaDelimitadora.AutoSize = True
         Me.lblProfundidadeTotalCaixaDelimitadora.BackColor = System.Drawing.Color.White
-        Me.lblProfundidadeTotalCaixaDelimitadora.Location = New System.Drawing.Point(86, 271)
+        Me.lblProfundidadeTotalCaixaDelimitadora.Location = New System.Drawing.Point(85, 271)
         Me.lblProfundidadeTotalCaixaDelimitadora.Name = "lblProfundidadeTotalCaixaDelimitadora"
         Me.lblProfundidadeTotalCaixaDelimitadora.Size = New System.Drawing.Size(21, 16)
         Me.lblProfundidadeTotalCaixaDelimitadora.TabIndex = 25
@@ -394,7 +530,7 @@ Partial Class Painel_Leitura_Dados
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(42, 25)
+        Me.Label6.Location = New System.Drawing.Point(43, 25)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 16)
@@ -406,7 +542,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblAlturaTotalCaixaDelimitadora.AutoSize = True
         Me.lblAlturaTotalCaixaDelimitadora.BackColor = System.Drawing.Color.White
-        Me.lblAlturaTotalCaixaDelimitadora.Location = New System.Drawing.Point(86, 217)
+        Me.lblAlturaTotalCaixaDelimitadora.Location = New System.Drawing.Point(85, 217)
         Me.lblAlturaTotalCaixaDelimitadora.Name = "lblAlturaTotalCaixaDelimitadora"
         Me.lblAlturaTotalCaixaDelimitadora.Size = New System.Drawing.Size(21, 16)
         Me.lblAlturaTotalCaixaDelimitadora.TabIndex = 24
@@ -427,7 +563,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblPeso.AutoSize = True
         Me.lblPeso.BackColor = System.Drawing.Color.White
-        Me.lblPeso.Location = New System.Drawing.Point(86, 162)
+        Me.lblPeso.Location = New System.Drawing.Point(85, 162)
         Me.lblPeso.Name = "lblPeso"
         Me.lblPeso.Size = New System.Drawing.Size(21, 16)
         Me.lblPeso.TabIndex = 23
@@ -436,7 +572,7 @@ Partial Class Painel_Leitura_Dados
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(6, 109)
+        Me.Label14.Location = New System.Drawing.Point(5, 110)
         Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(73, 16)
@@ -448,7 +584,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblMaterial.AutoSize = True
         Me.lblMaterial.BackColor = System.Drawing.Color.White
-        Me.lblMaterial.Location = New System.Drawing.Point(86, 188)
+        Me.lblMaterial.Location = New System.Drawing.Point(85, 188)
         Me.lblMaterial.Name = "lblMaterial"
         Me.lblMaterial.Size = New System.Drawing.Size(21, 16)
         Me.lblMaterial.TabIndex = 22
@@ -457,7 +593,7 @@ Partial Class Painel_Leitura_Dados
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(22, 136)
+        Me.Label13.Location = New System.Drawing.Point(21, 135)
         Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(57, 16)
@@ -469,7 +605,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblLarguraTotalCaixaDelimitadora.AutoSize = True
         Me.lblLarguraTotalCaixaDelimitadora.BackColor = System.Drawing.Color.White
-        Me.lblLarguraTotalCaixaDelimitadora.Location = New System.Drawing.Point(86, 243)
+        Me.lblLarguraTotalCaixaDelimitadora.Location = New System.Drawing.Point(85, 242)
         Me.lblLarguraTotalCaixaDelimitadora.Name = "lblLarguraTotalCaixaDelimitadora"
         Me.lblLarguraTotalCaixaDelimitadora.Size = New System.Drawing.Size(21, 16)
         Me.lblLarguraTotalCaixaDelimitadora.TabIndex = 21
@@ -478,7 +614,7 @@ Partial Class Painel_Leitura_Dados
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(30, 80)
+        Me.Label8.Location = New System.Drawing.Point(29, 80)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(49, 16)
@@ -490,7 +626,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblAreaPintura.AutoSize = True
         Me.lblAreaPintura.BackColor = System.Drawing.Color.White
-        Me.lblAreaPintura.Location = New System.Drawing.Point(86, 136)
+        Me.lblAreaPintura.Location = New System.Drawing.Point(85, 135)
         Me.lblAreaPintura.Name = "lblAreaPintura"
         Me.lblAreaPintura.Size = New System.Drawing.Size(21, 16)
         Me.lblAreaPintura.TabIndex = 20
@@ -511,7 +647,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblNumeroDobra.AutoSize = True
         Me.lblNumeroDobra.BackColor = System.Drawing.Color.White
-        Me.lblNumeroDobra.Location = New System.Drawing.Point(86, 109)
+        Me.lblNumeroDobra.Location = New System.Drawing.Point(85, 110)
         Me.lblNumeroDobra.Name = "lblNumeroDobra"
         Me.lblNumeroDobra.Size = New System.Drawing.Size(21, 16)
         Me.lblNumeroDobra.TabIndex = 19
@@ -532,7 +668,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblComprimento.AutoSize = True
         Me.lblComprimento.BackColor = System.Drawing.Color.White
-        Me.lblComprimento.Location = New System.Drawing.Point(86, 80)
+        Me.lblComprimento.Location = New System.Drawing.Point(85, 80)
         Me.lblComprimento.Name = "lblComprimento"
         Me.lblComprimento.Size = New System.Drawing.Size(21, 16)
         Me.lblComprimento.TabIndex = 18
@@ -541,7 +677,7 @@ Partial Class Painel_Leitura_Dados
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(23, 243)
+        Me.Label22.Location = New System.Drawing.Point(23, 242)
         Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(56, 16)
@@ -553,7 +689,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblLargura.AutoSize = True
         Me.lblLargura.BackColor = System.Drawing.Color.White
-        Me.lblLargura.Location = New System.Drawing.Point(86, 50)
+        Me.lblLargura.Location = New System.Drawing.Point(85, 50)
         Me.lblLargura.Name = "lblLargura"
         Me.lblLargura.Size = New System.Drawing.Size(21, 16)
         Me.lblLargura.TabIndex = 17
@@ -574,7 +710,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.lblEspessura.AutoSize = True
         Me.lblEspessura.BackColor = System.Drawing.Color.White
-        Me.lblEspessura.Location = New System.Drawing.Point(86, 25)
+        Me.lblEspessura.Location = New System.Drawing.Point(85, 25)
         Me.lblEspessura.Name = "lblEspessura"
         Me.lblEspessura.Size = New System.Drawing.Size(21, 16)
         Me.lblEspessura.TabIndex = 16
@@ -588,7 +724,7 @@ Partial Class Painel_Leitura_Dados
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(58, 16)
         Me.Label17.TabIndex = 7
-        Me.Label17.Text = "Material:"
+        Me.Label17.Text = "material:"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'GroupBox4
@@ -596,9 +732,11 @@ Partial Class Painel_Leitura_Dados
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.chkBoxTipoDesenho)
-        Me.GroupBox4.Location = New System.Drawing.Point(230, 552)
+        Me.GroupBox4.Location = New System.Drawing.Point(229, 608)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(567, 163)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox4.Size = New System.Drawing.Size(663, 162)
         Me.GroupBox4.TabIndex = 28
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Tipo Desenho"
@@ -611,9 +749,10 @@ Partial Class Painel_Leitura_Dados
         Me.chkBoxTipoDesenho.CheckOnClick = True
         Me.chkBoxTipoDesenho.FormattingEnabled = True
         Me.chkBoxTipoDesenho.Location = New System.Drawing.Point(11, 15)
+        Me.chkBoxTipoDesenho.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkBoxTipoDesenho.Name = "chkBoxTipoDesenho"
         Me.chkBoxTipoDesenho.ScrollAlwaysVisible = True
-        Me.chkBoxTipoDesenho.Size = New System.Drawing.Size(547, 140)
+        Me.chkBoxTipoDesenho.Size = New System.Drawing.Size(643, 123)
         Me.chkBoxTipoDesenho.Sorted = True
         Me.chkBoxTipoDesenho.TabIndex = 16
         '
@@ -624,7 +763,7 @@ Partial Class Painel_Leitura_Dados
         Me.BnPrincipal.CountItem = Nothing
         Me.BnPrincipal.DeleteItem = Nothing
         Me.BnPrincipal.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.BnPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsBLerDados, Me.tsbSalvar, Me.tsbConverterDXF, Me.TSBConverterPDF, Me.TSBAssociarMaterial, Me.tsbInserirNaOS, Me.ToolStripSeparator23, Me.tsbConfiguracoes, Me.ToolStripSeparator24, Me.tsbFerramentas, Me.ToolStripSeparator25, Me.ToolStripLabel1, Me.lblQtdeEstoque, Me.tslVersaoSistema})
+        Me.BnPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsBLerDados, Me.tsbSalvar, Me.tsbConverterDXF, Me.TSBConverterPDF, Me.ToolStripButton2, Me.ToolStripButton8, Me.TSBAssociarMaterial, Me.tsbInserirNaOS, Me.ToolStripSeparator23, Me.tsbConfiguracoes, Me.ToolStripSeparator24, Me.tsbFerramentas, Me.ToolStripSeparator25, Me.TsbInspecaoQualidade, Me.ToolStripSeparator39, Me.ToolStripButton9, Me.ToolStripLabel1, Me.lblQtdeEstoque, Me.tslVersaoSistema, Me.txtNomeArquivo})
         Me.BnPrincipal.Location = New System.Drawing.Point(4, 4)
         Me.BnPrincipal.MoveFirstItem = Nothing
         Me.BnPrincipal.MoveLastItem = Nothing
@@ -632,7 +771,7 @@ Partial Class Painel_Leitura_Dados
         Me.BnPrincipal.MovePreviousItem = Nothing
         Me.BnPrincipal.Name = "BnPrincipal"
         Me.BnPrincipal.PositionItem = Nothing
-        Me.BnPrincipal.Size = New System.Drawing.Size(796, 31)
+        Me.BnPrincipal.Size = New System.Drawing.Size(892, 31)
         Me.BnPrincipal.TabIndex = 27
         Me.BnPrincipal.Text = "BindingNavigator1"
         '
@@ -684,6 +823,28 @@ Partial Class Painel_Leitura_Dados
         Me.TSBConverterPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.TSBConverterPDF.ToolTipText = "So o Arquivo Corrente for um Detalhamento irá converter em PDF"
         '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.SwLynx_4._1.My.Resources.Resources.CYPCUT
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(29, 28)
+        Me.ToolStripButton2.Text = "Abrir Arquivo LXDS"
+        Me.ToolStripButton2.ToolTipText = "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Abrir Arquivo LXDS, Normalmente e um extenção do CypCut, corte a L" &
+    "aser."
+        '
+        'ToolStripButton8
+        '
+        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton8.Image = Global.SwLynx_4._1.My.Resources.Resources.arquivo_dxf
+        Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton8.Name = "ToolStripButton8"
+        Me.ToolStripButton8.Size = New System.Drawing.Size(29, 28)
+        Me.ToolStripButton8.Text = "Abrir Arquivo DXF"
+        Me.ToolStripButton8.ToolTipText = "Dica de Uso" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Abrir Arquivo DXF, abre os arquivos em DXF no seu programa padrão de" &
+    " edição. "
+        '
         'TSBAssociarMaterial
         '
         Me.TSBAssociarMaterial.CheckOnClick = True
@@ -692,7 +853,7 @@ Partial Class Painel_Leitura_Dados
         Me.TSBAssociarMaterial.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.TSBAssociarMaterial.Name = "TSBAssociarMaterial"
         Me.TSBAssociarMaterial.Size = New System.Drawing.Size(29, 28)
-        Me.TSBAssociarMaterial.Text = "Material"
+        Me.TSBAssociarMaterial.Text = "material"
         Me.TSBAssociarMaterial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.TSBAssociarMaterial.ToolTipText = "Abre o formulario para composição da peças corrente/Associação de material"
         '
@@ -798,13 +959,43 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
         Me.ToolStripSeparator25.Size = New System.Drawing.Size(6, 31)
         '
+        'TsbInspecaoQualidade
+        '
+        Me.TsbInspecaoQualidade.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TsbInspecaoQualidade.Image = Global.SwLynx_4._1.My.Resources.Resources.inspecao
+        Me.TsbInspecaoQualidade.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.TsbInspecaoQualidade.Name = "TsbInspecaoQualidade"
+        Me.TsbInspecaoQualidade.Size = New System.Drawing.Size(29, 28)
+        Me.TsbInspecaoQualidade.Text = "Ficha para Controle Dimencional"
+        Me.TsbInspecaoQualidade.ToolTipText = "Ficha para Controle Dimencional:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Informe as principais medidas com controel dime" &
+    "ncional da peças."
+        '
+        'ToolStripSeparator39
+        '
+        Me.ToolStripSeparator39.Name = "ToolStripSeparator39"
+        Me.ToolStripSeparator39.Size = New System.Drawing.Size(6, 31)
+        '
+        'ToolStripButton9
+        '
+        Me.ToolStripButton9.CheckOnClick = True
+        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton9.Image = Global.SwLynx_4._1.My.Resources.Resources.atualizar
+        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton9.Name = "ToolStripButton9"
+        Me.ToolStripButton9.Size = New System.Drawing.Size(29, 28)
+        Me.ToolStripButton9.Text = "Atualizar"
+        Me.ToolStripButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.ToolStripButton9.ToolTipText = "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Caso um novo cadastro de Acabamento, Tipo Desenho, Projeto e/ou Ta" &
+    "g seja inserido e não " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "apareça no ComboBox, basta clicar aqui para atualizar os" &
+    " dados."
+        '
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripLabel1.ForeColor = System.Drawing.Color.Red
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(145, 28)
-        Me.ToolStripLabel1.Text = "Qtde Peças Estoque:"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(143, 28)
+        Me.ToolStripLabel1.Text = "qtde Peças Estoque:"
         '
         'lblQtdeEstoque
         '
@@ -821,14 +1012,23 @@ Partial Class Painel_Leitura_Dados
         Me.tslVersaoSistema.Size = New System.Drawing.Size(27, 28)
         Me.tslVersaoSistema.Text = "---"
         '
+        'txtNomeArquivo
+        '
+        Me.txtNomeArquivo.AutoSize = False
+        Me.txtNomeArquivo.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtNomeArquivo.Name = "txtNomeArquivo"
+        Me.txtNomeArquivo.Size = New System.Drawing.Size(250, 31)
+        '
         'GroupBox10
         '
         Me.GroupBox10.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox10.Controls.Add(Me.chkBoxAcabamento)
-        Me.GroupBox10.Location = New System.Drawing.Point(230, 335)
+        Me.GroupBox10.Location = New System.Drawing.Point(229, 391)
+        Me.GroupBox10.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(567, 211)
+        Me.GroupBox10.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox10.Size = New System.Drawing.Size(663, 210)
         Me.GroupBox10.TabIndex = 20
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Acabamento"
@@ -840,10 +1040,11 @@ Partial Class Painel_Leitura_Dados
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkBoxAcabamento.CheckOnClick = True
         Me.chkBoxAcabamento.FormattingEnabled = True
-        Me.chkBoxAcabamento.Location = New System.Drawing.Point(6, 21)
+        Me.chkBoxAcabamento.Location = New System.Drawing.Point(5, 21)
+        Me.chkBoxAcabamento.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkBoxAcabamento.Name = "chkBoxAcabamento"
         Me.chkBoxAcabamento.ScrollAlwaysVisible = True
-        Me.chkBoxAcabamento.Size = New System.Drawing.Size(555, 174)
+        Me.chkBoxAcabamento.Size = New System.Drawing.Size(651, 174)
         Me.chkBoxAcabamento.Sorted = True
         Me.chkBoxAcabamento.TabIndex = 18
         '
@@ -851,7 +1052,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.GroupBox8.Controls.Add(Me.optProcessoSoldagemSim)
         Me.GroupBox8.Controls.Add(Me.optProcessoSoldagemNao)
-        Me.GroupBox8.Location = New System.Drawing.Point(122, 336)
+        Me.GroupBox8.Location = New System.Drawing.Point(123, 391)
         Me.GroupBox8.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -876,7 +1077,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.optProcessoSoldagemNao.AutoSize = True
         Me.optProcessoSoldagemNao.Checked = True
-        Me.optProcessoSoldagemNao.Location = New System.Drawing.Point(6, 45)
+        Me.optProcessoSoldagemNao.Location = New System.Drawing.Point(5, 46)
         Me.optProcessoSoldagemNao.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.optProcessoSoldagemNao.Name = "optProcessoSoldagemNao"
         Me.optProcessoSoldagemNao.Size = New System.Drawing.Size(57, 20)
@@ -894,9 +1095,11 @@ Partial Class Painel_Leitura_Dados
         Me.GroupBox2.Controls.Add(Me.chkSolda)
         Me.GroupBox2.Controls.Add(Me.chkPintura)
         Me.GroupBox2.Controls.Add(Me.chkMontagem)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 273)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 329)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(785, 56)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox2.Size = New System.Drawing.Size(881, 57)
         Me.GroupBox2.TabIndex = 17
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Processos"
@@ -905,7 +1108,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.chkCorte.AutoSize = True
         Me.chkCorte.Image = Global.SwLynx_4._1.My.Resources.Resources.chapa_de_aco_32x32
-        Me.chkCorte.Location = New System.Drawing.Point(14, 20)
+        Me.chkCorte.Location = New System.Drawing.Point(13, 20)
         Me.chkCorte.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkCorte.Name = "chkCorte"
         Me.chkCorte.Size = New System.Drawing.Size(87, 26)
@@ -931,7 +1134,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.chkSolda.AutoSize = True
         Me.chkSolda.Image = Global.SwLynx_4._1.My.Resources.Resources.de_solda
-        Me.chkSolda.Location = New System.Drawing.Point(266, 20)
+        Me.chkSolda.Location = New System.Drawing.Point(267, 20)
         Me.chkSolda.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkSolda.Name = "chkSolda"
         Me.chkSolda.Size = New System.Drawing.Size(91, 26)
@@ -944,7 +1147,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.chkPintura.AutoSize = True
         Me.chkPintura.Image = Global.SwLynx_4._1.My.Resources.Resources.rolo_de_pintura
-        Me.chkPintura.Location = New System.Drawing.Point(398, 20)
+        Me.chkPintura.Location = New System.Drawing.Point(397, 20)
         Me.chkPintura.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkPintura.Name = "chkPintura"
         Me.chkPintura.Size = New System.Drawing.Size(132, 26)
@@ -970,7 +1173,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.GroupBox7.Controls.Add(Me.OPTEstoqueSim)
         Me.GroupBox7.Controls.Add(Me.OPTEstoqueNao)
-        Me.GroupBox7.Location = New System.Drawing.Point(11, 336)
+        Me.GroupBox7.Location = New System.Drawing.Point(11, 391)
         Me.GroupBox7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -995,7 +1198,7 @@ Partial Class Painel_Leitura_Dados
         '
         Me.OPTEstoqueNao.AutoSize = True
         Me.OPTEstoqueNao.Checked = True
-        Me.OPTEstoqueNao.Location = New System.Drawing.Point(5, 45)
+        Me.OPTEstoqueNao.Location = New System.Drawing.Point(5, 46)
         Me.OPTEstoqueNao.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.OPTEstoqueNao.Name = "OPTEstoqueNao"
         Me.OPTEstoqueNao.Size = New System.Drawing.Size(57, 20)
@@ -1011,10 +1214,10 @@ Partial Class Painel_Leitura_Dados
         Me.btnPendencias.Enabled = False
         Me.btnPendencias.Image = Global.SwLynx_4._1.My.Resources.Resources.atencao
         Me.btnPendencias.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnPendencias.Location = New System.Drawing.Point(6, 42)
+        Me.btnPendencias.Location = New System.Drawing.Point(5, 42)
         Me.btnPendencias.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPendencias.Name = "btnPendencias"
-        Me.btnPendencias.Size = New System.Drawing.Size(794, 50)
+        Me.btnPendencias.Size = New System.Drawing.Size(891, 50)
         Me.btnPendencias.TabIndex = 23
         Me.btnPendencias.Text = " Pendências"
         Me.btnPendencias.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
@@ -1025,7 +1228,7 @@ Partial Class Painel_Leitura_Dados
         Me.chkVerificarLXDS.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkVerificarLXDS.AutoSize = True
         Me.chkVerificarLXDS.Image = Global.SwLynx_4._1.My.Resources.Resources.CYPCUT
-        Me.chkVerificarLXDS.Location = New System.Drawing.Point(699, 222)
+        Me.chkVerificarLXDS.Location = New System.Drawing.Point(793, 241)
         Me.chkVerificarLXDS.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVerificarLXDS.Name = "chkVerificarLXDS"
         Me.chkVerificarLXDS.Size = New System.Drawing.Size(96, 34)
@@ -1039,7 +1242,7 @@ Partial Class Painel_Leitura_Dados
         Me.chkVerificarDFT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkVerificarDFT.AutoSize = True
         Me.chkVerificarDFT.Image = Global.SwLynx_4._1.My.Resources.Resources.DFT
-        Me.chkVerificarDFT.Location = New System.Drawing.Point(699, 186)
+        Me.chkVerificarDFT.Location = New System.Drawing.Point(795, 155)
         Me.chkVerificarDFT.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVerificarDFT.Name = "chkVerificarDFT"
         Me.chkVerificarDFT.Size = New System.Drawing.Size(81, 28)
@@ -1057,7 +1260,7 @@ Partial Class Painel_Leitura_Dados
         Me.cboTitulo.Location = New System.Drawing.Point(95, 206)
         Me.cboTitulo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cboTitulo.Name = "cboTitulo"
-        Me.cboTitulo.Size = New System.Drawing.Size(589, 23)
+        Me.cboTitulo.Size = New System.Drawing.Size(672, 23)
         Me.cboTitulo.TabIndex = 6
         Me.ToolTipAjuda.SetToolTip(Me.cboTitulo, "O usuário pode digitar diretamente ou selecionar um tipo de produto que foi previ" &
         "amente" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "cadastrado no sistema SINCO através do formulário de tipos de produto.")
@@ -1071,12 +1274,12 @@ Partial Class Painel_Leitura_Dados
         Me.DGVMontaPeca.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
         Me.DGVMontaPeca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVMontaPeca.ContextMenuStrip = Me.mnuDGVMontaPeca
-        Me.DGVMontaPeca.Location = New System.Drawing.Point(7, 720)
+        Me.DGVMontaPeca.Location = New System.Drawing.Point(7, 780)
         Me.DGVMontaPeca.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DGVMontaPeca.Name = "DGVMontaPeca"
         Me.DGVMontaPeca.RowHeadersWidth = 51
         Me.DGVMontaPeca.RowTemplate.Height = 24
-        Me.DGVMontaPeca.Size = New System.Drawing.Size(790, 125)
+        Me.DGVMontaPeca.Size = New System.Drawing.Size(885, 65)
         Me.DGVMontaPeca.TabIndex = 15
         '
         'mnuDGVMontaPeca
@@ -1091,14 +1294,14 @@ Partial Class Painel_Leitura_Dados
         Me.ExcluirOMaterialDoDesenhoToolStripMenuItem.Image = Global.SwLynx_4._1.My.Resources.Resources.excluir
         Me.ExcluirOMaterialDoDesenhoToolStripMenuItem.Name = "ExcluirOMaterialDoDesenhoToolStripMenuItem"
         Me.ExcluirOMaterialDoDesenhoToolStripMenuItem.Size = New System.Drawing.Size(281, 26)
-        Me.ExcluirOMaterialDoDesenhoToolStripMenuItem.Text = "Excluir o Material do Desenho"
+        Me.ExcluirOMaterialDoDesenhoToolStripMenuItem.Text = "Excluir o material do Desenho"
         '
         'chkVerificarDXF
         '
         Me.chkVerificarDXF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkVerificarDXF.AutoSize = True
         Me.chkVerificarDXF.Image = Global.SwLynx_4._1.My.Resources.Resources.dxf
-        Me.chkVerificarDXF.Location = New System.Drawing.Point(699, 136)
+        Me.chkVerificarDXF.Location = New System.Drawing.Point(795, 190)
         Me.chkVerificarDXF.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVerificarDXF.Name = "chkVerificarDXF"
         Me.chkVerificarDXF.Size = New System.Drawing.Size(89, 42)
@@ -1112,7 +1315,7 @@ Partial Class Painel_Leitura_Dados
         Me.chkVerificarPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkVerificarPDF.AutoSize = True
         Me.chkVerificarPDF.Image = Global.SwLynx_4._1.My.Resources.Resources.pdf
-        Me.chkVerificarPDF.Location = New System.Drawing.Point(699, 104)
+        Me.chkVerificarPDF.Location = New System.Drawing.Point(795, 103)
         Me.chkVerificarPDF.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVerificarPDF.Name = "chkVerificarPDF"
         Me.chkVerificarPDF.Size = New System.Drawing.Size(92, 34)
@@ -1129,7 +1332,7 @@ Partial Class Painel_Leitura_Dados
         Me.txtAssuntoSubiTitulo.Location = New System.Drawing.Point(95, 244)
         Me.txtAssuntoSubiTitulo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAssuntoSubiTitulo.Name = "txtAssuntoSubiTitulo"
-        Me.txtAssuntoSubiTitulo.Size = New System.Drawing.Size(589, 22)
+        Me.txtAssuntoSubiTitulo.Size = New System.Drawing.Size(672, 22)
         Me.txtAssuntoSubiTitulo.TabIndex = 7
         '
         'Label4
@@ -1161,7 +1364,7 @@ Partial Class Painel_Leitura_Dados
         Me.txtComentarios.Margin = New System.Windows.Forms.Padding(4)
         Me.txtComentarios.Multiline = True
         Me.txtComentarios.Name = "txtComentarios"
-        Me.txtComentarios.Size = New System.Drawing.Size(589, 55)
+        Me.txtComentarios.Size = New System.Drawing.Size(672, 54)
         Me.txtComentarios.TabIndex = 5
         '
         'txtPalavraChave
@@ -1169,16 +1372,16 @@ Partial Class Painel_Leitura_Dados
         Me.txtPalavraChave.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPalavraChave.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtPalavraChave.Location = New System.Drawing.Point(327, 104)
+        Me.txtPalavraChave.Location = New System.Drawing.Point(327, 103)
         Me.txtPalavraChave.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPalavraChave.Name = "txtPalavraChave"
-        Me.txtPalavraChave.Size = New System.Drawing.Size(357, 22)
+        Me.txtPalavraChave.Size = New System.Drawing.Size(440, 22)
         Me.txtPalavraChave.TabIndex = 4
         '
         'txtAuthor
         '
         Me.txtAuthor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtAuthor.Location = New System.Drawing.Point(95, 104)
+        Me.txtAuthor.Location = New System.Drawing.Point(95, 103)
         Me.txtAuthor.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAuthor.Name = "txtAuthor"
         Me.txtAuthor.Size = New System.Drawing.Size(103, 22)
@@ -1199,7 +1402,7 @@ Partial Class Painel_Leitura_Dados
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(206, 107)
+        Me.Label2.Location = New System.Drawing.Point(205, 107)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(113, 16)
@@ -1341,7 +1544,7 @@ Partial Class Painel_Leitura_Dados
         Me.tpgDesenhosCadstrados.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpgDesenhosCadstrados.Name = "tpgDesenhosCadstrados"
         Me.tpgDesenhosCadstrados.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpgDesenhosCadstrados.Size = New System.Drawing.Size(804, 851)
+        Me.tpgDesenhosCadstrados.Size = New System.Drawing.Size(900, 851)
         Me.tpgDesenhosCadstrados.TabIndex = 2
         Me.tpgDesenhosCadstrados.Text = "Desenhos Cadastrados"
         Me.tpgDesenhosCadstrados.UseVisualStyleBackColor = True
@@ -1353,7 +1556,7 @@ Partial Class Painel_Leitura_Dados
         Me.ProgressBar1.Location = New System.Drawing.Point(5, 62)
         Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(818, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(887, 23)
         Me.ProgressBar1.TabIndex = 107
         '
         'TxtPesqSubtitulo3
@@ -1446,7 +1649,7 @@ Partial Class Painel_Leitura_Dados
         Me.dgvDesenhos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader
         Me.dgvDesenhos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDesenhos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvIcone, Me.Dgvrnc})
-        Me.dgvDesenhos.Location = New System.Drawing.Point(5, 92)
+        Me.dgvDesenhos.Location = New System.Drawing.Point(5, 90)
         Me.dgvDesenhos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvDesenhos.MultiSelect = False
         Me.dgvDesenhos.Name = "dgvDesenhos"
@@ -1454,7 +1657,7 @@ Partial Class Painel_Leitura_Dados
         Me.dgvDesenhos.RowHeadersWidth = 51
         Me.dgvDesenhos.RowTemplate.Height = 24
         Me.dgvDesenhos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvDesenhos.Size = New System.Drawing.Size(818, 755)
+        Me.dgvDesenhos.Size = New System.Drawing.Size(887, 757)
         Me.dgvDesenhos.TabIndex = 0
         '
         'dgvIcone
@@ -1521,33 +1724,38 @@ Partial Class Painel_Leitura_Dados
         Me.tpgBom.Margin = New System.Windows.Forms.Padding(4)
         Me.tpgBom.Name = "tpgBom"
         Me.tpgBom.Padding = New System.Windows.Forms.Padding(4)
-        Me.tpgBom.Size = New System.Drawing.Size(804, 851)
+        Me.tpgBom.Size = New System.Drawing.Size(900, 851)
         Me.tpgBom.TabIndex = 1
-        Me.tpgBom.Text = "BOM Lista de Material"
+        Me.tpgBom.Text = "BOM Lista de material"
         Me.tpgBom.UseVisualStyleBackColor = True
         '
         'chkConverterPDF
         '
+        Me.chkConverterPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkConverterPDF.Image = Global.SwLynx_4._1.My.Resources.Resources.pdf_16_161
-        Me.chkConverterPDF.Location = New System.Drawing.Point(363, 4)
+        Me.chkConverterPDF.Location = New System.Drawing.Point(738, 6)
         Me.chkConverterPDF.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkConverterPDF.Name = "chkConverterPDF"
         Me.chkConverterPDF.Size = New System.Drawing.Size(151, 25)
         Me.chkConverterPDF.TabIndex = 9
         Me.chkConverterPDF.Text = "Converter PDF"
         Me.chkConverterPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.ToolTipAjuda.SetToolTip(Me.chkConverterPDF, "Esta opção geras nos arquivo PDF dos desenhos de detalhamento.")
         Me.chkConverterPDF.UseVisualStyleBackColor = True
         '
         'chkConverterDXF
         '
+        Me.chkConverterDXF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkConverterDXF.Image = Global.SwLynx_4._1.My.Resources.Resources.dxf_16_16
-        Me.chkConverterDXF.Location = New System.Drawing.Point(179, 5)
+        Me.chkConverterDXF.Location = New System.Drawing.Point(567, 8)
         Me.chkConverterDXF.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chkConverterDXF.Name = "chkConverterDXF"
         Me.chkConverterDXF.Size = New System.Drawing.Size(152, 23)
         Me.chkConverterDXF.TabIndex = 8
         Me.chkConverterDXF.Text = "Converter DXF"
         Me.chkConverterDXF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.ToolTipAjuda.SetToolTip(Me.chkConverterDXF, "Marque esta opção para gerar arquivos DXF, esta opção paga  os arquivo XLSD e DFT" &
+        ".")
         Me.chkConverterDXF.UseVisualStyleBackColor = True
         '
         'BindingNavigator2
@@ -1556,7 +1764,7 @@ Partial Class Painel_Leitura_Dados
         Me.BindingNavigator2.CountItem = Nothing
         Me.BindingNavigator2.DeleteItem = Nothing
         Me.BindingNavigator2.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.BindingNavigator2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton4, Me.ToolStripSeparator26, Me.ToolStripButton5, Me.ToolStripSeparator28, Me.ToolStripButton6, Me.ToolStripSeparator27, Me.ToolStripButton7})
+        Me.BindingNavigator2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton4, Me.ToolStripSeparator26, Me.ToolStripButton5, Me.ToolStripSeparator28, Me.ToolStripButton6, Me.ToolStripSeparator27, Me.ToolStripButton7, Me.ToolStripSeparator37, Me.TsbAtualizarBOM, Me.ToolStripSeparator38})
         Me.BindingNavigator2.Location = New System.Drawing.Point(4, 4)
         Me.BindingNavigator2.MoveFirstItem = Nothing
         Me.BindingNavigator2.MoveLastItem = Nothing
@@ -1564,7 +1772,7 @@ Partial Class Painel_Leitura_Dados
         Me.BindingNavigator2.MovePreviousItem = Nothing
         Me.BindingNavigator2.Name = "BindingNavigator2"
         Me.BindingNavigator2.PositionItem = Nothing
-        Me.BindingNavigator2.Size = New System.Drawing.Size(796, 27)
+        Me.BindingNavigator2.Size = New System.Drawing.Size(892, 27)
         Me.BindingNavigator2.TabIndex = 29
         Me.BindingNavigator2.Text = "BindingNavigator2"
         '
@@ -1612,7 +1820,7 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton6.Name = "ToolStripButton6"
         Me.ToolStripButton6.Size = New System.Drawing.Size(29, 24)
-        Me.ToolStripButton6.Text = "Processar a Lista de Material"
+        Me.ToolStripButton6.Text = "Processar a Lista de material"
         Me.ToolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.ToolStripButton6.ToolTipText = resources.GetString("ToolStripButton6.ToolTipText")
         '
@@ -1629,20 +1837,40 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton7.Name = "ToolStripButton7"
         Me.ToolStripButton7.Size = New System.Drawing.Size(29, 24)
-        Me.ToolStripButton7.Text = "Inserir Lista de Material na Ordem de Serviço"
+        Me.ToolStripButton7.Text = "Inserir Lista de material na Ordem de Serviço"
         Me.ToolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.ToolStripButton7.ToolTipText = "Inserir na Ordem de Serviço - Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Insira na Ordem de Serviço (OS) a li" &
     "sta de materiais carregada no Grid. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Neste ponto, é necessário informar o fator" &
     " multiplicador."
         '
+        'ToolStripSeparator37
+        '
+        Me.ToolStripSeparator37.Name = "ToolStripSeparator37"
+        Me.ToolStripSeparator37.Size = New System.Drawing.Size(6, 27)
+        '
+        'TsbAtualizarBOM
+        '
+        Me.TsbAtualizarBOM.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TsbAtualizarBOM.Image = Global.SwLynx_4._1.My.Resources.Resources.atualizar
+        Me.TsbAtualizarBOM.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.TsbAtualizarBOM.Name = "TsbAtualizarBOM"
+        Me.TsbAtualizarBOM.Size = New System.Drawing.Size(29, 24)
+        Me.TsbAtualizarBOM.Text = "Atualizar"
+        Me.TsbAtualizarBOM.ToolTipText = "Clique aqui para atualizar a verofovcação dos tipos de arquivos já existentes"
+        '
+        'ToolStripSeparator38
+        '
+        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
+        Me.ToolStripSeparator38.Size = New System.Drawing.Size(6, 27)
+        '
         'ProgressBarListaSW
         '
         Me.ProgressBarListaSW.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ProgressBarListaSW.Location = New System.Drawing.Point(6, 81)
+        Me.ProgressBarListaSW.Location = New System.Drawing.Point(5, 81)
         Me.ProgressBarListaSW.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ProgressBarListaSW.Name = "ProgressBarListaSW"
-        Me.ProgressBarListaSW.Size = New System.Drawing.Size(792, 27)
+        Me.ProgressBarListaSW.Size = New System.Drawing.Size(885, 27)
         Me.ProgressBarListaSW.TabIndex = 12
         '
         'lblOrdemServicoAtiva
@@ -1653,7 +1881,7 @@ Partial Class Painel_Leitura_Dados
         Me.lblOrdemServicoAtiva.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblOrdemServicoAtiva.Location = New System.Drawing.Point(5, 44)
         Me.lblOrdemServicoAtiva.Name = "lblOrdemServicoAtiva"
-        Me.lblOrdemServicoAtiva.Size = New System.Drawing.Size(792, 34)
+        Me.lblOrdemServicoAtiva.Size = New System.Drawing.Size(885, 34)
         Me.lblOrdemServicoAtiva.TabIndex = 10
         Me.lblOrdemServicoAtiva.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ToolTipAjuda.SetToolTip(Me.lblOrdemServicoAtiva, "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Exibe o nome do arquivo atual.")
@@ -1668,7 +1896,8 @@ Partial Class Painel_Leitura_Dados
         Me.dgvDataGridBOM.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader
         Me.dgvDataGridBOM.ColumnHeadersHeight = 29
         Me.dgvDataGridBOM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.dgvDataGridBOM.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DGVIconeDXF, Me.dgvIconePDF})
+        Me.dgvDataGridBOM.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DGVIconeLXDS, Me.DGVIconeDXF, Me.dgvIconePDF})
+        Me.dgvDataGridBOM.ContextMenuStrip = Me.mnudgvDataGridBOM
         Me.dgvDataGridBOM.Location = New System.Drawing.Point(5, 114)
         Me.dgvDataGridBOM.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvDataGridBOM.MultiSelect = False
@@ -1676,8 +1905,19 @@ Partial Class Painel_Leitura_Dados
         Me.dgvDataGridBOM.ReadOnly = True
         Me.dgvDataGridBOM.RowHeadersWidth = 51
         Me.dgvDataGridBOM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvDataGridBOM.Size = New System.Drawing.Size(791, 729)
+        Me.dgvDataGridBOM.Size = New System.Drawing.Size(884, 729)
         Me.dgvDataGridBOM.TabIndex = 0
+        '
+        'DGVIconeLXDS
+        '
+        Me.DGVIconeLXDS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DGVIconeLXDS.Frozen = True
+        Me.DGVIconeLXDS.HeaderText = "LXDS"
+        Me.DGVIconeLXDS.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.DGVIconeLXDS.MinimumWidth = 6
+        Me.DGVIconeLXDS.Name = "DGVIconeLXDS"
+        Me.DGVIconeLXDS.ReadOnly = True
+        Me.DGVIconeLXDS.Width = 50
         '
         'DGVIconeDXF
         '
@@ -1701,6 +1941,54 @@ Partial Class Painel_Leitura_Dados
         Me.dgvIconePDF.ReadOnly = True
         Me.dgvIconePDF.Width = 50
         '
+        'mnudgvDataGridBOM
+        '
+        Me.mnudgvDataGridBOM.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.mnudgvDataGridBOM.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator34, Me.ToolStripMenuItem3, Me.ToolStripSeparator33, Me.ToolStripMenuItem2, Me.ToolStripSeparator35, Me.AbrirLXDSDaLinhaSelecionadaToolStripMenuItem, Me.ToolStripSeparator36})
+        Me.mnudgvDataGridBOM.Name = "mnudgvDataGridBOM"
+        Me.mnudgvDataGridBOM.Size = New System.Drawing.Size(300, 106)
+        '
+        'ToolStripSeparator34
+        '
+        Me.ToolStripSeparator34.Name = "ToolStripSeparator34"
+        Me.ToolStripSeparator34.Size = New System.Drawing.Size(296, 6)
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Image = Global.SwLynx_4._1.My.Resources.Resources.pdf
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(299, 26)
+        Me.ToolStripMenuItem3.Text = "Abrir PDF da Linha Selecionada"
+        '
+        'ToolStripSeparator33
+        '
+        Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(296, 6)
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Image = Global.SwLynx_4._1.My.Resources.Resources.arquivo_dxf
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(299, 26)
+        Me.ToolStripMenuItem2.Text = "Abrir DXF da Linha Selecionada"
+        '
+        'ToolStripSeparator35
+        '
+        Me.ToolStripSeparator35.Name = "ToolStripSeparator35"
+        Me.ToolStripSeparator35.Size = New System.Drawing.Size(296, 6)
+        '
+        'AbrirLXDSDaLinhaSelecionadaToolStripMenuItem
+        '
+        Me.AbrirLXDSDaLinhaSelecionadaToolStripMenuItem.Image = Global.SwLynx_4._1.My.Resources.Resources.CYPCUT
+        Me.AbrirLXDSDaLinhaSelecionadaToolStripMenuItem.Name = "AbrirLXDSDaLinhaSelecionadaToolStripMenuItem"
+        Me.AbrirLXDSDaLinhaSelecionadaToolStripMenuItem.Size = New System.Drawing.Size(299, 26)
+        Me.AbrirLXDSDaLinhaSelecionadaToolStripMenuItem.Text = "Abrir LXDS da Linha Selecionada"
+        '
+        'ToolStripSeparator36
+        '
+        Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(296, 6)
+        '
         'GroupBox3
         '
         Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -1713,7 +2001,7 @@ Partial Class Painel_Leitura_Dados
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox3.Size = New System.Drawing.Size(815, 82)
+        Me.GroupBox3.Size = New System.Drawing.Size(908, 82)
         Me.GroupBox3.TabIndex = 13
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Leitura  da BOM"
@@ -1743,7 +2031,7 @@ Partial Class Painel_Leitura_Dados
         '
         'btnLimparBom
         '
-        Me.btnLimparBom.Location = New System.Drawing.Point(6, 21)
+        Me.btnLimparBom.Location = New System.Drawing.Point(5, 21)
         Me.btnLimparBom.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnLimparBom.Name = "btnLimparBom"
         Me.btnLimparBom.Size = New System.Drawing.Size(145, 46)
@@ -1754,7 +2042,7 @@ Partial Class Painel_Leitura_Dados
         '
         'btnInserirItensOrdemServico
         '
-        Me.btnInserirItensOrdemServico.Location = New System.Drawing.Point(582, 21)
+        Me.btnInserirItensOrdemServico.Location = New System.Drawing.Point(581, 21)
         Me.btnInserirItensOrdemServico.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnInserirItensOrdemServico.Name = "btnInserirItensOrdemServico"
         Me.btnInserirItensOrdemServico.Size = New System.Drawing.Size(145, 46)
@@ -1793,7 +2081,7 @@ Partial Class Painel_Leitura_Dados
         Me.tpgOrdemServico.Location = New System.Drawing.Point(4, 25)
         Me.tpgOrdemServico.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpgOrdemServico.Name = "tpgOrdemServico"
-        Me.tpgOrdemServico.Size = New System.Drawing.Size(804, 851)
+        Me.tpgOrdemServico.Size = New System.Drawing.Size(900, 851)
         Me.tpgOrdemServico.TabIndex = 3
         Me.tpgOrdemServico.Text = "Ordem de Serviço"
         Me.tpgOrdemServico.UseVisualStyleBackColor = True
@@ -1812,7 +2100,7 @@ Partial Class Painel_Leitura_Dados
         Me.BindingNavigator1.MovePreviousItem = Nothing
         Me.BindingNavigator1.Name = "BindingNavigator1"
         Me.BindingNavigator1.PositionItem = Nothing
-        Me.BindingNavigator1.Size = New System.Drawing.Size(804, 27)
+        Me.BindingNavigator1.Size = New System.Drawing.Size(900, 27)
         Me.BindingNavigator1.TabIndex = 28
         Me.BindingNavigator1.Text = "BindingNavigator1"
         '
@@ -1851,13 +2139,13 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripButton3.Size = New System.Drawing.Size(29, 24)
         Me.ToolStripButton3.Text = "Atualizar"
         Me.ToolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.ToolStripButton3.ToolTipText = "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Caso um novo cadastro de projeto e/ou Tag seja inserido e não " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ap" &
+        Me.ToolStripButton3.ToolTipText = "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Caso um novo cadastro de Projeto e/ou Tag seja inserido e não " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ap" &
     "areça no ComboBox, basta clicar aqui para atualizar os dados."
         '
         'txtPesqAcabamentoDesenho
         '
         Me.txtPesqAcabamentoDesenho.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtPesqAcabamentoDesenho.Location = New System.Drawing.Point(434, 573)
+        Me.txtPesqAcabamentoDesenho.Location = New System.Drawing.Point(435, 574)
         Me.txtPesqAcabamentoDesenho.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtPesqAcabamentoDesenho.Name = "txtPesqAcabamentoDesenho"
         Me.txtPesqAcabamentoDesenho.Size = New System.Drawing.Size(211, 22)
@@ -1881,7 +2169,7 @@ Partial Class Painel_Leitura_Dados
         'txtPesqTipoDesenho
         '
         Me.txtPesqTipoDesenho.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtPesqTipoDesenho.Location = New System.Drawing.Point(216, 573)
+        Me.txtPesqTipoDesenho.Location = New System.Drawing.Point(216, 574)
         Me.txtPesqTipoDesenho.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtPesqTipoDesenho.Name = "txtPesqTipoDesenho"
         Me.txtPesqTipoDesenho.Size = New System.Drawing.Size(211, 22)
@@ -1893,7 +2181,7 @@ Partial Class Painel_Leitura_Dados
         'txtPesqCriadoPor
         '
         Me.txtPesqCriadoPor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtPesqCriadoPor.Location = New System.Drawing.Point(355, 205)
+        Me.txtPesqCriadoPor.Location = New System.Drawing.Point(355, 206)
         Me.txtPesqCriadoPor.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtPesqCriadoPor.Name = "txtPesqCriadoPor"
         Me.txtPesqCriadoPor.Size = New System.Drawing.Size(168, 22)
@@ -1914,7 +2202,7 @@ Partial Class Painel_Leitura_Dados
         'txtPesqNumeroDesenho
         '
         Me.txtPesqNumeroDesenho.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtPesqNumeroDesenho.Location = New System.Drawing.Point(11, 573)
+        Me.txtPesqNumeroDesenho.Location = New System.Drawing.Point(11, 574)
         Me.txtPesqNumeroDesenho.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtPesqNumeroDesenho.Name = "txtPesqNumeroDesenho"
         Me.txtPesqNumeroDesenho.Size = New System.Drawing.Size(196, 22)
@@ -1972,7 +2260,7 @@ Partial Class Painel_Leitura_Dados
         Me.ProgressBarProcessoLiberacaoOrdemServico.Location = New System.Drawing.Point(11, 231)
         Me.ProgressBarProcessoLiberacaoOrdemServico.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ProgressBarProcessoLiberacaoOrdemServico.Name = "ProgressBarProcessoLiberacaoOrdemServico"
-        Me.ProgressBarProcessoLiberacaoOrdemServico.Size = New System.Drawing.Size(773, 26)
+        Me.ProgressBarProcessoLiberacaoOrdemServico.Size = New System.Drawing.Size(868, 26)
         Me.ProgressBarProcessoLiberacaoOrdemServico.TabIndex = 15
         '
         'txtDescricao
@@ -1985,7 +2273,7 @@ Partial Class Painel_Leitura_Dados
         Me.txtDescricao.MaxLength = 200
         Me.txtDescricao.Multiline = True
         Me.txtDescricao.Name = "txtDescricao"
-        Me.txtDescricao.Size = New System.Drawing.Size(707, 61)
+        Me.txtDescricao.Size = New System.Drawing.Size(801, 61)
         Me.txtDescricao.TabIndex = 13
         '
         'Label25
@@ -2008,13 +2296,13 @@ Partial Class Painel_Leitura_Dados
         Me.DGVListaMaterialSW.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVListaMaterialSW.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSelecao, Me.dgvIconeItemOS, Me.dgvDXF, Me.dgvPDF})
         Me.DGVListaMaterialSW.ContextMenuStrip = Me.mnuDGVListaMaterialSW
-        Me.DGVListaMaterialSW.Location = New System.Drawing.Point(11, 599)
+        Me.DGVListaMaterialSW.Location = New System.Drawing.Point(11, 603)
         Me.DGVListaMaterialSW.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DGVListaMaterialSW.Name = "DGVListaMaterialSW"
         Me.DGVListaMaterialSW.ReadOnly = True
         Me.DGVListaMaterialSW.RowHeadersWidth = 51
         Me.DGVListaMaterialSW.RowTemplate.Height = 24
-        Me.DGVListaMaterialSW.Size = New System.Drawing.Size(773, 250)
+        Me.DGVListaMaterialSW.Size = New System.Drawing.Size(868, 246)
         Me.DGVListaMaterialSW.TabIndex = 9
         '
         'dgvSelecao
@@ -2225,7 +2513,7 @@ Partial Class Painel_Leitura_Dados
         Me.dgvos.ReadOnly = True
         Me.dgvos.RowHeadersWidth = 51
         Me.dgvos.RowTemplate.Height = 24
-        Me.dgvos.Size = New System.Drawing.Size(773, 253)
+        Me.dgvos.Size = New System.Drawing.Size(868, 254)
         Me.dgvos.TabIndex = 7
         '
         'dgvStatus
@@ -2241,7 +2529,7 @@ Partial Class Painel_Leitura_Dados
         'mnudgvos
         '
         Me.mnudgvos.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.mnudgvos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbrirPastaDaOrdemDeServiçoToolStripMenuItem, Me.ToolStripSeparator4, Me.LiberarOrdemDeServiçoParaProduçãoToolStripMenuItem, Me.CancelarLiberaçãoDaOSToolStripMenuItem, Me.ToolStripSeparator9, Me.AtualizarPDFsEDXFsNaPastaDaOSMToolStripMenuItem, Me.ToolStripSeparator10, Me.AlterarOFatorMultipçlicadorDaOSToolStripMenuItem, Me.ToolStripSeparator14, Me.GeralExcelDaOSToolStripMenuItem, Me.ToolStripSeparator11, Me.LimparPastaOrdemDeServiçoSelecionadaToolStripMenuItem, Me.ToolStripSeparator17, Me.CancelarAFabricaçãoDaOSToolStripMenuItem, Me.ToolStripSeparator12, Me.GerarArquivoEmDXFToolStripMenuItem, Me.ToolStripSeparator13, Me.GerarArquivoEmPDFToolStripMenuItem, Me.ToolStripSeparator16, Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem, Me.ToolStripSeparator20, Me.TransformarEstaOrdemDeServiçoEmReferenciaDeProdutoPadrãoToolStripMenuItem})
+        Me.mnudgvos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbrirPastaDaOrdemDeServiçoToolStripMenuItem, Me.ToolStripSeparator4, Me.LiberarOrdemDeServiçoParaProduçãoToolStripMenuItem, Me.CancelarLiberaçãoDaOSToolStripMenuItem, Me.ToolStripSeparator9, Me.AtualizarPDFsEDXFsNaPastaDaOSMToolStripMenuItem, Me.ToolStripSeparator10, Me.AlterarOFatorMultipçlicadorDaOSToolStripMenuItem, Me.ToolStripSeparator14, Me.GeralExcelDaOSToolStripMenuItem, Me.ToolStripSeparator11, Me.LimparPastaOrdemDeServiçoSelecionadaToolStripMenuItem, Me.ToolStripSeparator17, Me.CancelarAFabricaçãoDaOSToolStripMenuItem, Me.ToolStripSeparator12, Me.GerarArquivoEmDXFToolStripMenuItem, Me.ToolStripSeparator13, Me.GerarArquivoEmPDFToolStripMenuItem, Me.ToolStripSeparator16, Me.ToolStripSeparator20, Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem, Me.TransformarEstaOrdemDeServiçoEmReferenciaDeProdutoPadrãoToolStripMenuItem})
         Me.mnudgvos.Name = "mnudgvos"
         Me.mnudgvos.Size = New System.Drawing.Size(544, 376)
         '
@@ -2370,16 +2658,16 @@ Partial Class Painel_Leitura_Dados
         Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
         Me.ToolStripSeparator16.Size = New System.Drawing.Size(540, 6)
         '
+        'ToolStripSeparator20
+        '
+        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
+        Me.ToolStripSeparator20.Size = New System.Drawing.Size(540, 6)
+        '
         'CriarUmCopiaDaOSSelecionadaToolStripMenuItem
         '
         Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem.Name = "CriarUmCopiaDaOSSelecionadaToolStripMenuItem"
         Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem.Size = New System.Drawing.Size(543, 26)
         Me.CriarUmCopiaDaOSSelecionadaToolStripMenuItem.Text = "Criar uma copia da OS Selecionada"
-        '
-        'ToolStripSeparator20
-        '
-        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        Me.ToolStripSeparator20.Size = New System.Drawing.Size(540, 6)
         '
         'TransformarEstaOrdemDeServiçoEmReferenciaDeProdutoPadrãoToolStripMenuItem
         '
@@ -2399,7 +2687,7 @@ Partial Class Painel_Leitura_Dados
         Me.txtDescricaoTag.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtDescricaoTag.Multiline = True
         Me.txtDescricaoTag.Name = "txtDescricaoTag"
-        Me.txtDescricaoTag.Size = New System.Drawing.Size(429, 61)
+        Me.txtDescricaoTag.Size = New System.Drawing.Size(524, 61)
         Me.txtDescricaoTag.TabIndex = 6
         '
         'txtCliente
@@ -2420,13 +2708,13 @@ Partial Class Painel_Leitura_Dados
         Me.cboTag.Location = New System.Drawing.Point(355, 38)
         Me.cboTag.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cboTag.Name = "cboTag"
-        Me.cboTag.Size = New System.Drawing.Size(429, 24)
+        Me.cboTag.Size = New System.Drawing.Size(524, 24)
         Me.cboTag.TabIndex = 4
         '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(314, 42)
+        Me.Label24.Location = New System.Drawing.Point(315, 42)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(35, 16)
         Me.Label24.TabIndex = 3
@@ -2465,7 +2753,7 @@ Partial Class Painel_Leitura_Dados
         Me.DGVListaMaterialSWMaterial.ReadOnly = True
         Me.DGVListaMaterialSWMaterial.RowHeadersWidth = 51
         Me.DGVListaMaterialSWMaterial.RowTemplate.Height = 24
-        Me.DGVListaMaterialSWMaterial.Size = New System.Drawing.Size(746, 96)
+        Me.DGVListaMaterialSWMaterial.Size = New System.Drawing.Size(747, 96)
         Me.DGVListaMaterialSWMaterial.TabIndex = 16
         Me.DGVListaMaterialSWMaterial.Visible = False
         '
@@ -2489,7 +2777,7 @@ Partial Class Painel_Leitura_Dados
         Me.btnAplicarAcabamento.TabIndex = 19
         Me.btnAplicarAcabamento.Text = "Aplicar"
         Me.btnAplicarAcabamento.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.ToolTipAjuda.SetToolTip(Me.btnAplicarAcabamento, "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selecione as peças nas quais deseja aplicar o acabamento, escolha " &
+        Me.ToolTipAjuda.SetToolTip(Me.btnAplicarAcabamento, "Dicas de uso:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selecione as peças nas quais deseja aplicar o Acabamento, escolha " &
         "a opção" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "desejada no ComboBox e clique no botão Aplicar.")
         Me.btnAplicarAcabamento.UseVisualStyleBackColor = True
         '
@@ -2502,7 +2790,7 @@ Partial Class Painel_Leitura_Dados
         Me.tpgListaRNCPecaCorrente.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpgListaRNCPecaCorrente.Name = "tpgListaRNCPecaCorrente"
         Me.tpgListaRNCPecaCorrente.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpgListaRNCPecaCorrente.Size = New System.Drawing.Size(804, 851)
+        Me.tpgListaRNCPecaCorrente.Size = New System.Drawing.Size(900, 851)
         Me.tpgListaRNCPecaCorrente.TabIndex = 4
         Me.tpgListaRNCPecaCorrente.Text = "Detalhe Peça Corrente"
         Me.tpgListaRNCPecaCorrente.UseVisualStyleBackColor = True
@@ -2514,7 +2802,7 @@ Partial Class Painel_Leitura_Dados
         Me.btnAtualizarDadosItemOs.Location = New System.Drawing.Point(5, 42)
         Me.btnAtualizarDadosItemOs.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnAtualizarDadosItemOs.Name = "btnAtualizarDadosItemOs"
-        Me.btnAtualizarDadosItemOs.Size = New System.Drawing.Size(776, 49)
+        Me.btnAtualizarDadosItemOs.Size = New System.Drawing.Size(887, 49)
         Me.btnAtualizarDadosItemOs.TabIndex = 12
         Me.btnAtualizarDadosItemOs.Text = "Atualizar os itens da OSM conforme os dados originais dos desenhos."
         Me.btnAtualizarDadosItemOs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -2528,7 +2816,7 @@ Partial Class Painel_Leitura_Dados
         Me.lblNUmeroDocumentoAtivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNUmeroDocumentoAtivo.Location = New System.Drawing.Point(5, 2)
         Me.lblNUmeroDocumentoAtivo.Name = "lblNUmeroDocumentoAtivo"
-        Me.lblNUmeroDocumentoAtivo.Size = New System.Drawing.Size(776, 34)
+        Me.lblNUmeroDocumentoAtivo.Size = New System.Drawing.Size(887, 34)
         Me.lblNUmeroDocumentoAtivo.TabIndex = 11
         Me.lblNUmeroDocumentoAtivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -2542,13 +2830,13 @@ Partial Class Painel_Leitura_Dados
         Me.DGVTimerFiltroPecaAtivaOS.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.DGVTimerFiltroPecaAtivaOS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVTimerFiltroPecaAtivaOS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSelecaoAtualizacaoItemOs, Me.dgvTipoDesenhoAtualizacaoItemOs})
-        Me.DGVTimerFiltroPecaAtivaOS.Location = New System.Drawing.Point(5, 99)
+        Me.DGVTimerFiltroPecaAtivaOS.Location = New System.Drawing.Point(5, 96)
         Me.DGVTimerFiltroPecaAtivaOS.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DGVTimerFiltroPecaAtivaOS.Name = "DGVTimerFiltroPecaAtivaOS"
         Me.DGVTimerFiltroPecaAtivaOS.ReadOnly = True
         Me.DGVTimerFiltroPecaAtivaOS.RowHeadersWidth = 51
         Me.DGVTimerFiltroPecaAtivaOS.RowTemplate.Height = 24
-        Me.DGVTimerFiltroPecaAtivaOS.Size = New System.Drawing.Size(776, 748)
+        Me.DGVTimerFiltroPecaAtivaOS.Size = New System.Drawing.Size(887, 751)
         Me.DGVTimerFiltroPecaAtivaOS.TabIndex = 0
         '
         'dgvSelecaoAtualizacaoItemOs
@@ -2578,12 +2866,61 @@ Partial Class Painel_Leitura_Dados
         Me.tpgPCP.Controls.Add(Me.Label9)
         Me.tpgPCP.Controls.Add(Me.dgvTimerpcpAgrupamentoProjeto)
         Me.tpgPCP.Location = New System.Drawing.Point(4, 25)
+        Me.tpgPCP.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpgPCP.Name = "tpgPCP"
-        Me.tpgPCP.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpgPCP.Size = New System.Drawing.Size(804, 851)
+        Me.tpgPCP.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tpgPCP.Size = New System.Drawing.Size(900, 851)
         Me.tpgPCP.TabIndex = 5
         Me.tpgPCP.Text = "Visão do PCP"
         Me.tpgPCP.UseVisualStyleBackColor = True
+        '
+        'dgvTimerpcpAgrupamentoProjetoDetalhamento
+        '
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AllowUserToAddRows = False
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AllowUserToDeleteRows = False
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AllowUserToOrderColumns = True
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Location = New System.Drawing.Point(5, 127)
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Name = "dgvTimerpcpAgrupamentoProjetoDetalhamento"
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.ReadOnly = True
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.RowHeadersWidth = 51
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.RowTemplate.Height = 24
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Size = New System.Drawing.Size(887, 718)
+        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.TabIndex = 9
+        '
+        'txtClientepcp
+        '
+        Me.txtClientepcp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtClientepcp.Enabled = False
+        Me.txtClientepcp.Location = New System.Drawing.Point(301, 14)
+        Me.txtClientepcp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtClientepcp.Name = "txtClientepcp"
+        Me.txtClientepcp.Size = New System.Drawing.Size(591, 22)
+        Me.txtClientepcp.TabIndex = 8
+        '
+        'cboProjetoPCP
+        '
+        Me.cboProjetoPCP.FormattingEnabled = True
+        Me.cboProjetoPCP.Location = New System.Drawing.Point(65, 14)
+        Me.cboProjetoPCP.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cboProjetoPCP.Name = "cboProjetoPCP"
+        Me.cboProjetoPCP.Size = New System.Drawing.Size(231, 24)
+        Me.cboProjetoPCP.TabIndex = 7
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(12, 17)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(53, 16)
+        Me.Label9.TabIndex = 6
+        Me.Label9.Text = "Projeto:"
         '
         'dgvTimerpcpAgrupamentoProjeto
         '
@@ -2596,13 +2933,335 @@ Partial Class Painel_Leitura_Dados
         Me.dgvTimerpcpAgrupamentoProjeto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTimerpcpAgrupamentoProjeto.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.dgvTimerpcpAgrupamentoProjeto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTimerpcpAgrupamentoProjeto.Location = New System.Drawing.Point(6, 42)
+        Me.dgvTimerpcpAgrupamentoProjeto.Location = New System.Drawing.Point(5, 42)
+        Me.dgvTimerpcpAgrupamentoProjeto.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvTimerpcpAgrupamentoProjeto.Name = "dgvTimerpcpAgrupamentoProjeto"
         Me.dgvTimerpcpAgrupamentoProjeto.ReadOnly = True
         Me.dgvTimerpcpAgrupamentoProjeto.RowHeadersWidth = 51
         Me.dgvTimerpcpAgrupamentoProjeto.RowTemplate.Height = 24
-        Me.dgvTimerpcpAgrupamentoProjeto.Size = New System.Drawing.Size(792, 79)
+        Me.dgvTimerpcpAgrupamentoProjeto.Size = New System.Drawing.Size(887, 79)
         Me.dgvTimerpcpAgrupamentoProjeto.TabIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Label34)
+        Me.TabPage1.Controls.Add(Me.Label33)
+        Me.TabPage1.Controls.Add(Me.dgvTimerProdutosItens)
+        Me.TabPage1.Controls.Add(Me.txtPesqCodOmie4)
+        Me.TabPage1.Controls.Add(Me.txPesqCodDesenhoProduto4)
+        Me.TabPage1.Controls.Add(Me.txtPesqCodOmie3)
+        Me.TabPage1.Controls.Add(Me.txPesqCodDesenhoProduto3)
+        Me.TabPage1.Controls.Add(Me.txtPesqCodOmie2)
+        Me.TabPage1.Controls.Add(Me.txPesqCodDesenhoProduto2)
+        Me.TabPage1.Controls.Add(Me.txtPesqDescricaoProduto4)
+        Me.TabPage1.Controls.Add(Me.txtPesqDescricaoProduto3)
+        Me.TabPage1.Controls.Add(Me.txtPesqDescricaoProduto2)
+        Me.TabPage1.Controls.Add(Me.txtPesqDescricaoProduto1)
+        Me.TabPage1.Controls.Add(Me.Label10)
+        Me.TabPage1.Controls.Add(Me.txtPesqCodOmie1)
+        Me.TabPage1.Controls.Add(Me.txPesqCodDesenhoProduto1)
+        Me.TabPage1.Controls.Add(Me.Label11)
+        Me.TabPage1.Controls.Add(Me.Label15)
+        Me.TabPage1.Controls.Add(Me.dgvTimerProdutos)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TabPage1.Size = New System.Drawing.Size(900, 851)
+        Me.TabPage1.TabIndex = 6
+        Me.TabPage1.Text = "OSProd."
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label34
+        '
+        Me.Label34.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(6, 371)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(181, 16)
+        Me.Label34.TabIndex = 27
+        Me.Label34.Text = "Lista de peças dos Produtos:"
+        '
+        'Label33
+        '
+        Me.Label33.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(2, 161)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(257, 16)
+        Me.Label33.TabIndex = 26
+        Me.Label33.Text = "Lista de Produtos Prontos Para Produção:"
+        '
+        'dgvTimerProdutosItens
+        '
+        Me.dgvTimerProdutosItens.AllowUserToAddRows = False
+        Me.dgvTimerProdutosItens.AllowUserToDeleteRows = False
+        Me.dgvTimerProdutosItens.AllowUserToOrderColumns = True
+        Me.dgvTimerProdutosItens.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvTimerProdutosItens.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader
+        Me.dgvTimerProdutosItens.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+        Me.dgvTimerProdutosItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTimerProdutosItens.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvIconeItemOSProduto})
+        Me.dgvTimerProdutosItens.ContextMenuStrip = Me.mnudgvTimerProdutosItens
+        Me.dgvTimerProdutosItens.Location = New System.Drawing.Point(9, 401)
+        Me.dgvTimerProdutosItens.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dgvTimerProdutosItens.Name = "dgvTimerProdutosItens"
+        Me.dgvTimerProdutosItens.ReadOnly = True
+        Me.dgvTimerProdutosItens.RowHeadersWidth = 51
+        Me.dgvTimerProdutosItens.RowTemplate.Height = 24
+        Me.dgvTimerProdutosItens.Size = New System.Drawing.Size(885, 447)
+        Me.dgvTimerProdutosItens.TabIndex = 25
+        '
+        'dgvIconeItemOSProduto
+        '
+        Me.dgvIconeItemOSProduto.Frozen = True
+        Me.dgvIconeItemOSProduto.HeaderText = "dgvIconeItemOSProduto"
+        Me.dgvIconeItemOSProduto.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.dgvIconeItemOSProduto.MinimumWidth = 6
+        Me.dgvIconeItemOSProduto.Name = "dgvIconeItemOSProduto"
+        Me.dgvIconeItemOSProduto.ReadOnly = True
+        Me.dgvIconeItemOSProduto.Width = 6
+        '
+        'mnudgvTimerProdutosItens
+        '
+        Me.mnudgvTimerProdutosItens.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.mnudgvTimerProdutosItens.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator30, Me.ToolStripMenuItem1, Me.ToolStripSeparator31, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6})
+        Me.mnudgvTimerProdutosItens.Name = "MNUdgvTimerProdutos"
+        Me.mnudgvTimerProdutosItens.Size = New System.Drawing.Size(467, 94)
+        '
+        'ToolStripSeparator30
+        '
+        Me.ToolStripSeparator30.Name = "ToolStripSeparator30"
+        Me.ToolStripSeparator30.Size = New System.Drawing.Size(463, 6)
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Image = Global.SwLynx_4._1.My.Resources.Resources.pdf
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(466, 26)
+        Me.ToolStripMenuItem1.Text = "Abrir PDF da Linha Selecionada"
+        '
+        'ToolStripSeparator31
+        '
+        Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
+        Me.ToolStripSeparator31.Size = New System.Drawing.Size(463, 6)
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Image = Global.SwLynx_4._1.My.Resources.Resources.IconeswPrincipal
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(466, 26)
+        Me.ToolStripMenuItem5.Text = "Marcar como Conjunto Principal da Ordem de Serviço"
+        '
+        'ToolStripMenuItem6
+        '
+        Me.ToolStripMenuItem6.Image = Global.SwLynx_4._1.My.Resources.Resources.IcopneMontagemSW
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(466, 26)
+        Me.ToolStripMenuItem6.Text = "Desmarcar Como Conjunto Principal da Ordem de Serviço"
+        '
+        'txtPesqCodOmie4
+        '
+        Me.txtPesqCodOmie4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqCodOmie4.Location = New System.Drawing.Point(444, 74)
+        Me.txtPesqCodOmie4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqCodOmie4.Name = "txtPesqCodOmie4"
+        Me.txtPesqCodOmie4.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqCodOmie4.TabIndex = 24
+        '
+        'txPesqCodDesenhoProduto4
+        '
+        Me.txPesqCodDesenhoProduto4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txPesqCodDesenhoProduto4.Location = New System.Drawing.Point(444, 30)
+        Me.txPesqCodDesenhoProduto4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txPesqCodDesenhoProduto4.Name = "txPesqCodDesenhoProduto4"
+        Me.txPesqCodDesenhoProduto4.Size = New System.Drawing.Size(140, 22)
+        Me.txPesqCodDesenhoProduto4.TabIndex = 23
+        '
+        'txtPesqCodOmie3
+        '
+        Me.txtPesqCodOmie3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqCodOmie3.Location = New System.Drawing.Point(299, 74)
+        Me.txtPesqCodOmie3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqCodOmie3.Name = "txtPesqCodOmie3"
+        Me.txtPesqCodOmie3.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqCodOmie3.TabIndex = 22
+        '
+        'txPesqCodDesenhoProduto3
+        '
+        Me.txPesqCodDesenhoProduto3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txPesqCodDesenhoProduto3.Location = New System.Drawing.Point(299, 30)
+        Me.txPesqCodDesenhoProduto3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txPesqCodDesenhoProduto3.Name = "txPesqCodDesenhoProduto3"
+        Me.txPesqCodDesenhoProduto3.Size = New System.Drawing.Size(140, 22)
+        Me.txPesqCodDesenhoProduto3.TabIndex = 21
+        '
+        'txtPesqCodOmie2
+        '
+        Me.txtPesqCodOmie2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqCodOmie2.Location = New System.Drawing.Point(152, 74)
+        Me.txtPesqCodOmie2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqCodOmie2.Name = "txtPesqCodOmie2"
+        Me.txtPesqCodOmie2.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqCodOmie2.TabIndex = 20
+        '
+        'txPesqCodDesenhoProduto2
+        '
+        Me.txPesqCodDesenhoProduto2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txPesqCodDesenhoProduto2.Location = New System.Drawing.Point(152, 30)
+        Me.txPesqCodDesenhoProduto2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txPesqCodDesenhoProduto2.Name = "txPesqCodDesenhoProduto2"
+        Me.txPesqCodDesenhoProduto2.Size = New System.Drawing.Size(140, 22)
+        Me.txPesqCodDesenhoProduto2.TabIndex = 19
+        '
+        'txtPesqDescricaoProduto4
+        '
+        Me.txtPesqDescricaoProduto4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqDescricaoProduto4.Location = New System.Drawing.Point(444, 126)
+        Me.txtPesqDescricaoProduto4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqDescricaoProduto4.Name = "txtPesqDescricaoProduto4"
+        Me.txtPesqDescricaoProduto4.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqDescricaoProduto4.TabIndex = 18
+        '
+        'txtPesqDescricaoProduto3
+        '
+        Me.txtPesqDescricaoProduto3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqDescricaoProduto3.Location = New System.Drawing.Point(299, 126)
+        Me.txtPesqDescricaoProduto3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqDescricaoProduto3.Name = "txtPesqDescricaoProduto3"
+        Me.txtPesqDescricaoProduto3.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqDescricaoProduto3.TabIndex = 17
+        '
+        'txtPesqDescricaoProduto2
+        '
+        Me.txtPesqDescricaoProduto2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqDescricaoProduto2.Location = New System.Drawing.Point(152, 126)
+        Me.txtPesqDescricaoProduto2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqDescricaoProduto2.Name = "txtPesqDescricaoProduto2"
+        Me.txtPesqDescricaoProduto2.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqDescricaoProduto2.TabIndex = 16
+        '
+        'txtPesqDescricaoProduto1
+        '
+        Me.txtPesqDescricaoProduto1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqDescricaoProduto1.Location = New System.Drawing.Point(5, 126)
+        Me.txtPesqDescricaoProduto1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqDescricaoProduto1.Name = "txtPesqDescricaoProduto1"
+        Me.txtPesqDescricaoProduto1.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqDescricaoProduto1.TabIndex = 15
+        '
+        'Label10
+        '
+        Me.Label10.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(5, 106)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(140, 16)
+        Me.Label10.TabIndex = 14
+        Me.Label10.Text = "Descrição do produto:"
+        '
+        'txtPesqCodOmie1
+        '
+        Me.txtPesqCodOmie1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPesqCodOmie1.Location = New System.Drawing.Point(5, 74)
+        Me.txtPesqCodOmie1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPesqCodOmie1.Name = "txtPesqCodOmie1"
+        Me.txtPesqCodOmie1.Size = New System.Drawing.Size(140, 22)
+        Me.txtPesqCodOmie1.TabIndex = 13
+        '
+        'txPesqCodDesenhoProduto1
+        '
+        Me.txPesqCodDesenhoProduto1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txPesqCodDesenhoProduto1.Location = New System.Drawing.Point(5, 30)
+        Me.txPesqCodDesenhoProduto1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txPesqCodDesenhoProduto1.Name = "txPesqCodDesenhoProduto1"
+        Me.txPesqCodDesenhoProduto1.Size = New System.Drawing.Size(140, 22)
+        Me.txPesqCodDesenhoProduto1.TabIndex = 12
+        '
+        'Label11
+        '
+        Me.Label11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(5, 55)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(90, 16)
+        Me.Label11.TabIndex = 11
+        Me.Label11.Text = "Codigo OMIE:"
+        '
+        'Label15
+        '
+        Me.Label15.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(5, 11)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(180, 16)
+        Me.Label15.TabIndex = 10
+        Me.Label15.Text = "Codigo Desenho do produto:"
+        '
+        'dgvTimerProdutos
+        '
+        Me.dgvTimerProdutos.AllowUserToAddRows = False
+        Me.dgvTimerProdutos.AllowUserToDeleteRows = False
+        Me.dgvTimerProdutos.AllowUserToOrderColumns = True
+        Me.dgvTimerProdutos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvTimerProdutos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader
+        Me.dgvTimerProdutos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+        Me.dgvTimerProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTimerProdutos.ContextMenuStrip = Me.MNUdgvTimerProdutos
+        Me.dgvTimerProdutos.Location = New System.Drawing.Point(5, 194)
+        Me.dgvTimerProdutos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dgvTimerProdutos.Name = "dgvTimerProdutos"
+        Me.dgvTimerProdutos.ReadOnly = True
+        Me.dgvTimerProdutos.RowHeadersWidth = 51
+        Me.dgvTimerProdutos.RowTemplate.Height = 24
+        Me.dgvTimerProdutos.Size = New System.Drawing.Size(889, 156)
+        Me.dgvTimerProdutos.TabIndex = 0
+        '
+        'MNUdgvTimerProdutos
+        '
+        Me.MNUdgvTimerProdutos.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MNUdgvTimerProdutos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbrirPDFFichaTecnicaToolStripMenuItem, Me.ToolStripSeparator29, Me.AbrirPDFIsometricoToolStripMenuItem, Me.ToolStripSeparator32, Me.EditarProdutoExistenteToolStripMenuItem})
+        Me.MNUdgvTimerProdutos.Name = "MNUdgvTimerProdutos"
+        Me.MNUdgvTimerProdutos.Size = New System.Drawing.Size(242, 94)
+        '
+        'AbrirPDFFichaTecnicaToolStripMenuItem
+        '
+        Me.AbrirPDFFichaTecnicaToolStripMenuItem.Image = Global.SwLynx_4._1.My.Resources.Resources.pdf
+        Me.AbrirPDFFichaTecnicaToolStripMenuItem.Name = "AbrirPDFFichaTecnicaToolStripMenuItem"
+        Me.AbrirPDFFichaTecnicaToolStripMenuItem.Size = New System.Drawing.Size(241, 26)
+        Me.AbrirPDFFichaTecnicaToolStripMenuItem.Text = "Abrir PDF Ficha Tecnica"
+        '
+        'ToolStripSeparator29
+        '
+        Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
+        Me.ToolStripSeparator29.Size = New System.Drawing.Size(238, 6)
+        '
+        'AbrirPDFIsometricoToolStripMenuItem
+        '
+        Me.AbrirPDFIsometricoToolStripMenuItem.Image = Global.SwLynx_4._1.My.Resources.Resources.pdf
+        Me.AbrirPDFIsometricoToolStripMenuItem.Name = "AbrirPDFIsometricoToolStripMenuItem"
+        Me.AbrirPDFIsometricoToolStripMenuItem.Size = New System.Drawing.Size(241, 26)
+        Me.AbrirPDFIsometricoToolStripMenuItem.Text = "Abrir PDF Isometrico"
+        '
+        'ToolStripSeparator32
+        '
+        Me.ToolStripSeparator32.Name = "ToolStripSeparator32"
+        Me.ToolStripSeparator32.Size = New System.Drawing.Size(238, 6)
+        '
+        'EditarProdutoExistenteToolStripMenuItem
+        '
+        Me.EditarProdutoExistenteToolStripMenuItem.Image = Global.SwLynx_4._1.My.Resources.Resources.IconeswPrincipal
+        Me.EditarProdutoExistenteToolStripMenuItem.Name = "EditarProdutoExistenteToolStripMenuItem"
+        Me.EditarProdutoExistenteToolStripMenuItem.Size = New System.Drawing.Size(241, 26)
+        Me.EditarProdutoExistenteToolStripMenuItem.Text = "Editar Produto Existente"
         '
         'TimerdgvDesenhos
         '
@@ -2619,6 +3278,11 @@ Partial Class Painel_Leitura_Dados
         '
         'TimerFiltroPecaAtivaOS
         '
+        '
+        'ToolTipAjuda
+        '
+        Me.ToolTipAjuda.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipAjuda.ToolTipTitle = "Dicas de Uso:"
         '
         'OpenFileDialog1
         '
@@ -2641,52 +3305,13 @@ Partial Class Painel_Leitura_Dados
         'TimerpcpAgrupamentoProjeto
         '
         '
-        'txtClientepcp
+        'TimerProdutos
         '
-        Me.txtClientepcp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtClientepcp.Enabled = False
-        Me.txtClientepcp.Location = New System.Drawing.Point(302, 14)
-        Me.txtClientepcp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtClientepcp.Name = "txtClientepcp"
-        Me.txtClientepcp.Size = New System.Drawing.Size(496, 22)
-        Me.txtClientepcp.TabIndex = 8
+        Me.TimerProdutos.Interval = 500
         '
-        'cboProjetoPCP
+        'TimerProdutoItens
         '
-        Me.cboProjetoPCP.FormattingEnabled = True
-        Me.cboProjetoPCP.Location = New System.Drawing.Point(65, 13)
-        Me.cboProjetoPCP.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.cboProjetoPCP.Name = "cboProjetoPCP"
-        Me.cboProjetoPCP.Size = New System.Drawing.Size(231, 24)
-        Me.cboProjetoPCP.TabIndex = 7
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(12, 17)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 16)
-        Me.Label9.TabIndex = 6
-        Me.Label9.Text = "Projeto:"
-        '
-        'dgvTimerpcpAgrupamentoProjetoDetalhamento
-        '
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AllowUserToAddRows = False
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AllowUserToDeleteRows = False
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AllowUserToOrderColumns = True
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Location = New System.Drawing.Point(6, 127)
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Name = "dgvTimerpcpAgrupamentoProjetoDetalhamento"
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.ReadOnly = True
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.RowHeadersWidth = 51
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.RowTemplate.Height = 24
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.Size = New System.Drawing.Size(792, 718)
-        Me.dgvTimerpcpAgrupamentoProjetoDetalhamento.TabIndex = 9
+        Me.TimerProdutoItens.Interval = 500
         '
         'Painel_Leitura_Dados
         '
@@ -2697,7 +3322,7 @@ Partial Class Painel_Leitura_Dados
         Me.Controls.Add(Me.tpgPrincipal)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Painel_Leitura_Dados"
-        Me.Size = New System.Drawing.Size(820, 888)
+        Me.Size = New System.Drawing.Size(916, 889)
         Me.tpgPrincipal.ResumeLayout(False)
         Me.tpgFolhaDados.ResumeLayout(False)
         Me.tpgFolhaDados.PerformLayout()
@@ -2728,6 +3353,7 @@ Partial Class Painel_Leitura_Dados
         Me.BindingNavigator2.ResumeLayout(False)
         Me.BindingNavigator2.PerformLayout()
         CType(Me.dgvDataGridBOM, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.mnudgvDataGridBOM.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.tpgOrdemServico.ResumeLayout(False)
         Me.tpgOrdemServico.PerformLayout()
@@ -2743,8 +3369,14 @@ Partial Class Painel_Leitura_Dados
         CType(Me.DGVTimerFiltroPecaAtivaOS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tpgPCP.ResumeLayout(False)
         Me.tpgPCP.PerformLayout()
-        CType(Me.dgvTimerpcpAgrupamentoProjeto, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvTimerpcpAgrupamentoProjetoDetalhamento, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvTimerpcpAgrupamentoProjeto, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        CType(Me.dgvTimerProdutosItens, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.mnudgvTimerProdutosItens.ResumeLayout(False)
+        CType(Me.dgvTimerProdutos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MNUdgvTimerProdutos.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2922,8 +3554,6 @@ Partial Class Painel_Leitura_Dados
     Friend WithEvents BiscarFormatoA4DeitadoToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents TSTVersaoSistema As Windows.Forms.ToolStripTextBox
     Friend WithEvents btnPendencias As Windows.Forms.Button
-    Friend WithEvents DGVIconeDXF As Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents dgvIconePDF As Windows.Forms.DataGridViewImageColumn
     Friend WithEvents CadastroDeProjetosToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkBoxTipoDesenho As Windows.Forms.CheckedListBox
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
@@ -2988,4 +3618,65 @@ Partial Class Painel_Leitura_Dados
     Friend WithEvents cboProjetoPCP As Windows.Forms.ComboBox
     Friend WithEvents Label9 As Windows.Forms.Label
     Friend WithEvents dgvTimerpcpAgrupamentoProjetoDetalhamento As Windows.Forms.DataGridView
+    Friend WithEvents TabPage1 As Windows.Forms.TabPage
+    Friend WithEvents dgvTimerProdutos As Windows.Forms.DataGridView
+    Friend WithEvents TimerProdutos As Windows.Forms.Timer
+    Friend WithEvents txtPesqDescricaoProduto1 As Windows.Forms.TextBox
+    Friend WithEvents Label10 As Windows.Forms.Label
+    Friend WithEvents txtPesqCodOmie1 As Windows.Forms.TextBox
+    Friend WithEvents txPesqCodDesenhoProduto1 As Windows.Forms.TextBox
+    Friend WithEvents Label11 As Windows.Forms.Label
+    Friend WithEvents Label15 As Windows.Forms.Label
+    Friend WithEvents txtPesqCodOmie4 As Windows.Forms.TextBox
+    Friend WithEvents txPesqCodDesenhoProduto4 As Windows.Forms.TextBox
+    Friend WithEvents txtPesqCodOmie3 As Windows.Forms.TextBox
+    Friend WithEvents txPesqCodDesenhoProduto3 As Windows.Forms.TextBox
+    Friend WithEvents txtPesqCodOmie2 As Windows.Forms.TextBox
+    Friend WithEvents txPesqCodDesenhoProduto2 As Windows.Forms.TextBox
+    Friend WithEvents txtPesqDescricaoProduto4 As Windows.Forms.TextBox
+    Friend WithEvents txtPesqDescricaoProduto3 As Windows.Forms.TextBox
+    Friend WithEvents txtPesqDescricaoProduto2 As Windows.Forms.TextBox
+    Friend WithEvents dgvTimerProdutosItens As Windows.Forms.DataGridView
+    Friend WithEvents TimerProdutoItens As Windows.Forms.Timer
+    Friend WithEvents dgvIconeItemOSProduto As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents MNUdgvTimerProdutos As Windows.Forms.ContextMenuStrip
+    Friend WithEvents AbrirPDFFichaTecnicaToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator29 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents AbrirPDFIsometricoToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnudgvTimerProdutosItens As Windows.Forms.ContextMenuStrip
+    Friend WithEvents ToolStripSeparator30 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem5 As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem6 As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator31 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents txtFichaTecnica As Windows.Forms.TextBox
+    Friend WithEvents Label32 As Windows.Forms.Label
+    Friend WithEvents Label31 As Windows.Forms.Label
+    Friend WithEvents txtIsometrico As Windows.Forms.TextBox
+    Friend WithEvents btnIsometrico As Windows.Forms.Button
+    Friend WithEvents btnFichaTecnica As Windows.Forms.Button
+    Friend WithEvents txtNomeArquivo As Windows.Forms.ToolStripTextBox
+    Friend WithEvents Label34 As Windows.Forms.Label
+    Friend WithEvents Label33 As Windows.Forms.Label
+    Friend WithEvents ToolStripSeparator32 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents EditarProdutoExistenteToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnudgvDataGridBOM As Windows.Forms.ContextMenuStrip
+    Friend WithEvents ToolStripSeparator34 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem3 As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator33 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem2 As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator35 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents AbrirLXDSDaLinhaSelecionadaToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DGVIconeLXDS As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents DGVIconeDXF As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents dgvIconePDF As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents ToolStripSeparator36 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents TsbAtualizarBOM As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton2 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton8 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator37 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator38 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripButton9 As Windows.Forms.ToolStripButton
+    Friend WithEvents TsbInspecaoQualidade As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator39 As Windows.Forms.ToolStripSeparator
 End Class

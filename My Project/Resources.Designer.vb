@@ -253,6 +253,16 @@ Namespace My.Resources
         '''<summary>
         '''  Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property EYE_SNOW() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("EYE SNOW", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property facam() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("facam", resourceCulture)
@@ -316,6 +326,16 @@ Namespace My.Resources
         Friend ReadOnly Property IcopneMontagemSW() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("IcopneMontagemSW", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property inspecao() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("inspecao", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

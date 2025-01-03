@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>197, 17</value>
-  </metadata>
-  <data name="txtm2Total.ToolTip" xml:space="preserve">
-    <value>O cálculo de utilização da chapa é feito em metros quadrados (m²), com base em uma chapa padrão de mercado com 
-dimensões de 1200mm de largura por 3000mm de comprimento. A fórmula utilizada é a área calculada do blank da peça 
-corrente dividida pela área total da chapa (3,6m²) multiplicada pelo fator de utilização de 0,95.
-
-Para peças de comprimento linear, como perfis, vigas e tubos, o usuário deve informar o valor em metros lineares (m/linear).
-
-Para materiais como disco flap e lixa, o valor deve ser informado em frações. Exemplo: 0,5 representa meio disco flap.</value>
-  </data>
-  <metadata name="TimerDgvMaterial.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="GroupBox1.ToolTip" xml:space="preserve">
-    <value>O cálculo de utilização da chapa é feito em metros quadrados (m²), com base em uma chapa padrão de mercado com 
-dimensões de 1200mm de largura por 3000mm de comprimento. A fórmula utilizada é a área calculada do blank da peça 
-corrente dividida pela área total da chapa (3,6m²) multiplicada pelo fator de utilização de 0,95.
-
-Para peças de comprimento linear, como perfis, vigas e tubos, o usuário deve informar o valor em metros lineares (m/linear).
-
-Para materiais como disco flap e lixa, o valor deve ser informado em frações. Exemplo: 0,5 representa meio disco flap.
-</value>
-  </data>
 </root>

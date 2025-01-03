@@ -6,9 +6,9 @@ Public Class FrmBuscarProgramas
     Private Sub TimerdgvDesenhosCadastrados_Tick(sender As Object, e As EventArgs) Handles TimerdgvDesenhosCadastrados.Tick
 
         dgvDesenhosCadastrados.DataSource = cl_BancoDados.CarregarDados("SELECT RNC,
-        codMatFabricante, 
+        CodMatFabricante, 
         EnderecoArquivo
-        FROM material where PecaManuFat = 'S' and (d_e_l_e_t_e <> '*' or d_e_l_e_t_e is null)
+        FROM  " & ComplementoTipoBanco & "material where PecaManuFat = 'S' and (d_e_l_e_t_e <> '*' or d_e_l_e_t_e is null)
         and (EnderecoArquivo like '%.SLDPRT%' or EnderecoArquivo like '%.SLDASM%')
         and EnderecoArquivo like '%" & txtPesqEnderecoArquivo.Text & "%'")
 
@@ -24,90 +24,6 @@ Public Class FrmBuscarProgramas
 
     Private Sub btnBuscarDFT_Click(sender As Object, e As EventArgs) Handles btnBuscarDFT.Click
 
-        '' Cria e exibe o diálogo para escolher a pasta onde os arquivos .dft serão buscados
-        'Dim pastaBuscaDFT As String = ""
-
-        'Using folderBrowser As New FolderBrowserDialog
-        '    folderBrowser.Description = "Selecione a pasta onde os arquivos .dft serão buscados"
-        '    If folderBrowser.ShowDialog() = DialogResult.OK Then
-        '        pastaBuscaDFT = folderBrowser.SelectedPath
-        '    Else
-        '        MessageBox.Show("Nenhuma pasta foi selecionada. Operação cancelada.")
-        '        Exit Sub
-        '    End If
-        'End Using
-
-        'Dim pastaBuscaDFT As String = ""
-
-        'Using openFileDialog As New OpenFileDialog
-        '    openFileDialog.CheckFileExists = False
-        '    openFileDialog.CheckPathExists = True
-        '    openFileDialog.ValidateNames = False
-        '    openFileDialog.FileName = "Selecione uma pasta"
-
-        '    If openFileDialog.ShowDialog() = DialogResult.OK Then
-        '        ' Remove o nome fictício "Selecione uma pasta" para obter o caminho correto
-        '        pastaBuscaDFT = IO.Path.GetDirectoryName(openFileDialog.FileName)
-        '    Else
-        '        MessageBox.Show("Nenhuma pasta foi selecionada. Operação cancelada.")
-        '        Exit Sub
-        '    End If
-        'End Using
-
-        'ProgressBarBuscarArquivos.Maximum = dgvDesenhosCadastrados.Rows.Count
-        'ProgressBarBuscarArquivos.Minimum = 0
-
-
-        '' Percorre cada linha no DataGridView
-        'For Each row As DataGridViewRow In dgvDesenhosCadastrados.Rows
-
-        '    Try
-
-        '        ' Verifica se a linha não está vazia
-        '        If Not row.IsNewRow Then
-        '            ' Obtém o caminho completo do arquivo de origem (contido no DataGridView)
-        '            Dim caminhoArquivoOrigem As String = row.Cells("EnderecoArquivo").Value.ToString()
-
-        '            ' Obtém o nome do arquivo sem a extensão
-        '            Dim nomeArquivoSemExtensao As String = Path.GetFileNameWithoutExtension(caminhoArquivoOrigem)
-
-        '            ' Busca arquivos .dft em todas as subpastas da pasta selecionada
-        '            Dim arquivosDFT() As String = Directory.GetFiles(pastaBuscaDFT, nomeArquivoSemExtensao & ".dft", SearchOption.AllDirectories)
-
-        '            ' Verifica se algum arquivo .dft foi encontrado
-        '            If arquivosDFT.Length > 0 Then
-        '                ' Pega o primeiro arquivo encontrado (ou pode ser adaptado para tratar múltiplos arquivos)
-        '                Dim caminhoArquivoDFT As String = arquivosDFT(0)
-
-        '                ' Monta o caminho de destino na pasta de origem do arquivo original
-        '                Dim caminhoArquivoDestino As String = Path.Combine(Path.GetDirectoryName(caminhoArquivoOrigem), Path.GetFileName(caminhoArquivoDFT))
-
-        '                ' Copia o arquivo .dft da pasta de destino para a pasta de origem (sobrescreve se já existir)
-        '                File.Copy(caminhoArquivoDFT, caminhoArquivoDestino, True)
-
-        '                ' Atualiza a célula com o ícone de sucesso
-        '                row.Cells("dgvdft").Value = My.Resources.DFT
-
-        '                ProgressBarBuscarArquivos.Value = row.Index
-        '                row.DefaultCellStyle.BackColor = Color.LightGreen
-
-        '            Else
-        '                ' Atualiza a célula com o ícone de arquivo não encontrado
-        '                row.Cells("dgvdft").Value = My.Resources.Sem_Incone
-        '                row.DefaultCellStyle.BackColor = Color.White
-
-        '            End If
-        '        End If
-
-        '    Catch ex As Exception
-        '        Continue For
-        '    End Try
-
-        'Next
-
-        'ProgressBarBuscarArquivos.Value = 0
-
-        'MessageBox.Show("Operação concluída.")
 
         Dim pastaBuscaDFT As String = ""
 
@@ -375,10 +291,6 @@ Public Class FrmBuscarProgramas
         Finally
 
         End Try
-
-    End Sub
-
-    Private Sub dgvDesenhosCadastrados_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDesenhosCadastrados.CellContentClick
 
     End Sub
 
