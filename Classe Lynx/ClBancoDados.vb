@@ -42,9 +42,9 @@ Public Class ClBancoDados
             ''Max Pool Size=50;Connection Timeout=600;Connection Lifetime=3600;CharSet=utf8;"
             ''My.Settings.BancoDadosAtivo = "alfatec2"
 
-            ''''conexao = "Server=mettapaineis.mysql.uhserver.com;database=mettapaineis;uid=rubensmetta;pwd=jHAzhFG848@yN@U;
-            ''''Max Pool Size=50;Connection Timeout=600;Connection Lifetime=3600;CharSet=utf8;"
-            ''''My.Settings.BancoDadosAtivo = "mettapaineis"
+            '''conexao = "Server=mettapaineis.mysql.uhserver.com;database=mettapaineis;uid=rubensmetta;pwd=jHAzhFG848@yN@U;
+            '''Max Pool Size=50;Connection Timeout=600;Connection Lifetime=3600;CharSet=utf8;"
+            '''My.Settings.BancoDadosAtivo = "mettapaineis"
             '''
 
             '''''''''''''        ''    'conexao = "Server=marp.mysql.uhserver.com;database=marp;uid=mrogerio;pwd=RZ*5rDs7FPsGTT9;
@@ -60,6 +60,12 @@ Public Class ClBancoDados
             '''conexao = "Server=amceletrica.mysql.uhserver.com;database=amceletrica;uid=brunoamc;pwd=jHAzhFG848@yN@U;
             '''        Max Pool Size=50;Connection Timeout=600;Connection Lifetime=3600;CharSet=utf8;"
             '''My.Settings.BancoDadosAtivo = "amceletrica"
+            '''
+
+
+            ''''conexao = "Server=ihm.mysql.uhserver.com;database=ihm;uid=eduardoihm;pwd=jHAzhFG848@yN@U;
+            ''''        Max Pool Size=50;Connection Timeout=600;Connection Lifetime=3600;CharSet=utf8;"
+            ''''My.Settings.BancoDadosAtivo = "ihm"
 
 
         ElseIf TipoBanco = "SQL" Then

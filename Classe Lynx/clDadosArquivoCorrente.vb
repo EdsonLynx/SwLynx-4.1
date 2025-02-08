@@ -1223,9 +1223,19 @@ Public Class ClDadosArquivoCorrente
 
 
     ' Função para adicionar parâmetros como texto
-    Public Function AddTextParameterMysql(ByRef cmd As MySqlCommand, ByVal paramName As String, ByVal value As Object)
+    Public Function AddTextParameterMysql(ByRef cmd As MySqlCommand, ByVal paramName As String, ByVal value As Object) As Boolean
 
-        cmd.Parameters.AddWithValue(paramName, If(value Is Nothing, String.Empty, value.ToString().Trim()))
+        Try
+
+            cmd.Parameters.AddWithValue(paramName, If(value Is Nothing, String.Empty, value.ToString().Trim()))
+            Return True
+
+        Catch ex As Exception
+            Return False
+
+        End Try
+
+
 
     End Function
 
@@ -1633,7 +1643,7 @@ Public Class clPdf
 
 
 
-    Public Function EditarPdf(Origem As String, Parametro As String)
+    Public Function EditarPdf(Origem As String, Parametro As String) As Boolean
         Try
             ' Cria o leitor e escritor para o mesmo arquivo
             Using pdfReader As New PdfReader(Origem)

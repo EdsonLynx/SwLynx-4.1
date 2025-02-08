@@ -44,6 +44,20 @@ Public Class frmExportarParaOS
         Me.txtEmailPCP.Text = Usuario.EnviarEmailLiberacaoOS.ToString
 
 
+
+
+
+        If My.Settings.AtualizaCadastroComLeituraBOM = "SIM" Then
+
+            chkAtualizaCadastroComLeituraBOM.Checked = True
+
+        ElseIf My.Settings.AtualizaCadastroComLeituraBOM = "NÃO" Or My.Settings.AtualizaCadastroComLeituraBOM = "" Then
+
+            chkAtualizaCadastroComLeituraBOM.Checked = False
+
+        End If
+
+
     End Sub
 
     Private Sub btnSalvar_Click(sender As Object, e As EventArgs) Handles btnSalvar.Click
@@ -94,6 +108,21 @@ Public Class frmExportarParaOS
         Else
             My.Settings.TempoRespostaServidor = txtTempoRespostaServidor.Text
             My.Settings.Save()
+        End If
+
+
+        If chkAtualizaCadastroComLeituraBOM.Checked = True Then
+
+            My.Settings.AtualizaCadastroComLeituraBOM = "SIM"
+            ' Salva as configurações
+            My.Settings.Save()
+
+        ElseIf chkAtualizaCadastroComLeituraBOM.Checked = False Then
+
+            My.Settings.AtualizaCadastroComLeituraBOM = "NÃO"
+            ' Salva as configurações
+            My.Settings.Save()
+
         End If
 
         txtEmailPCP.Text = Usuario.EnviarEmailLiberacaoOS
@@ -203,6 +232,28 @@ Public Class frmExportarParaOS
     End Sub
 
     Private Sub txtEmailPCP_LocationChanged(sender As Object, e As EventArgs) Handles txtEmailPCP.LocationChanged
+
+    End Sub
+
+    Private Sub chkAtualizaCadastroComLeituraBOM_CheckedChanged(sender As Object, e As EventArgs) Handles chkAtualizaCadastroComLeituraBOM.CheckedChanged
+
+
+
+        If chkAtualizaCadastroComLeituraBOM.Checked = True Then
+
+            My.Settings.AtualizaCadastroComLeituraBOM = "SIM"
+            ' Salva as configurações
+            My.Settings.Save()
+
+        ElseIf chkAtualizaCadastroComLeituraBOM.Checked = False Then
+
+            My.Settings.AtualizaCadastroComLeituraBOM = "NÃO"
+            ' Salva as configurações
+            My.Settings.Save()
+
+
+        End If
+
 
     End Sub
 End Class
