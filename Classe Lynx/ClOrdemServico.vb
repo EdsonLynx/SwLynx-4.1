@@ -78,7 +78,7 @@ Public Class CLOrdemServico
     Public EnderecoIsometrico As String
     Public ProdutoCriadoPor As String
     Public DataCriacaoProduto As String
-    Public Function CriarOsCompleta(ByVal DgvGrid As DataGridView, ByVal timerDgvOS As Timer, ByVal timerDgvOSiTEM As Timer)
+    Public Function CriarOsCompleta(ByVal DgvGrid As DataGridView, ByVal timerDgvOS As Timer, ByVal timerDgvOSiTEM As Timer) As Boolean
 
         If My.Settings.EnderecoPastaRaizOS.ToString = "" And System.IO.Directory.Exists(My.Settings.EnderecoPastaRaizOS) = False Then
 
@@ -274,7 +274,7 @@ where IdOrdemServico = '" & OrdemServico.IdOrdemServico & "'") ' and idProjeto =
                 cmd.Parameters.AddWithValue("@Tag", OrdemServico.Tag)
                 cmd.Parameters.AddWithValue("@Descricao", OrdemServico.Descricao)
                 cmd.Parameters.AddWithValue("@EnderecoOrdemServico", OrdemServico.EnderecoOrdemServico)
-                cmd.Parameters.AddWithValue("@CriadoPor", If(String.IsNullOrEmpty(OrdemServico.CriadoPor), DBNull.Value, OrdemServico.CriadoPor.ToUpper()))
+                cmd.Parameters.AddWithValue("@CriadoPor", If(String.IsNullOrEmpty(OrdemServico.CriadoPor), DBNull.Value, OrdemServico.CriadoPor.ToUpper().ToString).ToString)
                 cmd.Parameters.AddWithValue("@DataCriacao", OrdemServico.DataCriacao)
                 cmd.Parameters.AddWithValue("@Estatus", OrdemServico.Estatus)
                 cmd.Parameters.AddWithValue("@D_E_L_E_T_E", "")  ' ou tratar conforme necessário

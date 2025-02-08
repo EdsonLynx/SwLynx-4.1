@@ -1290,7 +1290,15 @@ Public Class Painel_Leitura_Dados
 
 					End If
 
+
 					FormatarColunaIconeDGVListaBom() 'EDSON 18/01/2025
+
+
+					If My.Settings.AtualizaCadastroComLeituraBOM = "SIM" Then
+
+						DadosArquivoCorrente.AtualizaDesenho(swModel)
+
+					End If
 
 
 
@@ -1991,7 +1999,8 @@ Public Class Painel_Leitura_Dados
 	''' </summary>
 	''' <param name="swModel">O modelo ativo do SolidWorks.</param>
 	''' <param name="docType">O tipo do documento.</param>
-	''' <returns>True se o documento foi carregado com sucesso; caso contrário, False.</returns>    Private Function WaitForDocumentToLoad(ByVal swModel As ModelDoc2, ByVal docType As swDocumentTypes_e) As Boolean
+	''' <returns>True se o documento foi carregado com sucesso; caso contrário, False.</returns>   
+ Private Function WaitForDocumentToLoad(ByVal swModel As ModelDoc2, ByVal docType As swDocumentTypes_e) As Boolean
 		Dim maxRetries As Integer = 10
 		Dim retryInterval As Integer = 100 ' Tempo em milissegundos
 
@@ -2221,7 +2230,8 @@ Public Class Painel_Leitura_Dados
 
 	''' <summary>
 	''' Limpa os campos do formulário.
-	''' </summary>    Private Sub LimparCamposFormulario()
+	''' </summary>    
+	Private Sub LimparCamposFormulario()
 		Me.cboTitulo.Text = ""
 		Me.txtAssuntoSubiTitulo.Clear()
 		Me.txtComentarios.Clear()
@@ -2259,7 +2269,8 @@ Public Class Painel_Leitura_Dados
 
 	''' <summary>
 	''' Limpa os campos relacionados à lista de corte.
-	''' </summary>    Private Sub LimparCamposListaCorte()
+	''' </summary>    
+	Private Sub LimparCamposListaCorte()
 		Me.lblEspessura.Text = ""
 		Me.lblLargura.Text = ""
 		Me.lblComprimento.Text = ""
@@ -2276,7 +2287,8 @@ Public Class Painel_Leitura_Dados
 
 	''' <summary>
 	''' Limpa os campos relacionados à caixa delimitadora.
-	''' </summary>    Private Sub LimparCamposCaixaDelimitadora()
+	''' </summary>   
+	Private Sub LimparCamposCaixaDelimitadora()
 		Me.lblAlturaTotalCaixaDelimitadora.Text = ""
 		Me.lblProfundidadeTotalCaixaDelimitadora.Text = ""
 		Me.lblProfundidadeTotalCaixaDelimitadora.Text = ""
@@ -2289,7 +2301,8 @@ Public Class Painel_Leitura_Dados
 
 	''' <summary>
 	''' Limpa os campos relacionados ao processo.
-	''' </summary>    Private Sub LimparCamposProcesso()
+	''' </summary>   
+	Private Sub LimparCamposProcesso()
 		Me.lblPeso.Text = ""
 		Me.lblMaterial.Text = ""
 	End Sub
@@ -2301,7 +2314,8 @@ Public Class Painel_Leitura_Dados
 
 	''' <summary>
 	''' Limpa as propriedades do objeto DadosArquivoCorrente.
-	''' </summary>    Private Sub LimparDadosArquivoCorrente()
+	''' </summary>   
+Private Sub LimparDadosArquivoCorrente()
 		With DadosArquivoCorrente
 			' Informações gerais
 			.IdMaterial = Nothing
@@ -2835,16 +2849,17 @@ order by descdetal")
 
 			' Atribuir valores ao objeto OrdemServico
 			OrdemServico.Projeto = cboProjeto.Text
+			OrdemServico.idProjeto = cboProjeto.SelectedValue
 
 			Try
 
 				' Tentar converter o valor selecionado para inteiro
 				' Dim idProjeto As Integer
-				If Integer.TryParse(cboProjeto.SelectedValue?.ToString(), OrdemServico.idProjeto) Then
+				If Integer.TryParse(cboProjeto.SelectedValue?.ToString(), Convert.ToInt32(OrdemServico.idProjeto)) Then
 
 					If TipoBanco = "MYSQL" Then
 
-						OrdemServico.idProjeto = OrdemServico.idProjeto
+						'	OrdemServico.idProjeto = OrdemServico.idProjeto
 
 						' Preenchendo o ComboBox com os dados do banco
 						cl_BancoDados.ComboBoxDataSet("tags", "idTag", "Tag", cboTag, " where (D_E_L_E_T_E IS NULL OR D_E_L_E_T_E = '')   and (Finalizado = '' OR Finalizado Is NULL) AND idProjeto = '" & OrdemServico.idProjeto & "'")
@@ -2910,14 +2925,15 @@ order by descdetal")
 
 			' Atribuir o texto da Tag ao objeto OrdemServico
 			OrdemServico.Tag = cboTag.Text
+			OrdemServico.idTag = cboTag.SelectedValue
 
 			' Tentar converter o valor selecionado para inteiro
 			' Dim idTag As Integer
-			If Integer.TryParse(cboTag.SelectedValue?.ToString(), OrdemServico.idTag) Then
+			If Integer.TryParse(cboTag.SelectedValue?.ToString(), Convert.ToInt32(OrdemServico.idTag)) Then
 
 				' OrdemServico.idTag = cl_BancoDados.FormatarPara7Caracteres(OrdemServico.idTag)
 
-				OrdemServico.idTag = OrdemServico.idTag
+				'	OrdemServico.idTag = OrdemServico.idTag
 
 				'    OrdemServico.idTag = idTag
 				' Else
@@ -10718,22 +10734,26 @@ DescEmpresa) values
 			' Processar PART ou ASSEMBLY
 			If swModel.GetType() = swDocumentTypes_e.swDocPART Or swModel.GetType() = swDocumentTypes_e.swDocASSEMBLY Then
 
-				''retirado 03/12/2024 edson  DadosArquivoCorrente.AtualizaDesenho(swModel)
+				If My.Settings.AtualizaCadastroComLeituraBOM = "SIM" Then
+
+					DadosArquivoCorrente.AtualizaDesenho(swModel)
+
+				End If
 
 
 				If DadosArquivoCorrente.VerificarProcessodaPecaCorrente(swModel, False) = False Then
 
-					DadosArquivoCorrente.rnc = "S"
+						DadosArquivoCorrente.rnc = "S"
 
-				End If
+					End If
 
-				FormatarColunaIconeDGVListaBom()
-
-
+					FormatarColunaIconeDGVListaBom()
 
 
-				' Preencher o DataGridView com os dados da peça
-				dgvDataGridBOM.Rows.Add(My.Resources.Sem_Incone,
+
+
+					' Preencher o DataGridView com os dados da peça
+					dgvDataGridBOM.Rows.Add(My.Resources.Sem_Incone,
 										iconeDXF,
 										iconePDF,
 										iconeTipoArquivo,
@@ -10770,28 +10790,28 @@ DescEmpresa) values
 
 
 
-				' Ler dados da view de montagem
-				LerDadosViewMontaPeca()
+					' Ler dados da view de montagem
+					LerDadosViewMontaPeca()
 
-				Try
+					Try
 
 
-					' Fechar o documento
-					swapp.CloseDoc(DadosArquivoCorrente.EnderecoArquivo)
-					cl_BancoDados.FecharArquivoMemoria()
-					IntanciaSolidWorks.LiberarRecurso(swModel)
+						' Fechar o documento
+						swapp.CloseDoc(DadosArquivoCorrente.EnderecoArquivo)
+						cl_BancoDados.FecharArquivoMemoria()
+						IntanciaSolidWorks.LiberarRecurso(swModel)
 
-				Catch ex As Exception
+					Catch ex As Exception
 
-				Finally
+					Finally
 
-				End Try
+					End Try
 
-				' Processar a lista de material
-				ProcessarListaMaterial(swModel)
+					' Processar a lista de material
+					ProcessarListaMaterial(swModel)
 
-			End If
-		Catch ex As Exception
+				End If
+        Catch ex As Exception
 			MsgBox("Erro: " & ex.Message, vbCritical, "Erro")
 			' Fechar o documento
 			swapp.CloseDoc(DadosArquivoCorrente.EnderecoArquivo)
@@ -10853,6 +10873,13 @@ DescEmpresa) values
 
 						DadosArquivoCorrente.EnderecoArquivo = Path.GetFullPath(DadosArquivoCorrente.EnderecoArquivo)
 
+
+						' Verificar se o arquivo SLDASM existe
+						If File.Exists(DadosArquivoCorrente.EnderecoArquivo) Then
+							OpenDocumentAndWait(DadosArquivoCorrente.EnderecoArquivo, False, swModel)
+						End If
+
+
 						If chkConverterPDF.Checked Then
 
 							' Verifica se EnderecoArquivo não é nulo ou vazio antes de realizar a substituição
@@ -10883,7 +10910,6 @@ DescEmpresa) values
 
 						End If
 
-
 						If chkConverterDXF.Checked Then
 
 							If DadosArquivoCorrente.EnderecoArquivo.ToUpper.EndsWith(".SLDPRT") Then
@@ -10910,7 +10936,11 @@ DescEmpresa) values
 
 						End If
 
-						'     DadosArquivoCorrente.AtualizaDesenho(swModel)
+						If My.Settings.AtualizaCadastroComLeituraBOM = "SIM" Then
+
+							DadosArquivoCorrente.AtualizaDesenho(swModel)
+
+						End If
 
 						swapp.CloseDoc(DadosArquivoCorrente.EnderecoArquivo)
 						cl_BancoDados.FecharArquivoMemoria()
@@ -10930,7 +10960,7 @@ DescEmpresa) values
 
 						dgvDataGridBOM.Rows(i).Cells("CodMatFabricante").Style.BackColor = Color.LightPink
 
-						MsgBox(ex.Message)
+						'MsgBox(ex.Message)
 
 						Continue For
 
@@ -10943,8 +10973,8 @@ DescEmpresa) values
 				ProgressBarListaSW.Value = 0
 
 				chkConverterPDF.Checked = False
-				chkConverterDXF.Checked = False
 
+				chkConverterDXF.Checked = False
 
 			Else
 
@@ -10952,7 +10982,6 @@ DescEmpresa) values
 
 			End If
 
-			'dgvDataGridBOM.ResumeLayout()
 		End If
 
 		If dgvDataGridBOM.Rows.Count > 0 Then
@@ -12857,4 +12886,38 @@ ORDER BY CodDesenhoProduto"
 
 	End Sub
 
+
+	Private Sub txtNomeArquivo_GotFocus(sender As Object, e As EventArgs) Handles txtNomeArquivo.GotFocus
+
+		txtNomeArquivo.SelectAll()
+		Clipboard.SetText(txtNomeArquivo.Text) ' Copia o texto para a área de transferência
+
+	End Sub
+
+	Private Sub chkDobra_CheckedChanged(sender As Object, e As EventArgs) Handles chkDobra.CheckedChanged
+
+
+		Try
+
+
+
+			' Verifique se o swModel foi aberto com sucesso
+			If Not swModel Is Nothing Then
+
+				DadosArquivoCorrente.Dobra = If(chkDobra.Checked, "1", "")
+				DadosArquivoCorrente.GarantirOuCriarPropriedade(swModel, "txtDobra", DadosArquivoCorrente.Dobra, DadosArquivoCorrente.Dobra)
+
+				swModel.SaveSilent()
+
+			End If
+		Catch ex As Exception
+		Finally
+
+		End Try
+
+	End Sub
+
+	Private Sub chkCorte_CheckedChanged(sender As Object, e As EventArgs) Handles chkCorte.CheckedChanged
+
+	End Sub
 End Class
